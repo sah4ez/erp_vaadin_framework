@@ -46,7 +46,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
         filter = this.addItem("filter" + caption, new ThemeResource("ico16/filter.png"), filterCommand);
         filter.setDescription("Сортировать");
         this.setStyleName("v-menubar-menuitem-caption-null-size");
-        this.addStyleName("mybarmenu");
+        this.addStyleName("menu-navigator");
     }
 
     protected Workspace getParentLayout(){
@@ -164,35 +164,43 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
         this.filter = filter;
     }
 
-    protected void hideAdd(){
+    public void hideAdd(){
         add.setVisible(false);
     }
 
-    protected void showAdd(){
+    public void showAdd(){
         add.setVisible(true);
     }
 
-    protected void hideDelete(){
+    public void hideDelete(){
         delete.setVisible(false);
     }
 
-    protected void showDelete(){
+    public void showDelete(){
         delete.setVisible(true);
     }
 
-    protected void hidePrint(){
+    public void hidePrint(){
         print.setVisible(false);
     }
 
-    protected void showPrint(){
+    public void showPrint(){
         print.setVisible(true);
     }
 
-    protected void hideFilter(){
+    public void hideFilter(){
         filter.setVisible(false);
     }
 
-    protected void showFilter(){
+    public void showFilter(){
         filter.setVisible(true);
+    }
+
+    public void editModeOff(){
+        getAdd().setStyleName(null);
+    }
+
+    public void editModeOn(){
+        getAdd().setStyleName(ENABLE_BUTTON_STYLE);
     }
 }
