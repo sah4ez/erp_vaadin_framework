@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="erp_vaadin_framework:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="erp-vaadin-framework-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="erp_vaadin_framework:war exploded" />
+    </root>
+  </artifact>
+</component>
