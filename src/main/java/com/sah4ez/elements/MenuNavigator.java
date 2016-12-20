@@ -1,4 +1,4 @@
-package com.sah4ez;
+package com.sah4ez.elements;
 
 import com.sah4ez.permission.ModiferAccess;
 import com.sah4ez.permission.PermissionAccess;

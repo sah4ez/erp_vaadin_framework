@@ -1,4 +1,4 @@
-package com.sah4ez;
+package com.sah4ez.elements;
 
 import com.sah4ez.data.TreeBeanContainer;
 import com.sah4ez.permission.ModiferAccess;
@@ -36,7 +36,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     private BottomTabs bottomTabs = null;
 
-    private MenuNavigator abstractNavigator = null;
+    private MenuNavigator navigator = null;
 
     private FilterPanel filterPanel = null;
 
@@ -55,6 +55,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         horizontalSplitPanel();
         verticalSplitPanel();
         addComponent(verticalSplitPanel);
+
         editOff();
         setSizeFull();
     }
@@ -86,10 +87,13 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         tableAll.setMultiSelect(true);
         tableAll.setImmediate(true);
         tableAll.setColumnCollapsingAllowed(true);
+
         editItemClickListenerAll = editTableAllItemClick();
         selectItemClickListenerAll = selectTableAllItemClick();
         tableAll.addItemClickListener(editItemClickListenerAll);
         tableAll.addItemClickListener(selectItemClickListenerAll);
+
+
         return tableAll;
     }
 
@@ -127,22 +131,11 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     public void setSplitPosition(Float splitPosition) {
         //TODO реализовать цветовую индикацию при нажатии на menuItem
         this.splitPosition = splitPosition;
-//        getAbstractNavigator().addStyleName("not-push");
         horizontalSplitPanel.setSplitPosition(this.splitPosition, Unit.PERCENTAGE);
         if (splitPosition == 100f) {
             horizontalSplitPanel.setLocked(true);
-//            if (getAbstractNavigator().getItems().size() > 0)
-//                (getAbstractNavigator()
-//                        .getItems()
-//                        .get(0))
-//                        .setStyleName("not-push");
         } else {
             horizontalSplitPanel.setLocked(false);
-//            if (getAbstractNavigator().getItems().size() > 0)
-//                (getAbstractNavigator()
-//                        .getItems()
-//                        .get(0))
-//                        .setStyleName("push");
         }
     }
 
@@ -157,7 +150,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     }
 
     private MenuBar navigatorLayout() {
-        abstractNavigator = new MenuNavigator("", this) {
+        navigator = new MenuNavigator("", this) {
             @Override
             public void add() {
 
@@ -178,7 +171,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
             }
         };
-        return abstractNavigator;
+        return navigator;
     }
 
     private FilterPanel filterPanel() {
@@ -265,14 +258,14 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         logic.addUi(bottomTabs);
     }
 
-    public MenuNavigator getAbstractNavigator() {
-        return abstractNavigator;
+    public MenuNavigator getNavigator() {
+        return navigator;
     }
 
-    public void setAbstractNavigator(MenuNavigator abstractNavigator) {
-        this.abstractNavigator = abstractNavigator;
-        layout.addComponent(this.abstractNavigator, 0);
-        logic.addUi(abstractNavigator);
+    public void setNavigator(MenuNavigator navigator) {
+        this.navigator = navigator;
+        layout.addComponent(this.navigator, 0);
+        logic.addUi(navigator);
     }
 
     public void setFilterPanel(FilterPanel filterPanel) {
@@ -288,8 +281,8 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     }
 
     public void setPermissionAccess(ModiferAccess permission) {
-        if (abstractNavigator != null) {
-            abstractNavigator.replacePermissionAccess(permission);
+        if (navigator != null) {
+            navigator.replacePermissionAccess(permission);
         }
         if (bottomTabs != null) {
             bottomTabs.replacePermissionAccess(permission);

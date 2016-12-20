@@ -44,15 +44,15 @@ abstract public class DataContainer<T> extends BeanItemContainer<T> {
     }
 
     public void addCaptionColumn(String... captions) {
-        Arrays.stream(captions).forEach(c -> this.captionList.add(c));
+        Arrays.stream(captions).forEach(this::addCaptionColumn);
     }
 
     public void addHeaderColumn(String... headers) {
-        Arrays.stream(headers).forEach(h -> this.headersList.add(h));
+        Arrays.stream(headers).forEach(this::addHeaderColumn);
     }
 
     public void addCollapsedColumn(Boolean... visible) {
-        Arrays.stream(visible).forEach(v -> this.visibleList.add(v));
+        Arrays.stream(visible).forEach(this::addCollapsedColumn);
     }
 
     public void addCaptionColumn(String caption) {
