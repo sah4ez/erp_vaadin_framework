@@ -2,13 +2,13 @@ package com.sah4ez.permission;
 
 import java.util.Map;
 
-import static com.sah4ez.permission.ModiferAccess.*;
+import static com.sah4ez.permission.ModifierAccess.*;
 
 /**
  * Created by aleksandr on 20.12.16.
  */
-public class PermissionAccess {
-    public static ModiferAccess getPermissionAccess(Integer id) {
+public final class PermissionAccess {
+    public static ModifierAccess getModifierAccess(Integer id) {
         switch (id) {
             case 1: {
                 return EDIT;
@@ -25,8 +25,8 @@ public class PermissionAccess {
         }
     }
 
-    public static void replacePermissionAccess(PermissionAccessUI component, ModiferAccess newValue) {
-        switch (component.getPermissionAccess()) {
+    public static void replacePermissionAccess(PermissionAccessUI component, ModifierAccess newValue) {
+        switch (component.getModifierAccess()) {
             case EDIT: {
                 if (newValue.equals(HIDE) || newValue.equals(READ)) break;
                 component.setPermissionAccess(newValue);
@@ -44,7 +44,7 @@ public class PermissionAccess {
         }
     }
 
-    public static void replacePermissionAccess(Map<String, ModiferAccess > map, String name, ModiferAccess  newValue) {
+    public static void replacePermissionAccess(Map<String, ModifierAccess> map, String name, ModifierAccess newValue) {
         switch (map.get(name)) {
             case EDIT: {
                 if (newValue.equals(HIDE) || newValue.equals(READ)) break;

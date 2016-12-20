@@ -1,6 +1,6 @@
 package com.sah4ez.elements;
 
-import com.sah4ez.permission.ModiferAccess;
+import com.sah4ez.permission.ModifierAccess;
 import com.sah4ez.permission.PermissionAccess;
 import com.sah4ez.permission.PermissionAccessUI;
 import com.vaadin.server.ThemeResource;
@@ -12,7 +12,7 @@ import com.vaadin.ui.MenuBar;
 public abstract class MenuNavigator extends MenuBar implements PermissionAccessUI {
 
 
-    private ModiferAccess permissionAccess = ModiferAccess.HIDE;
+    private ModifierAccess permissionAccess = ModifierAccess.HIDE;
 
     private MenuItem add;
     private MenuItem delete;
@@ -75,31 +75,19 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
         return add;
     }
 
-    public void setAdd(MenuItem add) {
-        this.add = add;
-    }
-
     public MenuItem getDelete() {
         return delete;
-    }
-
-    public void setDelete(MenuItem delete) {
-        this.delete = delete;
     }
 
     public MenuItem getPrint() {
         return print;
     }
 
-    public void setPrint(MenuItem print) {
-        this.print = print;
-    }
-
-    public ModiferAccess getPermissionAccess() {
+    public ModifierAccess getModifierAccess() {
         return this.permissionAccess;
     }
 
-    public void setPermissionAccess(ModiferAccess permission) {
+    public void setPermissionAccess(ModifierAccess permission) {
         this.permissionAccess = permission;
         switch (permission) {
             case EDIT: {
@@ -144,7 +132,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
         this.setVisible(false);
     }
 
-    public void replacePermissionAccess(ModiferAccess permissionAccess) {
+    public void replacePermissionAccess(ModifierAccess permissionAccess) {
         PermissionAccess.replacePermissionAccess(this, permissionAccess);
     }
 

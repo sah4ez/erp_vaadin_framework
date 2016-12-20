@@ -1,7 +1,7 @@
 package com.sah4ez.elements;
 
 import com.sah4ez.data.TreeBeanContainer;
-import com.sah4ez.permission.ModiferAccess;
+import com.sah4ez.permission.ModifierAccess;
 import com.sah4ez.permission.PermissionAccess;
 import com.sah4ez.permission.PermissionAccessUI;
 import com.vaadin.event.ItemClickEvent;
@@ -28,7 +28,6 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     private FilterTable tableAll = null;
 
     private ItemClickEvent.ItemClickListener editItemClickListener;
-
     private ItemClickEvent.ItemClickListener editItemClickListenerAll;
 
     private VerticalSplitPanel verticalSplitPanel = null;
@@ -40,7 +39,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     private FilterPanel filterPanel = null;
 
-    private ModiferAccess permissionAccess = ModiferAccess.HIDE;
+    private ModifierAccess permissionAccess = ModifierAccess.HIDE;
 
     private VerticalLayout layout;
     private ItemClickEvent.ItemClickListener selectItemClickListener;
@@ -101,7 +100,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     abstract protected ItemClickEvent.ItemClickListener selectTableAllItemClick();
 
-    public VerticalSplitPanel verticalSplitPanel() {
+    private VerticalSplitPanel verticalSplitPanel() {
         verticalSplitPanel = new VerticalSplitPanel();
         verticalSplitPanel.setSizeFull();
         layout = new VerticalLayout();
@@ -113,7 +112,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         return verticalSplitPanel;
     }
 
-    public HorizontalSplitPanel horizontalSplitPanel() {
+    private HorizontalSplitPanel horizontalSplitPanel() {
 
         horizontalSplitPanel = new HorizontalSplitPanel();
         horizontalSplitPanel.setSizeFull();
@@ -128,8 +127,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         return splitPosition;
     }
 
-    public void setSplitPosition(Float splitPosition) {
-        //TODO реализовать цветовую индикацию при нажатии на menuItem
+    private void setSplitPosition(Float splitPosition) {
         this.splitPosition = splitPosition;
         horizontalSplitPanel.setSplitPosition(this.splitPosition, Unit.PERCENTAGE);
         if (splitPosition == 100f) {
@@ -236,16 +234,8 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         return verticalSplitPanel;
     }
 
-    public void setVerticalSplitPanel(VerticalSplitPanel verticalSplitPanel) {
-        this.verticalSplitPanel = verticalSplitPanel;
-    }
-
     public HorizontalSplitPanel getHorizontalSplitPanel() {
         return horizontalSplitPanel;
-    }
-
-    public void setHorizontalSplitPanel(HorizontalSplitPanel horizontalSplitPanel) {
-        this.horizontalSplitPanel = horizontalSplitPanel;
     }
 
     public TabSheet getBottomTabs() {
@@ -280,7 +270,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         throw new NotImplementedException();
     }
 
-    public void setPermissionAccess(ModiferAccess permission) {
+    public void setPermissionAccess(ModifierAccess permission) {
         if (navigator != null) {
             navigator.replacePermissionAccess(permission);
         }
@@ -309,11 +299,11 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         }
     }
 
-    public void replacePermissionAccess(ModiferAccess permissionAccess) {
+    public void replacePermissionAccess(ModifierAccess permissionAccess) {
         PermissionAccess.replacePermissionAccess(this, permissionAccess);
     }
 
-    public ModiferAccess getPermissionAccess() {
+    public ModifierAccess getModifierAccess() {
         return permissionAccess;
     }
 

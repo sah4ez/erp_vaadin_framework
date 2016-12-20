@@ -17,13 +17,16 @@ public abstract class Menu extends CssLayout {
     private static final String VALO_MENUITEMS = "valo-menuitems";
     private static final String VALO_MENU_TOGGLE = "valo-menu-toggle";
     private static final String VALO_MENU_VISIBLE = "valo-menu-visible";
+
     private Navigator navigator;
-    private Map<String, Button> viewButtons = new HashMap<String, Button>();
+    private Map<String, Button> viewButtons = new HashMap<>();
 
     private MenuBar.Command loginCommand;
 
     private CssLayout menuItemsLayout;
     private CssLayout menuPart;
+
+    private Image image;
 
     public Menu(Navigator navigator) {
         this.navigator = navigator;
@@ -31,23 +34,20 @@ public abstract class Menu extends CssLayout {
         menuPart = new CssLayout();
         menuPart.addStyleName(ValoTheme.MENU_PART);
 
-        // header of the menu
         final HorizontalLayout top = new HorizontalLayout();
         top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
         top.addStyleName(ValoTheme.MENU_TITLE);
         top.setSpacing(true);
+
         Label title = new Label("PLM-TEAM");
         title.addStyleName(ValoTheme.LABEL_H3);
         title.setSizeUndefined();
-        Image image = new Image(null, new ThemeResource("img/table-logo.png"));
-        image.setStyleName("logo");
-        top.addComponent(image);
         top.addComponent(title);
-        menuPart.addComponent(top);
 
+        menuPart.addComponent(top);
         loginCommand = loginCommand();
 
-
+        //TODO необходимо реализовать поведение компонента в зависимости от состояния пользователя
         if (userIsLoggined()) {
 //            menuPart.addComponent(buildUserMenu());
 //            menuPart.addComponent(addAttr());
@@ -61,7 +61,6 @@ public abstract class Menu extends CssLayout {
         }
 
 
-        // button for toggling the visibility of the menu when on a small screen
         final Button showMenu = new Button("Меню", event -> {
             if (menuPart.getStyleName().contains(VALO_MENU_VISIBLE)) {
                 menuPart.removeStyleName(VALO_MENU_VISIBLE);
@@ -84,39 +83,19 @@ public abstract class Menu extends CssLayout {
         addComponent(menuPart);
     }
 
-    public boolean userIsLoggined(){
+    public boolean userIsLoggined() {
         return false;
     }
 
     public abstract MenuBar.Command loginCommand();
 
 
-    /**
-     * Register a pre-created view instance in the navigation menu and in the
-     * {@link Navigator}.
-     *
-     * @param view    view instance to register
-     * @param name    view name
-     * @param caption view caption in the menu
-     * @param icon    view icon in the menu
-     * @see Navigator#addView(String, View)
-     */
     public void addView(View view, final String name, String caption,
                         Resource icon) {
         navigator.addView(name, view);
         createViewButton(name, caption, icon);
     }
 
-    /**
-     * Register a view in the navigation menu and in the {@link Navigator} based
-     * on a view class.
-     *
-     * @param viewClass class of the views to create
-     * @param name      view name
-     * @param caption   view caption in the menu
-     * @param icon      view icon in the menu
-     * @see Navigator#addView(String, Class)
-     */
     public void addView(Class<? extends View> viewClass, final String name,
                         String caption, Resource icon) {
         navigator.addView(name, viewClass);
@@ -132,12 +111,6 @@ public abstract class Menu extends CssLayout {
         viewButtons.put(name, button);
     }
 
-    /**
-     * Highlights a view navigation button as the currently active view in the
-     * menu. This method does not perform the actual navigation.
-     *
-     * @param viewName the name of the view to show as active
-     */
     public void setActiveView(String viewName) {
         for (Button button : viewButtons.values()) {
             button.removeStyleName("selected");
@@ -147,5 +120,9 @@ public abstract class Menu extends CssLayout {
             selected.addStyleName("selected");
         }
         menuPart.removeStyleName(VALO_MENU_VISIBLE);
+    }
+
+    public void setImage(Image image){
+        this.image = image;
     }
 }

@@ -1,6 +1,6 @@
 package com.sah4ez.elements;
 
-import com.sah4ez.permission.ModiferAccess;
+import com.sah4ez.permission.ModifierAccess;
 import com.sah4ez.permission.PermissionAccess;
 import com.sah4ez.permission.PermissionAccessUI;
 import com.vaadin.server.Resource;
@@ -17,14 +17,12 @@ import java.util.List;
  */
 abstract public class BottomTabs extends TabSheet implements PermissionAccessUI {
 
-    private ModiferAccess permissionAccess = ModiferAccess.HIDE;
-    private final Logic logic;
+    private ModifierAccess permissionAccess = ModifierAccess.HIDE;
     private final List<String> captions = new ArrayList<>();
     private final List<Component> components = new ArrayList<>();
     private final List<Resource> resources = new ArrayList<>();
 
-    public BottomTabs(Logic logic) {
-        this.logic = logic;
+    public BottomTabs() {
         captions.removeAll(captions);
         components.removeAll(components);
         resources.removeAll(resources);
@@ -72,7 +70,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
         return this.getTabPosition(this.getTab(this.getSelectedTab()));
     }
 
-    public void setPermissionAccess(ModiferAccess permission) {
+    public void setPermissionAccess(ModifierAccess permission) {
         this.permissionAccess = permission;
         components.forEach(component -> {
             if (component instanceof PermissionAccessUI) {
@@ -81,11 +79,11 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
         });
     }
 
-    public void replacePermissionAccess(ModiferAccess permissionAccess) {
+    public void replacePermissionAccess(ModifierAccess permissionAccess) {
         PermissionAccess.replacePermissionAccess(this, permissionAccess);
     }
 
-    public ModiferAccess getPermissionAccess() {
+    public ModifierAccess getModifierAccess() {
         return this.permissionAccess;
     }
 }

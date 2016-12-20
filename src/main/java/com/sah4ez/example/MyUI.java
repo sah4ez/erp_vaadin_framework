@@ -30,7 +30,7 @@ public class MyUI extends UI {
         Locale locale = new Locale("ru", "RU");
         this.setLocale(locale);
         this.getSession().setLocale(locale);
-        getPage().setTitle("PLM-team");
+        getPage().setTitle("Example");
         showMainView();
     }
 

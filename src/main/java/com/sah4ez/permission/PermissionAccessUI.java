@@ -5,11 +5,11 @@ package com.sah4ez.permission;
  */
 public interface PermissionAccessUI {
 
-    void setPermissionAccess(ModiferAccess permission);
+    void setPermissionAccess(ModifierAccess permission);
 
-    void replacePermissionAccess(ModiferAccess permissionAccess);
+    void replacePermissionAccess(ModifierAccess permissionAccess);
 
-    ModiferAccess getPermissionAccess();
+    ModifierAccess getModifierAccess();
 
 }
 
