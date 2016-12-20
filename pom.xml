@@ -85,6 +85,33 @@
 
 	<build>
 		<plugins>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>repository</classifier>
+                            <includes>
+								<include>
+									*/com/sah4ez/data/*
+								</include>
+								<include>
+									*/com/sah4ez/elements/*
+								</include>
+								<include>
+									*/com/sah4ez/permission/*
+								</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
