@@ -1,0 +1,17 @@
+@import "mytheme.scss";
+@import "addons.scss";
+
+// This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
+// The actual styles should be defined in mytheme.scss
+
+.mytheme {
+  @include addons;
+  @include mytheme;
+
+  .menu-navigator .v-menubar-menuitem-highlight {
+    background: #B7B9C2;
+  }
+  .v-menubar-menuitem-caption-null-size {
+    font-size: 0%;
+  }
+}

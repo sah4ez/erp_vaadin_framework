@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.sah4ez</groupId>
+	<groupId>com.github.sah4ez</groupId>
 	<artifactId>erp-vaadin-framework</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>erp-vaadin-framework</name>
 	
@@ -55,6 +55,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.github.sah4ez</groupId>
+			<artifactId>core</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
@@ -99,13 +104,13 @@
 							<classifier>repository</classifier>
                             <includes>
 								<include>
-									*/com/sah4ez/data/*
+									**/com/sah4ez/data/*
 								</include>
 								<include>
-									*/com/sah4ez/elements/*
+									**/com/sah4ez/elements/*
 								</include>
 								<include>
-									*/com/sah4ez/permission/*
+									**/com/sah4ez/permission/*
 								</include>
 							</includes>
 						</configuration>
