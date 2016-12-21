@@ -10,6 +10,17 @@
     <name>core</name>
     <url>http://maven.apache.org</url>
 
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL)</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/sah4ez/erp_vaadin_framework</url>
+    </scm>
+
     <properties>
         <vaadin.version>7.7.0</vaadin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
