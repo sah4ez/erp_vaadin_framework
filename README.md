@@ -260,3 +260,4 @@ mvn clear install jetty:run
 ```
 and on **localhost:8080** start your application.
 
+(https://raw.githubusercontent.com/sah4ez/erp_vaadin_framework/master/picture/screen-01.png)
