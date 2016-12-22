@@ -261,3 +261,81 @@ mvn clear install jetty:run
 and on **localhost:8080** start your application.
 
 (https://raw.githubusercontent.com/sah4ez/erp_vaadin_framework/master/picture/screen-01.png)
+
+DATA STRUCTURE
+==========
+For structure data use JPA with implement **Serializable** interface:
+```java
+public class Element implements Serializable {
+    private Integer id = 0;
+    private String name = "element";
+    private Float price = 0.0F;
+
+    public Element(Integer id, String name, Float price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+}
+```
+And create class Container:
+```java
+public class ElementContainer extends DataContainer<Element> {
+    public ElementContainer() {
+        super(Element.class);
+    }
+
+    @Override
+    protected void initHeaders() {
+        addCaptionColumn("id", "name", "price"); //set property from Entity
+        addHeaderColumn("ID", "Название", "Цена"); //set Caption for table
+        addCollapsedColumn(true, false, false); //set collapsed column
+    }
+
+    @Override
+    public DataContainer loadAllData() {
+        add(new Element(1, "name1", 1.0f));
+        add(new Element(2, "name2", 2.0f));
+        add(new Element(3, "name3", 3.0f));
+        add(new Element(4, "name4", 4.0f));
+        add(new Element(5, "name5", 5.0f));
+        add(new Element(6, "name6", 6.0f));
+        add(new Element(7, "name7", 7.0f));
+        add(new Element(8, "name8", 8.0f));
+        add(new Element(9, "name9", 9.0f));
+        add(new Element(10, "name10", 10.0f));
+        add(new Element(11, "name11", 11.0f));
+        //or you may load data from your DB.
+        return this;
+    }
+}
+```
+
+For binding data to table (or treeTable) you might use this method:
+`java
+CommonLogic.setDataToTalbe(DataContainer container, CustomTable table);
+`

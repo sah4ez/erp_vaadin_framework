@@ -19,7 +19,7 @@ abstract public class CommonLogic implements Logic {
         return this.view;
     }
 
-    public void setDataToTable(DataContainer container, Object table) {
+    public void setDataToTable(DataContainer container, CustomTable table) {
 
         if (table instanceof CustomTable) {
             CustomTable tmpTable = ((CustomTable) table);

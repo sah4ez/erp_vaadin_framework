@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Element implements Serializable {
     private Integer id = 0;
-    private String name = "elemtn";
+    private String name = "element";
     private Float price = 0.0F;
 
     public Element(Integer id, String name, Float price) {
