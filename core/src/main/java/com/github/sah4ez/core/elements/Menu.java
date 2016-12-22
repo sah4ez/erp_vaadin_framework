@@ -25,6 +25,8 @@ public abstract class Menu extends CssLayout {
 
     private CssLayout menuItemsLayout;
     private CssLayout menuPart;
+    private String menuCaption = "Example";
+    private Label title;
 
     private Image image;
 
@@ -39,7 +41,7 @@ public abstract class Menu extends CssLayout {
         top.addStyleName(ValoTheme.MENU_TITLE);
         top.setSpacing(true);
 
-        Label title = new Label("PLM-TEAM");
+        title = new Label(menuCaption);
         title.addStyleName(ValoTheme.LABEL_H3);
         title.setSizeUndefined();
         top.addComponent(title);
@@ -89,6 +91,14 @@ public abstract class Menu extends CssLayout {
 
     public abstract MenuBar.Command loginCommand();
 
+    public String getMenuCaption() {
+        return menuCaption;
+    }
+
+    public void setMenuCaption(String menuCaption) {
+        this.menuCaption = menuCaption;
+        title.setValue(this.menuCaption);
+    }
 
     public void addView(View view, final String name, String caption,
                         Resource icon) {

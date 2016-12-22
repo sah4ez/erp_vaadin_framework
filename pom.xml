@@ -5,7 +5,7 @@
 
 	<groupId>com.github.sah4ez</groupId>
 	<artifactId>erp-vaadin-framework</artifactId>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>erp-vaadin-framework</name>
 	
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>com.github.sah4ez</groupId>
 			<artifactId>core</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -90,33 +90,6 @@
 
 	<build>
 		<plugins>
-            <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<classifier>repository</classifier>
-                            <includes>
-								<include>
-									**/com/sah4ez/data/*
-								</include>
-								<include>
-									**/com/sah4ez/elements/*
-								</include>
-								<include>
-									**/com/sah4ez/permission/*
-								</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

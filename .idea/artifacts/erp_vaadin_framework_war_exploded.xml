@@ -7,6 +7,9 @@
           <element id="module-output" name="erp_vaadin_framework" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="core-1.0.1-SNAPSHOT.jar">
+            <element id="module-output" name="core" />
+          </element>
           <element id="library" level="project" name="Maven: com.vaadin:vaadin-server:7.7.0" />
           <element id="library" level="project" name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13" />
           <element id="library" level="project" name="Maven: org.w3c.css:sac:1.3" />

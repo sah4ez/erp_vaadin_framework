@@ -21,6 +21,7 @@ public class MainScreen extends HorizontalLayout{
         navigator.setErrorView(ErrorView.class);
 
         menu = new MyMenu(navigator);
+        menu.setMenuCaption("This Example");
 
         menu.addView(new MyView(), "MyView", "MyView", null);
 
