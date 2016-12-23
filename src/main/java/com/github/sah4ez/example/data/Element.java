@@ -1,6 +1,7 @@
 package com.github.sah4ez.example.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by aleksandr on 20.12.16.
@@ -38,5 +39,20 @@ public class Element implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Element element = (Element) o;
+        return Objects.equals(id, element.id) &&
+                Objects.equals(name, element.name) &&
+                Objects.equals(price, element.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price);
     }
 }

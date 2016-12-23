@@ -1,7 +1,7 @@
 package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.data.DataContainer;
-import com.github.sah4ez.core.data.TreeBeanContainer;
+import com.github.sah4ez.core.data.TreeDataContainer;
 import com.vaadin.data.Container;
 import com.vaadin.data.util.filter.SimpleStringFilter;
 import com.vaadin.ui.*;
@@ -199,43 +199,43 @@ abstract public class FilterPanel extends VerticalLayout {
 
         beforeFilter();
         Container.Filter filter = new SimpleStringFilter(value, textValue, true, false);
-        if (table != null && table.getContainerDataSource() instanceof TreeBeanContainer) {
-            TreeBeanContainer treeBeanContainer = ((TreeBeanContainer) table.getContainerDataSource());
-            treeBeanContainer.addContainerFilter(filter);
-            addParentsAndChildren(treeBeanContainer);
+        if (table != null && table.getContainerDataSource() instanceof TreeDataContainer) {
+            TreeDataContainer treeDataContainer = ((TreeDataContainer) table.getContainerDataSource());
+            treeDataContainer.addContainerFilter(filter);
+            addParentsAndChildren(treeDataContainer);
         }
         if (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof DataContainer) {
             DataContainer abstractDataContainer = ((DataContainer) fitlerTable.getContainerDataSource());
             abstractDataContainer.addContainerFilter(filter);
         }
         if (filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof Container.Hierarchical) {
-            TreeBeanContainer treeBeanContainer = ((TreeBeanContainer) filterTreeTable.getContainerDataSource());
-            treeBeanContainer.addContainerFilter(filter);
-            addParentsAndChildren(treeBeanContainer);
+            TreeDataContainer treeDataContainer = ((TreeDataContainer) filterTreeTable.getContainerDataSource());
+            treeDataContainer.addContainerFilter(filter);
+            addParentsAndChildren(treeDataContainer);
         }
         sortListener();
         return filter;
     }
 
     private void removeFilter(Container.Filter filter) {
-        TreeBeanContainer treeBeanContainer = null;
-        if ((table != null && table.getContainerDataSource() instanceof TreeBeanContainer) ||
-                (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof TreeBeanContainer)) {
+        TreeDataContainer treeDataContainer = null;
+        if ((table != null && table.getContainerDataSource() instanceof TreeDataContainer) ||
+                (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof TreeDataContainer)) {
             if (table != null)
-                treeBeanContainer = ((TreeBeanContainer) table.getContainerDataSource());
+                treeDataContainer = ((TreeDataContainer) table.getContainerDataSource());
 
             if (fitlerTable != null)
-                treeBeanContainer = ((TreeBeanContainer) fitlerTable.getContainerDataSource());
+                treeDataContainer = ((TreeDataContainer) fitlerTable.getContainerDataSource());
 
-            if (treeBeanContainer == null) return;
-            treeBeanContainer.removeContainerFilter(filter);
-            addParentsAndChildren(treeBeanContainer);
+            if (treeDataContainer == null) return;
+            treeDataContainer.removeContainerFilter(filter);
+            addParentsAndChildren(treeDataContainer);
         }
-//        if (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof TreeBeanContainer) {
-//            treeBeanContainer = ((TreeBeanContainer) fitlerTable.getContainerDataSource());
-//            if (treeBeanContainer == null) return;
-//            treeBeanContainer.removeContainerFilter(filter);
-//            addParentsAndChildren(treeBeanContainer);
+//        if (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof TreeDataContainer) {
+//            treeDataContainer = ((TreeDataContainer) fitlerTable.getContainerDataSource());
+//            if (treeDataContainer == null) return;
+//            treeDataContainer.removeContainerFilter(filter);
+//            addParentsAndChildren(treeDataContainer);
 //        }
         if (fitlerTable != null && fitlerTable.getContainerDataSource() instanceof DataContainer) {
             DataContainer abstractDataContainer = ((DataContainer) fitlerTable.getContainerDataSource());
@@ -253,9 +253,9 @@ abstract public class FilterPanel extends VerticalLayout {
 
     private void sortable() {
         if (sortColumn.size() > 0) {
-            TreeBeanContainer treBeanContainer = null;
-            if (table != null && table.getContainerDataSource() instanceof TreeBeanContainer) {
-                treBeanContainer = ((TreeBeanContainer) table.getContainerDataSource());
+            TreeDataContainer treBeanContainer = null;
+            if (table != null && table.getContainerDataSource() instanceof TreeDataContainer) {
+                treBeanContainer = ((TreeDataContainer) table.getContainerDataSource());
                 if (treBeanContainer != null) {
                     boolean[] booleanArray = new boolean[sortAscending.size()];
                     for (int i = 0; i < sortAscending.size(); i++) {
@@ -282,8 +282,8 @@ abstract public class FilterPanel extends VerticalLayout {
 //                    abstractDataContainer.sort(sortColumn.toArray(), booleanArray);
                 }
             }
-            if (filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof TreeBeanContainer) {
-                treBeanContainer = ((TreeBeanContainer) filterTreeTable.getContainerDataSource());
+            if (filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof TreeDataContainer) {
+                treBeanContainer = ((TreeDataContainer) filterTreeTable.getContainerDataSource());
                 if (treBeanContainer != null) {
                     boolean[] booleanArray = new boolean[sortAscending.size()];
                     for (int i = 0; i < sortAscending.size(); i++) {
@@ -304,16 +304,16 @@ abstract public class FilterPanel extends VerticalLayout {
         int removeIndex = sortColumn.indexOf(columnName);
         sortAscending.remove(removeIndex);
         sortColumn.remove(removeIndex);
-        TreeBeanContainer treeBeanContainer = null;
-        if ((table != null && table.getContainerDataSource() instanceof TreeBeanContainer)
-                || (filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof TreeBeanContainer)) {
+        TreeDataContainer treeDataContainer = null;
+        if ((table != null && table.getContainerDataSource() instanceof TreeDataContainer)
+                || (filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof TreeDataContainer)) {
             if (table != null)
-                treeBeanContainer = ((TreeBeanContainer) table.getContainerDataSource());
+                treeDataContainer = ((TreeDataContainer) table.getContainerDataSource());
             if (filterTreeTable != null)
-                treeBeanContainer = ((TreeBeanContainer) filterTreeTable.getContainerDataSource());
-            if (treeBeanContainer != null) {
-                treeBeanContainer.sort(new Object[]{getNameIdentifyColumn()}, new boolean[]{true});
-                addParentsAndChildren(treeBeanContainer);
+                treeDataContainer = ((TreeDataContainer) filterTreeTable.getContainerDataSource());
+            if (treeDataContainer != null) {
+                treeDataContainer.sort(new Object[]{getNameIdentifyColumn()}, new boolean[]{true});
+                addParentsAndChildren(treeDataContainer);
                 sortable();
             }
         }
@@ -335,7 +335,7 @@ abstract public class FilterPanel extends VerticalLayout {
         this.setVisible(false);
     }
 
-    public abstract void addParentsAndChildren(TreeBeanContainer treeBeanContainer);
+    public abstract void addParentsAndChildren(TreeDataContainer treeDataContainer);
 
     public abstract Object getNameIdentifyColumn();// Нужно вернуть имя колонки с идентификаторами
 

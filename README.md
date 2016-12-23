@@ -5,6 +5,7 @@ Framework ERP UI on Vaadin.
 
 INSTALL
 ========
+
 You need add repository to your pom.xml:
 ```xml
 
@@ -23,6 +24,7 @@ You need add repository to your pom.xml:
 ```
 
 And add dependency:
+
 ```xml
     <dependency>
       <groupId>com.github.sah4ez</groupId>
@@ -56,9 +58,10 @@ This framework has next structure:
      |_PermissionAccess(F)
      |_PermissionAccessUI(I)
 ```
-(A) - abstract class, (C) - class, (I) - interface, (E) - enum, (F) - final class. </p>
 
-This framework extend **Demo Vaadin CRUD**. </p>
+(A) - abstract class, (C) - class, (I) - interface, (E) - enum, (F) - final class. 
+
+This framework extend **Demo Vaadin CRUD**. 
 
 QUICK START
 ==========
@@ -91,8 +94,9 @@ public class MyUI extends UI {
     }
 }
 ```
-</p>
-In MyUI create class MainScreen, example: </p>
+
+In MyUI create class MainScreen, example:
+
 
 ```java
 
@@ -138,7 +142,8 @@ public class MainScreen extends HorizontalLayout{
 
 ```
 
-Where MyMenu - extend Menu from Framework. MyView extend from CommonView, MyLogic extend from CommonLogic<p>
+Where MyMenu - extend Menu from Framework. MyView extend from CommonView, MyLogic extend from CommonLogic
+
 For UI create package **layout** where need make: 
 ```java
 
@@ -183,7 +188,8 @@ public class MyLayout extends Workspace {
 }
 ```
 
-Not forget return from ItemClickEven.ClickListener, if this return null and will result to NullPointerException. <p> 
+Not forget return from ItemClickEven.ClickListener, if this return null and will result to NullPointerException.
+
 Example instance of MenuNavigator with mode for MenuItem:
 ```java
 
@@ -249,7 +255,7 @@ public class MyTabSheet extends BottomTabs {
 ```
 For add Tab to **TabSheet**, you need add **caption** to method *addCaption(String ... caption)*,
 add **component** to method *addComponent(Component ... component)*, and **icon** to method *addResource(Resource ... res)*.
-<p>
+
 Then create instance *MyLayout* in *class MyView*.
 
 RUN
@@ -260,7 +266,7 @@ mvn clear install jetty:run
 ```
 and on **localhost:8080** start your application.
 
-(https://raw.githubusercontent.com/sah4ez/erp_vaadin_framework/master/picture/screen-01.png)
+![Example](https://raw.githubusercontent.com/sah4ez/erp_vaadin_framework/master/picture/screen-01.png)
 
 DATA STRUCTURE
 ==========

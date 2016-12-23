@@ -1,6 +1,6 @@
 package com.github.sah4ez.core.elements;
 
-import com.github.sah4ez.core.data.TreeBeanContainer;
+import com.github.sah4ez.core.data.TreeDataContainer;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
@@ -174,7 +174,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     private FilterPanel filterPanel() {
         filterPanel = new FilterPanel(this.getTable()) {
             @Override
-            public void addParentsAndChildren(TreeBeanContainer treeBeanContainer) {
+            public void addParentsAndChildren(TreeDataContainer treeDataContainer) {
 
             }
 

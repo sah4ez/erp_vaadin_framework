@@ -12,14 +12,25 @@ import java.util.stream.Stream;
  */
 abstract public class DataContainer<T> extends BeanItemContainer<T> {
 
-    private ArrayList<String> captionList = new ArrayList<>();
-    private ArrayList<Boolean> visibleList = new ArrayList<>();
-    private final ArrayList<String> headersList = new ArrayList<>();
+    private final ArrayList<String> headers = new ArrayList<>();
+    private ArrayList<String> captions = new ArrayList<>();
+    private ArrayList<Boolean> visible = new ArrayList<>();
 
     public DataContainer(Class<T> type) {
         super(type);
-        initHeaders();
+        if (validCaption())
+            initHeaders();
+        // TODO: 23.12.16 реализовать checked exception для валидации количества столбцов
     }
+
+    private boolean validCaption() {
+        return captions.size() == visible.size() &&
+                captions.size() == headers.size();
+    }
+
+    abstract protected void initHeaders();
+
+    abstract public DataContainer loadAllData();
 
     public List<T> getList() {
         return getItemIds();
@@ -29,72 +40,66 @@ abstract public class DataContainer<T> extends BeanItemContainer<T> {
         return getItemIds().stream();
     }
 
-    public DataContainer<T> add(T o){
+    public DataContainer<T> add(T o) {
         addBean(o);
         return this;
     }
 
-    public DataContainer<T> remove(T o){
+    public DataContainer<T> remove(T o) {
         this.removeItem(o);
         return this;
     }
 
-    public DataContainer<T> get() {
-        return this;
+    public void addCaption(String... captions) {
+        Arrays.stream(captions).forEach(this::addCaption);
     }
 
-    public void addCaptionColumn(String... captions) {
-        Arrays.stream(captions).forEach(this::addCaptionColumn);
+    public void addHeader(String... headers) {
+        Arrays.stream(headers).forEach(this::addHeader);
     }
 
-    public void addHeaderColumn(String... headers) {
-        Arrays.stream(headers).forEach(this::addHeaderColumn);
+    public void addCollapsed(Boolean... visible) {
+        Arrays.stream(visible).forEach(this::addCollapsed);
     }
 
-    public void addCollapsedColumn(Boolean... visible) {
-        Arrays.stream(visible).forEach(this::addCollapsedColumn);
+    public void addCaption(String caption) {
+        this.captions.add(caption);
     }
 
-    public void addCaptionColumn(String caption) {
-        this.captionList.add(caption);
+    public void addHeader(String header) {
+        this.headers.add(header);
     }
 
-    public void addHeaderColumn(String header) {
-        this.headersList.add(header);
-    }
-
-    public void addCollapsedColumn(Boolean visible) {
-        this.visibleList.add(visible);
+    public void addCollapsed(Boolean visible) {
+        this.visible.add(visible);
     }
 
     public Object[] getCaption() {
-        Object[] caption = captionList.toArray();
+        Object[] caption = captions.toArray();
         return caption;
     }
 
     public String[] getHeaders() {
-        String[] headers = headersList.toArray(new String[0]);
+        String[] headers = this.headers.toArray(new String[0]);
         return headers;
     }
 
     public Boolean[] getVisible() {
-        Boolean[] visible = visibleList.toArray(new Boolean[0]);
+        Boolean[] visible = this.visible.toArray(new Boolean[0]);
         return visible;
     }
 
-    public void clear(){ this.removeAllItems(); }
-
-    public void removeHeaders(){
-        captionList.clear();
-        headersList.clear();
-        visibleList.clear();
+    public void clear() {
+        this.removeAllItems();
     }
 
-    abstract protected void initHeaders();
+    public void removeHeaders() {
+        captions.clear();
+        headers.clear();
+        visible.clear();
+    }
 
-    abstract public DataContainer loadAllData();
-
-    public void refresh(){
+    public void refresh() {
         this.fireItemSetChange();
     }
 }

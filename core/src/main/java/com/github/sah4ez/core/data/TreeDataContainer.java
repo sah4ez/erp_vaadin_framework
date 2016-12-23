@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by aleksandr on 20.12.16.
  */
-public class TreeBeanContainer<T> extends DataContainer<T> implements Container.Hierarchical {
+public class TreeDataContainer<T> extends DataContainer<T> implements Container.Hierarchical {
     // The contained bean type uses this property to store
     // the parent relationship.
     Object parentPID;
 
-    public TreeBeanContainer(Class<T> type,
+    public TreeDataContainer(Class<T> type,
                              Object parentPropertyId) {
         super(type);
 

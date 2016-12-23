@@ -20,17 +20,15 @@ abstract public class CommonLogic implements Logic {
     }
 
     public void setDataToTable(DataContainer container, CustomTable table) {
+        if (container == null || table == null) return;
 
-        if (table instanceof CustomTable) {
-            CustomTable tmpTable = ((CustomTable) table);
-            tmpTable.setContainerDataSource(container);
-            tmpTable.setVisibleColumns(container.getCaption());
-            tmpTable.setColumnHeaders(container.getHeaders());
-            tmpTable.setColumnCollapsingAllowed(true);
-            for (int i = 0; i < container.getCaption().length; i++) {
-                tmpTable.setColumnCollapsed(container.getCaption()[i],
-                        container.getVisible()[i].booleanValue());
-            }
+        table.setContainerDataSource(container);
+        table.setVisibleColumns(container.getCaption());
+        table.setColumnHeaders(container.getHeaders());
+        table.setColumnCollapsingAllowed(true);
+        for (int i = 0; i < container.getCaption().length; i++) {
+            table.setColumnCollapsed(container.getCaption()[i],
+                    container.getVisible()[i].booleanValue());
         }
     }
 }

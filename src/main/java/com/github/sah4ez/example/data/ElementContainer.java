@@ -13,9 +13,9 @@ public class ElementContainer extends DataContainer<Element> {
 
     @Override
     protected void initHeaders() {
-        addCaptionColumn("id", "name", "price");
-        addHeaderColumn("ID", "Название", "Цена");
-        addCollapsedColumn(true, false, false);
+        addCaption("id", "name", "price");
+        addHeader("ID", "Название", "Цена");
+        addCollapsed(true, false, false);
     }
 
     @Override
