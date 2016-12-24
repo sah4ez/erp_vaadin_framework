@@ -74,7 +74,7 @@ abstract public class DataContainer<T> extends BeanItemContainer<T> {
         this.visible.add(visible);
     }
 
-    public Object[] getCaption() {
+    public Object[] getCaptions() {
         Object[] caption = captions.toArray();
         return caption;
     }
@@ -101,6 +101,10 @@ abstract public class DataContainer<T> extends BeanItemContainer<T> {
 
     public void refresh() {
         this.fireItemSetChange();
+    }
+
+    public boolean isEmpty(){
+        return size()<=0;
     }
 }
 

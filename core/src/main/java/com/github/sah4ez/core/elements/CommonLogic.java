@@ -23,11 +23,11 @@ abstract public class CommonLogic implements Logic {
         if (container == null || table == null) return;
 
         table.setContainerDataSource(container);
-        table.setVisibleColumns(container.getCaption());
+        table.setVisibleColumns(container.getCaptions());
         table.setColumnHeaders(container.getHeaders());
         table.setColumnCollapsingAllowed(true);
-        for (int i = 0; i < container.getCaption().length; i++) {
-            table.setColumnCollapsed(container.getCaption()[i],
+        for (int i = 0; i < container.getCaptions().length; i++) {
+            table.setColumnCollapsed(container.getCaptions()[i],
                     container.getVisible()[i].booleanValue());
         }
     }
