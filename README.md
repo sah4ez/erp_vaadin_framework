@@ -29,7 +29,7 @@ And add dependency:
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.3-SNAPSHOT</version>
     </dependency>
 
 ```
