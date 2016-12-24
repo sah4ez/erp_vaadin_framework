@@ -1,16 +1,17 @@
 package com.github.sah4ez.core.data;
 
 import com.vaadin.data.Container;
+import com.vaadin.data.Item;
+import com.vaadin.data.Property;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by aleksandr on 20.12.16.
  */
-public class TreeDataContainer<T> extends DataContainer<T> implements Container.Hierarchical {
+abstract public class TreeDataContainer<T> extends DataContainer<T> implements Container.Hierarchical {
     // The contained bean type uses this property to store
     // the parent relationship.
     Object parentPID;
@@ -28,17 +29,17 @@ public class TreeDataContainer<T> extends DataContainer<T> implements Container.
 
         // This implementation has O(n^2) complexity when
         // painting the tree, so it's really inefficient.
-        for (Object candidateId: getItemIds()) {
-            Object parentRef = getItem(candidateId).
-                    getItemProperty(parentPID).getValue();
-            if (parentRef == itemId)
+        for (Object candidateId : getItemIds()) {
+            Item item = getItem(candidateId);
+            Property property = item.getItemProperty(parentPID);
+            Object parentRef = null;
+            if (property != null && property.getValue() != null)
+                parentRef = property.getValue();
+            if (parentRef != null && parentRef == itemId)
                 children.add(candidateId);
         }
 
-        if (children.size() > 0)
-            return children;
-        else
-            return null;
+        return children;
     }
 
     @Override
@@ -49,12 +50,16 @@ public class TreeDataContainer<T> extends DataContainer<T> implements Container.
 
     @Override
     public Collection<?> rootItemIds() {
-        LinkedList<Object> result = new LinkedList<Object>();
-        for (Object candidateId: getItemIds()) {
-            Object parentRef  = null;
-            parentRef = getItem(candidateId).getItemProperty(parentPID).getValue();
-            if (parentRef == null)
-                result.add(candidateId);
+        ArrayList<Object> result = new ArrayList<>();
+        for (Object candidateId : getItemIds()) {
+            Object parentRef = null;
+            Item item = getItem(candidateId);
+            if (item != null){
+                Property property = item.getItemProperty(parentPID);
+                parentRef = property.getValue();
+                if (parentRef == null)
+                    result.add(candidateId);
+            }
         }
 
         if (result.size() > 0)
@@ -92,7 +97,7 @@ public class TreeDataContainer<T> extends DataContainer<T> implements Container.
 
     @Override
     public boolean hasChildren(Object itemId) {
-        for (Object candidateId: getItemIds()) {
+        for (Object candidateId : getItemIds()) {
             Object parentRef = getItem(candidateId).
                     getItemProperty(parentPID).getValue();
             if (parentRef == itemId)
@@ -100,23 +105,14 @@ public class TreeDataContainer<T> extends DataContainer<T> implements Container.
         }
         return false;
     }
-    public void refresh(){
-        if(isFiltered())
+
+    public void refresh() {
+        if (isFiltered())
             filterAll();
         else fireItemSetChange();
     }
 
-    @Override
-    protected void initHeaders() {
-
-    }
-
-    @Override
-    public DataContainer loadAllData() {
-        return this;
-    }
-
-    public List<T> getFilteredItemIds(){
+    public List<T> getFilteredItemIds() {
         return super.getFilteredItemIds();
     }
 }

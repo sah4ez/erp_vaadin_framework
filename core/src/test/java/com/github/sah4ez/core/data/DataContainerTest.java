@@ -12,48 +12,6 @@ import java.util.Objects;
  */
 public class DataContainerTest extends Assert {
 
-    //region Declaration test class Element
-    private class Element implements Serializable {
-        private Integer id = 0;
-        private String name = "";
-
-        public Element(Integer id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Element)) return false;
-            Element element = (Element) o;
-            return Objects.equals(getId(), element.getId()) &&
-                    Objects.equals(getName(), element.getName());
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(getId(), getName());
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-    //endregion
-
     private DataContainer<Element> container;
 
     @Before
@@ -175,5 +133,47 @@ public class DataContainerTest extends Assert {
         assertEquals(0, container.getHeaders().length);
         assertEquals(0, container.getVisible().length);
     }
+
+    //region Declaration test class Element
+    private class Element implements Serializable {
+        private Integer id = 0;
+        private String name = "";
+
+        public Element(Integer id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Element)) return false;
+            Element element = (Element) o;
+            return Objects.equals(getId(), element.getId()) &&
+                    Objects.equals(getName(), element.getName());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getId(), getName());
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+    //endregion
 
 }
