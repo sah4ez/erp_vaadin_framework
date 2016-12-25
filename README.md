@@ -6,6 +6,7 @@ Framework ERP UI on Vaadin.
 INSTALL
 ========
 
+For SNAPSHOT version.
 You need add repository to your pom.xml:
 ```xml
 
@@ -29,7 +30,7 @@ And add dependency:
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>1.0.4-SNAPSHOT</version>
     </dependency>
 
 ```

@@ -24,22 +24,22 @@
 		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>vaadin-addons</id>
-			<url>http://maven.vaadin.com/vaadin-addons</url>
-		</repository>
-		<repository>
-			<id>vaadin-snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>vaadin-addons</id>-->
+			<!--<url>http://maven.vaadin.com/vaadin-addons</url>-->
+		<!--</repository>-->
+		<!--<repository>-->
+			<!--<id>vaadin-snapshots</id>-->
+			<!--<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>-->
+			<!--<releases>-->
+				<!--<enabled>false</enabled>-->
+			<!--</releases>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
+	<!--</repositories>-->
 
 	<dependencyManagement>
 		<dependencies>
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>com.github.sah4ez</groupId>
 			<artifactId>core</artifactId>
-			<version>1.0.3-SNAPSHOT</version>
+			<version>1.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -4,10 +4,12 @@
 
     <groupId>com.github.sah4ez</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
 
     <name>core</name>
+    <description>Simple Framework ERP UI.</description>
+    <url>https://github.com/sah4ez/erp_vaadin_framework</url>
 
     <licenses>
         <license>
@@ -17,7 +19,7 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/sah4ez/erp_vaadin_framework</url>
+        <url>scm:git://github.com/sah4ez/erp_vaadin_framework.git</url>
     </scm>
 
     <properties>
@@ -26,6 +28,29 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <developers>
+        <developer>
+            <id>sah4ez</id>
+            <name>Alexandr Kozlenkov</name>
+            <url>https://github.com/sah4ez</url>
+            <timezone>gmt+3</timezone>
+            <roles>
+                <role>Main Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus001</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus002</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <repositories>
         <repository>
@@ -96,4 +121,74 @@
             <version>RELEASE</version>
         </dependency>
     </dependencies>
+    <build>
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<groupId>org.sonatype.plugins</groupId>-->
+                    <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+                    <!--<version>1.6.7</version>-->
+                    <!--<extensions>true</extensions>-->
+                    <!--<configuration>-->
+                        <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+                        <!--<serverId>nexus002</serverId>-->
+                        <!--&lt;!&ndash;<autoReleaseAfterClose>true</autoReleaseAfterClose>&ndash;&gt;-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>gpg</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <serverId>nexus002</serverId>
+                    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
