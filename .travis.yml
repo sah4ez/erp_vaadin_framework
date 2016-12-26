@@ -1,6 +1,6 @@
 language: java
-before_script: cd core
-script: mvn clean test verify
+before_install: cd core
+install: mvn clean test verify
 
 notifications:
   email:
