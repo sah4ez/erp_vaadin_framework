@@ -1,7 +1,6 @@
 package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.data.DataContainer;
-import com.vaadin.navigator.View;
 import com.vaadin.ui.CustomTable;
 
 /**
@@ -9,13 +8,13 @@ import com.vaadin.ui.CustomTable;
  */
 abstract public class CommonLogic implements Logic {
 
-    private View view;
+    private CommonView view;
 
-    public CommonLogic(View view){
+    public CommonLogic(CommonView view){
         this.view = view;
     }
 
-    public View getView(){
+    public CommonView getView(){
         return this.view;
     }
 
