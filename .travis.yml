@@ -4,8 +4,7 @@ jdk:
 before_install: cd core
 install: mvn clean test verify -Ptravis-ci
 
-after_success:
-  - coveralls
+after_success: coveralls
 
 notifications:
   email:
