@@ -3,7 +3,6 @@ package com.github.sah4ez.core.elements;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
-import com.sun.istack.internal.NotNull;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.TabSheet;
@@ -46,7 +45,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     }
 
     @Override
-    public void setIdentify(@NotNull String identify) {
+    public void setIdentify(String identify) {
         this.identify = identify;
     }
 

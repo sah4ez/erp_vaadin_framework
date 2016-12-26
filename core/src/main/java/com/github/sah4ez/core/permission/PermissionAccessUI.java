@@ -1,6 +1,5 @@
 package com.github.sah4ez.core.permission;
 
-import com.sun.istack.internal.NotNull;
 
 /**
  * Created by aleksandr on 20.12.16.
@@ -13,7 +12,7 @@ public interface PermissionAccessUI {
 
     ModifierAccess getModifierAccess();
 
-    void setIdentify(@NotNull String identify);
+    void setIdentify(String identify);
 
     String getIdentify();
 }

@@ -3,7 +3,6 @@ package com.github.sah4ez.core.elements;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
-import com.sun.istack.internal.NotNull;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.MenuBar;
 
@@ -25,7 +24,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
 
     private Workspace parent;
 
-    public MenuNavigator(String caption, Workspace parent, @NotNull String identify) {
+    public MenuNavigator(String caption, Workspace parent, String identify) {
         this.parent = parent;
         setIdentify(identify);
         setWidth("100%");
@@ -57,7 +56,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
     }
 
     @Override
-    public void setIdentify(@NotNull String identify) {
+    public void setIdentify(String identify) {
         this.identify = identify;
     }
 

@@ -1,6 +1,5 @@
 package com.github.sah4ez.core.permission;
 
-import com.sun.istack.internal.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -188,7 +187,7 @@ public class PermissionAccessTest extends Assert {
         }
 
         @Override
-        public void setIdentify(@NotNull String identify) {
+        public void setIdentify(String identify) {
             this.identify = identify;
         }
 
