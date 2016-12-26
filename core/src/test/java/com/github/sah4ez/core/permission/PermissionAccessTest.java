@@ -1,5 +1,6 @@
 package com.github.sah4ez.core.permission;
 
+import com.sun.istack.internal.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -168,7 +169,8 @@ public class PermissionAccessTest extends Assert {
     }
 
     private class TestComponent implements PermissionAccessUI {
-        ModifierAccess access = ModifierAccess.HIDE;
+        private ModifierAccess access = ModifierAccess.HIDE;
+        private String identify = "";
 
         @Override
         public void setPermissionAccess(ModifierAccess access) {
@@ -183,6 +185,16 @@ public class PermissionAccessTest extends Assert {
         @Override
         public ModifierAccess getModifierAccess() {
             return access;
+        }
+
+        @Override
+        public void setIdentify(@NotNull String identify) {
+            this.identify = identify;
+        }
+
+        @Override
+        public String getIdentify() {
+            return this.identify;
         }
     }
 }

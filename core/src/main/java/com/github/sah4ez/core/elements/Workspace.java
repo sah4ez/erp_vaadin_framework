@@ -20,8 +20,10 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     private Mode mode = Mode.NORMAL;
 
-    public String CAPTION = "";
-    public ThemeResource PICTURE = null;
+    private String identify = "";
+
+    private String CAPTION = "";
+    private ThemeResource PICTURE = null;
 
     private FilterTable table = null;
     private FilterTable tableAll = null;
@@ -44,8 +46,9 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     private ItemClickEvent.ItemClickListener selectItemClickListener;
     private ItemClickEvent.ItemClickListener selectItemClickListenerAll;
 
-    public Workspace(Logic logic) {
+    public Workspace(Logic logic, String identify) {
         this.logic = logic;
+        setIdentify(identify);
         table();
         tableAll();
         navigatorLayout();
@@ -136,18 +139,21 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         }
     }
 
-    public void setTable(FilterTable fTable) {
-        table = fTable;
-        table.setFilterBarVisible(true);
-        table.setMultiSelect(true);
-        table.setSizeFull();
-        table.setSelectable(true);
-        table.setImmediate(true);
-        table.setNullSelectionAllowed(true);
-    }
-
     private MenuBar navigatorLayout() {
-        navigator = new MenuNavigator("", this) {
+
+        navigator = new MenuNavigator("", this, MenuNavigator.class.toString() + "1") {
+            private String identify = "";
+
+            @Override
+            public String getIdentify() {
+                return this.identify;
+            }
+
+            @Override
+            public void setIdentify(String identify) {
+                this.identify = identify;
+            }
+
             @Override
             public void add() {
 
@@ -198,12 +204,11 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         filterPanel.setWidth("100%");
         return filterPanel;
     }
-//    ====================
-
 
     public String getCAPTION() {
         return CAPTION;
     }
+//    ====================
 
     public void setCAPTION(String CAPTION) {
         this.CAPTION = CAPTION;
@@ -227,6 +232,16 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     public FilterTable getTable() {
         return table;
+    }
+
+    public void setTable(FilterTable fTable) {
+        table = fTable;
+        table.setFilterBarVisible(true);
+        table.setMultiSelect(true);
+        table.setSizeFull();
+        table.setSelectable(true);
+        table.setImmediate(true);
+        table.setNullSelectionAllowed(true);
     }
 
     public VerticalSplitPanel getVerticalSplitPanel() {
@@ -257,12 +272,12 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         logic.addUi(navigator);
     }
 
-    public void setFilterPanel(FilterPanel filterPanel) {
-        this.filterPanel = filterPanel;
-    }
-
     public FilterPanel getFilterPanel() {
         return this.filterPanel;
+    }
+
+    public void setFilterPanel(FilterPanel filterPanel) {
+        this.filterPanel = filterPanel;
     }
 
     public FilterTreeTable getFilterTable() {
@@ -351,12 +366,12 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         this.editItemClickListener = editItemClickListener;
     }
 
-    public void setEditItemClickListenerAll(ItemClickEvent.ItemClickListener editItemClickListenerAll) {
-        this.editItemClickListenerAll = editItemClickListenerAll;
-    }
-
     public ItemClickEvent.ItemClickListener getEditItemClickListenerAll() {
         return editItemClickListenerAll;
+    }
+
+    public void setEditItemClickListenerAll(ItemClickEvent.ItemClickListener editItemClickListenerAll) {
+        this.editItemClickListenerAll = editItemClickListenerAll;
     }
 
     public ItemClickEvent.ItemClickListener getSelectItemClickListener() {

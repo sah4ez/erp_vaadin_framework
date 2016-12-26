@@ -3,6 +3,7 @@ package com.github.sah4ez.core.elements;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
+import com.sun.istack.internal.NotNull;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.TabSheet;
@@ -21,13 +22,16 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     private final List<String> captions = new ArrayList<>();
     private final List<Component> components = new ArrayList<>();
     private final List<Resource> resources = new ArrayList<>();
+    private String identify = "";
 
-    public BottomTabs() {
+    public BottomTabs(String identify) {
+        setIdentify(identify);
         captions.removeAll(captions);
         components.removeAll(components);
         resources.removeAll(resources);
         setSizeFull();
         init();
+
     }
 
     private void init() {
@@ -39,6 +43,16 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
                         , this.resources.get(i));
             }
         }
+    }
+
+    @Override
+    public void setIdentify(@NotNull String identify) {
+        this.identify = identify;
+    }
+
+    @Override
+    public String getIdentify() {
+        return identify;
     }
 
     public void addCaption(String ... args){

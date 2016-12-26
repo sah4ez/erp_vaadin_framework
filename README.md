@@ -13,7 +13,7 @@ INSTALL
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
     </dependency>
 
 ```
@@ -49,6 +49,15 @@ And add dependency:
     </dependency>
 
 ```
+WHAT NEW
+==========
+
+*v 1.0.7*
+
+`PermissionAccessUI`:
+
+- added property `String identity` for insert into instances of `Map` all component `CommonView`;
+    
 
 HOW TO
 ========

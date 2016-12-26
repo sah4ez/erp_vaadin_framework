@@ -1,6 +1,7 @@
 package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.permission.ModifierAccess;
+import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -17,34 +18,38 @@ public abstract class CommonView extends VerticalLayout implements View {
     private Map<String, PermissionAccessUI> components = new HashMap<>();
     private Logic logic = null;
 
-    public void setLogic(Logic logic) {
-        this.logic = logic;
-    }
-
     public Logic getLogic() {
         return logic;
     }
 
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+    }
+
     public abstract Map<String, ModifierAccess> loadComponents();
 
-    private void loadPermission(){
+    private void loadPermission() {
         Map<String, ModifierAccess> accessMap = loadComponents();
-        accessMap.forEach(modifiers::replace);
+        accessMap.forEach((k, v) -> PermissionAccess.replacePermissionAccess(modifiers, k, v));
 
         components.forEach(this::replaceComponent);
     }
 
-    private void replaceComponent(String name, PermissionAccessUI accessUI){
+    private void replaceComponent(String name, PermissionAccessUI accessUI) {
         accessUI.replacePermissionAccess(modifiers.get(name));
     }
 
     public void addUI(PermissionAccessUI name) {
-        try {
-            components.put(name.getClass().toString(), name);
-            modifiers.put(name.getClass().toString(), ModifierAccess.READ);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        components.put(name.getIdentify(), name);
+        modifiers.put(name.getIdentify(), ModifierAccess.READ);
+    }
+
+    public Map<String, ModifierAccess> getModifiers() {
+        return modifiers;
+    }
+
+    public Map<String, PermissionAccessUI> getComponents() {
+        return components;
     }
 
     @Override
