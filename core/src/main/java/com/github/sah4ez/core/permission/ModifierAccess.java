@@ -15,7 +15,7 @@ public enum ModifierAccess {
 
     ModifierAccess(int id, String condition){
         this.id = id;
-        this.message = message;
+        this.message = condition;
     }
 
     public int getId() {
