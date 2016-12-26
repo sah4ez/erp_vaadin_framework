@@ -2,12 +2,9 @@ language: java
 before_script: cd core
 script: mvn clean test verify
 
-notification:
-
+notifications:
   email:
      - sah4ez32@gmail.com
-     on_success: [always]
-     on_failure: [always]
 
-service:
+services:
   - core-erp-vaadin-framework
