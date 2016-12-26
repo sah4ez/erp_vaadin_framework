@@ -120,15 +120,32 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.eluder.coveralls/coveralls-maven-plugin -->
+        <dependency>
+            <groupId>org.eluder.coveralls</groupId>
+            <artifactId>coveralls-maven-plugin</artifactId>
+            <version>4.3.0</version>
+        </dependency>
     </dependencies>
+
     <build>
 
     </build>
+
     <profiles>
         <profile>
             <id>travis-ci</id>
             <build>
-
+                <plugins>
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.3.0</version>
+                        <configuration>
+                            <repoToken>qSJ3z7QAIGUmeasPvdla7rtCE79mnsN5M</repoToken>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
         <profile>
