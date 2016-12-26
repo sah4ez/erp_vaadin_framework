@@ -2,11 +2,11 @@ language: java
 jdk:
   - oraclejdk8
 before_install: cd core
-install: mvn clean test verify -Ptravis-ci
+install:
+  - mvn clean test verify -Ptravis-ci
 
 after_success:
 - mvn cobertura:cobertura coveralls:report -Ptravis-ci
-- mvn clean deploy -Prelease
 
 notifications:
   email:
