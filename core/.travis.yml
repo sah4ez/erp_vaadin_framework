@@ -1,0 +1,12 @@
+language: java
+script: mvn clean test verify
+
+notification:
+
+  email:
+     - sah4ez32@gmail.com
+     on_success: [always]
+     on_failure: [always]
+
+service:
+  - core-erp-vaadin-framework

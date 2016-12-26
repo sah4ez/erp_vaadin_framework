@@ -4,7 +4,7 @@
 
     <groupId>com.github.sah4ez</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>jar</packaging>
 
     <name>core</name>
@@ -47,7 +47,7 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>nexus002</id>
+            <id>nexus001</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
@@ -123,19 +123,19 @@
     </dependencies>
     <build>
         <!--<pluginManagement>-->
-            <!--<plugins>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.sonatype.plugins</groupId>-->
-                    <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
-                    <!--<version>1.6.7</version>-->
-                    <!--<extensions>true</extensions>-->
-                    <!--<configuration>-->
-                        <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
-                        <!--<serverId>nexus002</serverId>-->
-                        <!--&lt;!&ndash;<autoReleaseAfterClose>true</autoReleaseAfterClose>&ndash;&gt;-->
-                    <!--</configuration>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
+        <!--<plugins>-->
+        <!--<plugin>-->
+        <!--<groupId>org.sonatype.plugins</groupId>-->
+        <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+        <!--<version>1.6.7</version>-->
+        <!--<extensions>true</extensions>-->
+        <!--<configuration>-->
+        <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+        <!--<serverId>nexus002</serverId>-->
+        <!--&lt;!&ndash;<autoReleaseAfterClose>true</autoReleaseAfterClose>&ndash;&gt;-->
+        <!--</configuration>-->
+        <!--</plugin>-->
+        <!--</plugins>-->
         <!--</pluginManagement>-->
         <plugins>
             <plugin>
@@ -185,8 +185,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <serverId>nexus002</serverId>
-                    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                    <serverId>nexus001</serverId>
+                    <!--<stagingRepositoryId>nexus001</stagingRepositoryId>-->
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
