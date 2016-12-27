@@ -36,7 +36,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     }
 
     private void init() {
-        initTabs(logic);
+        initTabs();
         for (int i = 0; i < this.components.size(); i++) {
             if (i < resources.size() && i < captions.size()) {
                 this.addTab(this.components.get(i)
@@ -79,7 +79,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     public void addResource(Resource resource){
         resources.add(resource);
     }
-    public abstract void initTabs(Logic logic);
+    public abstract void initTabs();
 
     public int getSelecteTabIndex() {
         return this.getTabPosition(this.getTab(this.getSelectedTab()));
@@ -100,6 +100,10 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
 
     public ModifierAccess getModifierAccess() {
         return this.permissionAccess;
+    }
+
+    public Logic getLogic() {
+        return logic;
     }
 }
 
