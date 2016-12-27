@@ -15,7 +15,7 @@ public class MyLayout extends Workspace {
 
     public MyLayout(Logic logic) {
         super(logic,  "MyLayout1");
-        tabSheet = new MyTabSheet();
+        tabSheet = new MyTabSheet(logic);
         menu = new MyMenu("myMenu", this);
         logic.setDataToTable(container.loadAllData(), getTable());
         setBottomTabs(tabSheet);

@@ -2,7 +2,10 @@ package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.data.TreeDataContainer;
+import com.vaadin.data.util.filter.SimpleStringFilter;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.themes.ValoTheme;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,31 +13,38 @@ import org.mockito.Mockito;
 import org.tepi.filtertable.FilterTable;
 import org.tepi.filtertable.FilterTreeTable;
 
-import java.io.Serializable;
+import java.util.Collections;
+
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by aleksandr on 27.12.16.
  */
-public class FilterPanelTest extends Assert{
+public class FilterPanelTest extends Assert {
 
 
-    TestFilterPanel testFilterTable;
-    TestFilterPanel testFilterFilterTable;
-    TestFilterPanel testFilterFilterTreeTable;
+    private TestFilterPanel testFilterTable;
+    private TestFilterPanel testFilterFilterTable;
+    private TestFilterPanel testFilterFilterTreeTable;
 
-    Table table = Mockito.mock(Table.class);
-    FilterTable filterTable = Mockito.mock(FilterTable.class);
-    FilterTreeTable filterTreeTable = Mockito.mock(FilterTreeTable.class);
+    private Table table = Mockito.mock(Table.class);
+    private FilterTable filterTable = Mockito.mock(FilterTable.class);
+    private FilterTreeTable filterTreeTable = Mockito.mock(FilterTreeTable.class);
 
-    Object[] visibleColumns = new Object[]{"id", "name", "price"};
+    private Object[] visibleColumns = new Object[]{"id", "name", "price"};
 
-    DataContainer container = Mockito.mock(DataContainer.class);
-    TreeDataContainer treeContainer = Mockito.mock(TreeDataContainer.class);
+    private DataContainer container = Mockito.mock(DataContainer.class);
+    private TreeDataContainer treeContainer = Mockito.mock(TreeDataContainer.class);
 
-    TreeDataContainer containerAddParentAndChildren = null;
+    private TreeDataContainer containerAddParentAndChildren = null;
+
     @Before
     public void setUp() throws Exception {
 
+        Mockito.when(container.getItemIds()).thenReturn(Collections.singletonList(1));
+        Mockito.when(treeContainer.getItemIds()).thenReturn(Collections.singletonList(1));
+
+        Mockito.when(treeContainer.getContainerFilters()).thenReturn(Collections.singletonList(1));
 
         Mockito.when(table.getVisibleColumns()).thenReturn(visibleColumns);
         Mockito.when(table.getColumnHeader("id")).thenReturn("ID");
@@ -64,10 +74,10 @@ public class FilterPanelTest extends Assert{
                 .thenReturn(treeContainer)
                 .thenReturn(treeContainer);
 
+
         testFilterTable = new TestFilterPanel(table);
         testFilterFilterTable = new TestFilterPanel(filterTable);
         testFilterFilterTreeTable = new TestFilterPanel(filterTreeTable);
-
     }
 
     @Test
@@ -75,12 +85,17 @@ public class FilterPanelTest extends Assert{
         assertEquals(3, testFilterTable.getColumn().getItemIds().size());
         assertEquals(3, testFilterFilterTable.getColumn().getItemIds().size());
         assertEquals(3, testFilterFilterTreeTable.getColumn().getItemIds().size());
-
     }
 
     @Test
-    public void removeAllFilters() throws Exception {
+    public void filterButton() throws Exception {
+        Button button = testFilterTable.filterButton("hello");
+        assertEquals("null hello x", button.getCaption());
+        assertEquals(1, testFilterTable.getFilters().getComponentCount());
+        assertEquals(ValoTheme.BUTTON_QUIET, button.getStyleName());
 
+        testFilterTable.removeFilter(button);
+        assertEquals(0, testFilterTable.getFilters().getComponentCount());
     }
 
     @Test
@@ -108,8 +123,25 @@ public class FilterPanelTest extends Assert{
     }
 
     @Test
-    public void addParentsAndChildren() throws Exception {
+    public void testSort() {
+        assertEquals(0, testFilterTable.getSortColumn().size());
+        assertEquals(0, testFilterTable.getSortAscending().size());
+        testFilterTable.addSort("id", true);
+        testFilterTable.addSort("name", false);
+        assertEquals(2, testFilterTable.getSortColumn().size());
+        assertEquals(2, testFilterTable.getSortAscending().size());
+        testFilterTable.removeSort("id");
+        assertEquals(1, testFilterTable.getSortColumn().size());
+        assertEquals(1, testFilterTable.getSortAscending().size());
+        testFilterTable.removeSort("name");
+        assertEquals(0, testFilterTable.getSortColumn().size());
+        assertEquals(0, testFilterTable.getSortAscending().size());
+    }
 
+    @Test
+    public void testParentsAndChildren() {
+        testFilterFilterTreeTable.addSort("id", true);
+        assertNotNull(containerAddParentAndChildren);
     }
 
     @Test
@@ -121,17 +153,28 @@ public class FilterPanelTest extends Assert{
     }
 
     @Test
-    public void sortListener() throws Exception {
+    public void testAddRemoveFilters() {
+        testFilterTable.addFilter("id", "1");
+        verify(container).addContainerFilter(Mockito.any(SimpleStringFilter.class));
 
+
+        testFilterFilterTreeTable.addFilter("id", "1");
+        verify(treeContainer).addContainerFilter(Mockito.any(SimpleStringFilter.class));
+        assertNotNull(containerAddParentAndChildren);
     }
 
     @Test
-    public void beforeFilter() throws Exception {
+    public void testRemoveFilter(){
+        SimpleStringFilter filter = new SimpleStringFilter("id", "1",  true, false);
+        testFilterTable.removeFilter(filter);
+        verify(container).removeContainerFilter(filter);
 
+        testFilterTable.removeFilter(filter);
+        verify(container).removeContainerFilter(filter);
     }
 
     @Test
-    public void testGetContainer(){
+    public void testGetContainer() {
         assertEquals(container, testFilterTable.getContainer());
         assertEquals(treeContainer, testFilterTable.getContainer());
 
@@ -139,6 +182,34 @@ public class FilterPanelTest extends Assert{
         assertEquals(treeContainer, testFilterFilterTable.getContainer());
 
         assertEquals(treeContainer, testFilterFilterTreeTable.getContainer());
+    }
+
+    @Test
+    public void testAddButton(){
+        Button.ClickEvent event = Mockito.mock(Button.ClickEvent.class);
+
+        testFilterTable.addButton(event);
+        assertTrue(testFilterTable.getFilters().isVisible());
+    }
+
+    @Test
+    public void testDescSortButton(){
+        Button.ClickEvent event = Mockito.mock(Button.ClickEvent.class);
+        testFilterTable.descSortListener(event);
+
+        assertTrue(testFilterTable.getFilters().isVisible());
+        assertEquals(1, testFilterTable.getSortAscending().size());
+        assertEquals(1, testFilterTable.getSortColumn().size());
+    }
+
+    @Test
+    public void testAscSortButton(){
+        Button.ClickEvent event = Mockito.mock(Button.ClickEvent.class);
+        testFilterTable.ascSortListener(event);
+
+        assertTrue(testFilterTable.getFilters().isVisible());
+        assertEquals(1, testFilterTable.getSortAscending().size());
+        assertEquals(1, testFilterTable.getSortColumn().size());
     }
 
     private class TestFilterPanel extends FilterPanel {

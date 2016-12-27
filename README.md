@@ -58,13 +58,17 @@ WHAT NEW
 
 *v 1.0.8*
 
-`FilterPanel`:
+**FilterPanel**:
 
 - refactoring code, for better testing code.
 
+**BottomTabs**:
+
+- added `Logic` to constructor `abstract class`, and added *getter* and *setter*;
+
 *v 1.0.7*
 
-`PermissionAccessUI`:
+**PermissionAccessUI**:
 
 - added property `String identity` for insert into instances of `Map` all component `CommonView`;
     

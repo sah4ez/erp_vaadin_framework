@@ -90,22 +90,23 @@ abstract public class FilterPanel extends VerticalLayout {
 
     private Component initAdd() {
         add = new Button("Добавить");
-        add.addClickListener(event -> {
-
-            if (!filters.isVisible())
-                filters.setVisible(true);
-
-            if (column.getValue() == null) return;
-
-            Button btn = filterButton(" содержит: " + text.getValue());
-
-            Container.Filter filter = addFilter(column.getValue(), text.getValue());
-
-            btn.addClickListener(removeFilter(btn, filter));
-
-        });
+        add.addClickListener(this::addButton);
         add.setEnabled(false);
         return add;
+    }
+
+    protected void addButton(Button.ClickEvent event) {
+        if (!filters.isVisible())
+            filters.setVisible(true);
+
+        if (column.getValue() == null) return;
+
+        Button btn = filterButton(" содержит: " + text.getValue());
+
+        Container.Filter filter = addFilter(column.getValue(), text.getValue());
+
+        btn.addClickListener(removeFilterListener(btn, filter));
+
     }
 
     private TextField initText() {
@@ -118,50 +119,54 @@ abstract public class FilterPanel extends VerticalLayout {
     private Button initDown() {
         down = new Button("По убыванию");
         down.setStyleName(ValoTheme.BUTTON_LINK);
-        down.addClickListener(upClick -> {
-            if (!filters.isVisible())
-                filters.setVisible(true);
-
-            Button btnDesc = filterButton(": по убыванию");
-
-            Object columnValue = column.getValue();
-            addSort(columnValue, false);
-            btnDesc.addClickListener(removeSort(btnDesc, columnValue));
-        });
+        down.addClickListener(this::descSortListener);
         return down;
+    }
+
+    protected void descSortListener(Button.ClickEvent event){
+        if (!filters.isVisible())
+            filters.setVisible(true);
+
+        Button btnDesc = filterButton(": по убыванию");
+
+        Object columnValue = column.getValue();
+        addSort(columnValue, false);
+        btnDesc.addClickListener(removeSortListener(btnDesc, columnValue));
     }
 
     private Button initUp() {
         up = new Button("По возрастанию");
         up.setStyleName(ValoTheme.BUTTON_LINK);
-        up.addClickListener(upClick -> {
-            if (!filters.isVisible())
-                filters.setVisible(true);
-
-            Button btnAsc = filterButton(": по возрастанию");
-
-            Object columnValue = column.getValue();
-            addSort(columnValue, true);
-            btnAsc.addClickListener(removeSort(btnAsc, columnValue));
-        });
+        up.addClickListener(this::ascSortListener);
         return up;
     }
 
-    private Button.ClickListener removeSort(Button btn, Object column) {
+    protected void ascSortListener(Button.ClickEvent event){
+        if (!filters.isVisible())
+            filters.setVisible(true);
+
+        Button btnAsc = filterButton(": по возрастанию");
+
+        Object columnValue = column.getValue();
+        addSort(columnValue, true);
+        btnAsc.addClickListener(removeSortListener(btnAsc, columnValue));
+    }
+
+    private Button.ClickListener removeSortListener(Button btn, Object column) {
         return clickEvent -> {
             removeFilter(btn);
             removeSort(column);
         };
     }
 
-    private Button.ClickListener removeFilter(Button btn, Container.Filter column) {
+    private Button.ClickListener removeFilterListener(Button btn, Container.Filter column) {
         return clickEvent -> {
             removeFilter(btn);
             removeFilter(column);
         };
     }
 
-    private void removeFilter(Button btn) {
+    protected void removeFilter(Button btn) {
         filters.removeComponent(btn);
         if (filters.getComponentCount() == 0)
             filters.setVisible(false);
@@ -198,11 +203,11 @@ abstract public class FilterPanel extends VerticalLayout {
         }
     }
 
-    public void removeAllFilters() {
-        //TODO Реализовать удаление всех фильров
-    }
+//    public void removeAllFilters() {
+    //TODO Реализовать удаление всех фильров
+//    }
 
-    private Container.Filter addFilter(Object value, String textValue) {
+    protected Container.Filter addFilter(Object value, String textValue) {
 
         Container.Filter filter = new SimpleStringFilter(value, textValue, true, false);
 
@@ -226,13 +231,13 @@ abstract public class FilterPanel extends VerticalLayout {
         if (tableIsNotNull()) {
             if (table.getContainerDataSource() instanceof TreeDataContainer) {
                 treeContainer = ((TreeDataContainer) table.getContainerDataSource());
-            }else {
+            } else {
                 container = ((DataContainer) table.getContainerDataSource());
             }
         } else if (filterTableIsNotNull()) {
             if (filterTable.getContainerDataSource() instanceof TreeDataContainer) {
                 treeContainer = ((TreeDataContainer) filterTable.getContainerDataSource());
-            }else {
+            } else {
                 container = ((DataContainer) filterTable.getContainerDataSource());
             }
         } else if (filterTreeTableIsNotNull()) {
@@ -257,7 +262,7 @@ abstract public class FilterPanel extends VerticalLayout {
         sortListener();
     }
 
-    private void addSort(Object sortedColumn, boolean sortedAscending) {
+    protected void addSort(Object sortedColumn, boolean sortedAscending) {
         sortColumn.add(sortedColumn);
         sortAscending.add(sortedAscending);
         sortable();
@@ -286,7 +291,7 @@ abstract public class FilterPanel extends VerticalLayout {
         sortListener();
     }
 
-    private void removeSort(Object columnName) {
+    protected void removeSort(Object columnName) {
         int removeIndex = sortColumn.indexOf(columnName);
         sortAscending.remove(removeIndex);
         sortColumn.remove(removeIndex);
@@ -328,13 +333,20 @@ abstract public class FilterPanel extends VerticalLayout {
 
     public abstract void sortListener();
 
-    protected ComboBox getColumn() {
+    ComboBox getColumn() {
         return column;
     }
 
-    protected CssLayout getFilters(){
+    CssLayout getFilters() {
         return filters;
     }
 
+    List<Object> getSortColumn() {
+        return sortColumn;
+    }
+
+    List<Boolean> getSortAscending() {
+        return sortAscending;
+    }
 }
 
