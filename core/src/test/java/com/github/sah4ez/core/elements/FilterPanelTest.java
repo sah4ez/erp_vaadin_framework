@@ -1,5 +1,6 @@
 package com.github.sah4ez.core.elements;
 
+import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.data.TreeDataContainer;
 import com.vaadin.ui.Table;
 import org.junit.Assert;
@@ -8,6 +9,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.tepi.filtertable.FilterTable;
 import org.tepi.filtertable.FilterTreeTable;
+
+import java.io.Serializable;
 
 /**
  * Created by aleksandr on 27.12.16.
@@ -25,23 +28,41 @@ public class FilterPanelTest extends Assert{
 
     Object[] visibleColumns = new Object[]{"id", "name", "price"};
 
+    DataContainer container = Mockito.mock(DataContainer.class);
+    TreeDataContainer treeContainer = Mockito.mock(TreeDataContainer.class);
+
+    TreeDataContainer containerAddParentAndChildren = null;
     @Before
     public void setUp() throws Exception {
+
 
         Mockito.when(table.getVisibleColumns()).thenReturn(visibleColumns);
         Mockito.when(table.getColumnHeader("id")).thenReturn("ID");
         Mockito.when(table.getColumnHeader("name")).thenReturn("NAME");
         Mockito.when(table.getColumnHeader("price")).thenReturn("PRICE");
+        Mockito.when(table.getContainerDataSource())
+                .thenReturn(container)
+                .thenReturn(container)
+                .thenReturn(treeContainer)
+                .thenReturn(treeContainer);
 
         Mockito.when(filterTable.getVisibleColumns()).thenReturn(visibleColumns);
         Mockito.when(filterTable.getColumnHeader("id")).thenReturn("ID");
         Mockito.when(filterTable.getColumnHeader("name")).thenReturn("NAME");
         Mockito.when(filterTable.getColumnHeader("price")).thenReturn("PRICE");
+        Mockito.when(filterTable.getContainerDataSource())
+                .thenReturn(container)
+                .thenReturn(container)
+                .thenReturn(treeContainer)
+                .thenReturn(treeContainer);
 
         Mockito.when(filterTreeTable.getVisibleColumns()).thenReturn(visibleColumns);
         Mockito.when(filterTreeTable.getColumnHeader("id")).thenReturn("ID");
         Mockito.when(filterTreeTable.getColumnHeader("name")).thenReturn("NAME");
         Mockito.when(filterTreeTable.getColumnHeader("price")).thenReturn("PRICE");
+        Mockito.when(filterTreeTable.getContainerDataSource())
+                .thenReturn(treeContainer)
+                .thenReturn(treeContainer);
 
         testFilterTable = new TestFilterPanel(table);
         testFilterFilterTable = new TestFilterPanel(filterTable);
@@ -93,6 +114,9 @@ public class FilterPanelTest extends Assert{
 
     @Test
     public void getNameIdentifyColumn() throws Exception {
+        assertEquals("id", testFilterTable.getNameIdentifyColumn());
+        assertEquals("id", testFilterFilterTable.getNameIdentifyColumn());
+        assertEquals("id", testFilterFilterTreeTable.getNameIdentifyColumn());
 
     }
 
@@ -104,6 +128,17 @@ public class FilterPanelTest extends Assert{
     @Test
     public void beforeFilter() throws Exception {
 
+    }
+
+    @Test
+    public void testGetContainer(){
+        assertEquals(container, testFilterTable.getContainer());
+        assertEquals(treeContainer, testFilterTable.getContainer());
+
+        assertEquals(container, testFilterFilterTable.getContainer());
+        assertEquals(treeContainer, testFilterFilterTable.getContainer());
+
+        assertEquals(treeContainer, testFilterFilterTreeTable.getContainer());
     }
 
     private class TestFilterPanel extends FilterPanel {
@@ -123,7 +158,7 @@ public class FilterPanelTest extends Assert{
 
         @Override
         public void addParentsAndChildren(TreeDataContainer treeDataContainer) {
-
+            containerAddParentAndChildren = treeDataContainer;
         }
 
         @Override

@@ -79,7 +79,7 @@ abstract public class FilterPanel extends VerticalLayout {
         return components;
     }
 
-    private Button filterButton(String caption) {
+    protected Button filterButton(String caption) {
         Button btn = new Button(column.getItemCaption(column.getValue()) +
                 " " + caption + " x");
         btn.setStyleName(ValoTheme.BUTTON_QUIET);
@@ -161,7 +161,7 @@ abstract public class FilterPanel extends VerticalLayout {
         };
     }
 
-    private void removeFilter(Button btn){
+    private void removeFilter(Button btn) {
         filters.removeComponent(btn);
         if (filters.getComponentCount() == 0)
             filters.setVisible(false);
@@ -219,38 +219,31 @@ abstract public class FilterPanel extends VerticalLayout {
         return filter;
     }
 
-    private DataContainer getContainer() {
+    protected DataContainer getContainer() {
         DataContainer container = null;
         TreeDataContainer treeContainer = null;
 
         if (tableIsNotNull()) {
-            if (table.getContainerDataSource() instanceof DataContainer) {
-                container = ((DataContainer) table.getContainerDataSource());
-            } else if (table.getContainerDataSource() instanceof DataContainer) {
+            if (table.getContainerDataSource() instanceof TreeDataContainer) {
                 treeContainer = ((TreeDataContainer) table.getContainerDataSource());
+            }else {
+                container = ((DataContainer) table.getContainerDataSource());
             }
         } else if (filterTableIsNotNull()) {
-            if (filterTable.getContainerDataSource() instanceof DataContainer) {
-                container = ((DataContainer) filterTable.getContainerDataSource());
-            } else if (filterTable.getContainerDataSource() instanceof DataContainer) {
+            if (filterTable.getContainerDataSource() instanceof TreeDataContainer) {
                 treeContainer = ((TreeDataContainer) filterTable.getContainerDataSource());
+            }else {
+                container = ((DataContainer) filterTable.getContainerDataSource());
             }
         } else if (filterTreeTableIsNotNull()) {
-            if (filterTreeTable.getContainerDataSource() instanceof DataContainer) {
-                container = ((DataContainer) filterTreeTable.getContainerDataSource());
-            } else if (filterTreeTable.getContainerDataSource() instanceof DataContainer) {
+            if (filterTreeTable.getContainerDataSource() instanceof TreeDataContainer)
                 treeContainer = ((TreeDataContainer) filterTreeTable.getContainerDataSource());
-            }
         }
 
-        if (container != null) return container;
-
-        if (treeContainer != null) return treeContainer;
-
-        return null;
+        return container != null ? container : treeContainer;
     }
 
-    private void removeFilter(Container.Filter filter) {
+    protected void removeFilter(Container.Filter filter) {
         DataContainer container = getContainer();
 
         assert container != null;
@@ -335,8 +328,13 @@ abstract public class FilterPanel extends VerticalLayout {
 
     public abstract void sortListener();
 
-    public ComboBox getColumn() {
+    protected ComboBox getColumn() {
         return column;
     }
+
+    protected CssLayout getFilters(){
+        return filters;
+    }
+
 }
 

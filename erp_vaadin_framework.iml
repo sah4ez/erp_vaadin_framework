@@ -96,7 +96,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.sun:tools:0">
         <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/tools.jar!/" />
+          <root url="jar://$USER_HOME$/.opt/jdk1.8.0_101/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
