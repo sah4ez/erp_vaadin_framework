@@ -64,12 +64,26 @@ public class FilterPanelTest extends Assert{
 
     @Test
     public void show() throws Exception {
+        testFilterTable.show();
+        assertTrue(testFilterTable.isVisible());
 
+        testFilterFilterTable.show();
+        assertTrue(testFilterFilterTable.isVisible());
+
+        testFilterFilterTreeTable.show();
+        assertTrue(testFilterFilterTreeTable.isVisible());
     }
 
     @Test
     public void hide() throws Exception {
+        testFilterTable.hide();
+        assertFalse(testFilterTable.isVisible());
 
+        testFilterFilterTable.hide();
+        assertFalse(testFilterFilterTable.isVisible());
+
+        testFilterFilterTreeTable.hide();
+        assertFalse(testFilterFilterTreeTable.isVisible());
     }
 
     @Test

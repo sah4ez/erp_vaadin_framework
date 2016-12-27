@@ -122,7 +122,7 @@ abstract public class FilterPanel extends VerticalLayout {
             if (!filters.isVisible())
                 filters.setVisible(true);
 
-            Button btnDesc = filterButton(": по убыванию x");
+            Button btnDesc = filterButton(": по убыванию");
 
             Object columnValue = column.getValue();
             addSort(columnValue, false);
@@ -138,7 +138,7 @@ abstract public class FilterPanel extends VerticalLayout {
             if (!filters.isVisible())
                 filters.setVisible(true);
 
-            Button btnAsc = filterButton(": по возрастанию x");
+            Button btnAsc = filterButton(": по возрастанию");
 
             Object columnValue = column.getValue();
             addSort(columnValue, true);
@@ -149,20 +149,22 @@ abstract public class FilterPanel extends VerticalLayout {
 
     private Button.ClickListener removeSort(Button btn, Object column) {
         return clickEvent -> {
-            filters.removeComponent(btn);
-            if (filters.getComponentCount() == 0)
-                filters.setVisible(false);
+            removeFilter(btn);
             removeSort(column);
         };
     }
 
     private Button.ClickListener removeFilter(Button btn, Container.Filter column) {
         return clickEvent -> {
-            filters.removeComponent(btn);
-            if (filters.getComponentCount() == 0)
-                filters.setVisible(false);
+            removeFilter(btn);
             removeFilter(column);
         };
+    }
+
+    private void removeFilter(Button btn){
+        filters.removeComponent(btn);
+        if (filters.getComponentCount() == 0)
+            filters.setVisible(false);
     }
 
     private ComboBox initColumn() {
