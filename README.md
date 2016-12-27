@@ -17,7 +17,7 @@ INSTALL
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.8</version>
     </dependency>
 
 ```
@@ -55,6 +55,12 @@ And add dependency:
 ```
 WHAT NEW
 ==========
+
+*v 1.0.8*
+
+`FilterPanel`:
+
+- refactoring code, for better testing code.
 
 *v 1.0.7*
 
