@@ -9,7 +9,7 @@ import com.github.sah4ez.core.elements.Workspace;
 public class MyMenu extends MenuNavigator {
 
     public MyMenu(String caption, Workspace parent) {
-        super(caption, parent);
+        super(caption, parent, "MyMenu1");
     }
 
     @Override

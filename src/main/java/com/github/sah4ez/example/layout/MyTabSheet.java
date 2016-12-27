@@ -9,7 +9,7 @@ import com.vaadin.ui.Label;
  */
 public class MyTabSheet extends BottomTabs {
     public MyTabSheet() {
-        super();
+        super("MyTabSheet1");
     }
 
     @Override

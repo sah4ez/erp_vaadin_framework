@@ -195,14 +195,19 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
             public void sortListener() {
 
             }
-
-            @Override
-            public void beforeFilter() {
-
-            }
         };
         filterPanel.setWidth("100%");
         return filterPanel;
+    }
+
+    @Override
+    public void setIdentify(String identify) {
+        this.identify = identify;
+    }
+
+    @Override
+    public String getIdentify() {
+        return this.identify;
     }
 
     public String getCAPTION() {

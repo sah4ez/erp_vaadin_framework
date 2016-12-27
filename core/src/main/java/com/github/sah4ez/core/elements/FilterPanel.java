@@ -202,7 +202,6 @@ abstract public class FilterPanel extends VerticalLayout {
 
     private Container.Filter addFilter(Object value, String textValue) {
 
-        beforeFilter();
         Container.Filter filter = new SimpleStringFilter(value, textValue, true, false);
 
         DataContainer container = getContainer();
@@ -219,13 +218,33 @@ abstract public class FilterPanel extends VerticalLayout {
     }
 
     private DataContainer getContainer() {
+        DataContainer container = null;
+        TreeDataContainer treeContainer = null;
+
         if (tableIsNotNull()) {
-            return (DataContainer) table.getContainerDataSource();
+            if (table.getContainerDataSource() instanceof DataContainer) {
+                container = ((DataContainer) table.getContainerDataSource());
+            } else if (table.getContainerDataSource() instanceof DataContainer) {
+                treeContainer = ((TreeDataContainer) table.getContainerDataSource());
+            }
         } else if (filterTableIsNotNull()) {
-            return (TreeDataContainer) filterTable.getContainerDataSource();
+            if (filterTable.getContainerDataSource() instanceof DataContainer) {
+                container = ((DataContainer) filterTable.getContainerDataSource());
+            } else if (filterTable.getContainerDataSource() instanceof DataContainer) {
+                treeContainer = ((TreeDataContainer) filterTable.getContainerDataSource());
+            }
         } else if (filterTreeTableIsNotNull()) {
-            return (TreeDataContainer) filterTreeTable.getContainerDataSource();
+            if (filterTreeTable.getContainerDataSource() instanceof DataContainer) {
+                container = ((DataContainer) filterTreeTable.getContainerDataSource());
+            } else if (filterTreeTable.getContainerDataSource() instanceof DataContainer) {
+                treeContainer = ((TreeDataContainer) filterTreeTable.getContainerDataSource());
+            }
         }
+
+        if (container != null) return container;
+
+        if (treeContainer != null) return treeContainer;
+
         return null;
     }
 
@@ -297,15 +316,15 @@ abstract public class FilterPanel extends VerticalLayout {
     }
 
     private boolean tableIsNotNull() {
-        return table != null && table.getContainerDataSource() instanceof TreeDataContainer;
+        return table != null;
     }
 
     private boolean filterTableIsNotNull() {
-        return filterTable != null && filterTable.getContainerDataSource() instanceof DataContainer;
+        return filterTable != null;
     }
 
     private boolean filterTreeTableIsNotNull() {
-        return filterTreeTable != null && filterTreeTable.getContainerDataSource() instanceof TreeDataContainer;
+        return filterTreeTable != null;
     }
 
     public abstract void addParentsAndChildren(TreeDataContainer treeDataContainer);
@@ -314,6 +333,8 @@ abstract public class FilterPanel extends VerticalLayout {
 
     public abstract void sortListener();
 
-    public abstract void beforeFilter();
+    public ComboBox getColumn() {
+        return column;
+    }
 }
 

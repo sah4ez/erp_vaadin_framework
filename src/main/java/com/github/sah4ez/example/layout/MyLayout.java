@@ -1,8 +1,8 @@
 package com.github.sah4ez.example.layout;
 
-import com.github.sah4ez.example.data.ElementContainer;
 import com.github.sah4ez.core.elements.Logic;
 import com.github.sah4ez.core.elements.Workspace;
+import com.github.sah4ez.example.data.ElementContainer;
 import com.vaadin.event.ItemClickEvent;
 
 /**
@@ -14,7 +14,7 @@ public class MyLayout extends Workspace {
     private MyMenu menu;
 
     public MyLayout(Logic logic) {
-        super(logic);
+        super(logic,  "MyLayout1");
         tabSheet = new MyTabSheet();
         menu = new MyMenu("myMenu", this);
         logic.setDataToTable(container.loadAllData(), getTable());
