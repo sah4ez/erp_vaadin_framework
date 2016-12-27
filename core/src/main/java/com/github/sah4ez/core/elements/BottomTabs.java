@@ -1,5 +1,9 @@
 package com.github.sah4ez.core.elements;
 
+/**
+ * Created by aleksandr on 20.12.16.
+ */
+import com.github.sah4ez.core.elements.Logic;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
@@ -11,10 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-/**
- * Created by aleksandr on 20.12.16.
- */
 abstract public class BottomTabs extends TabSheet implements PermissionAccessUI {
 
     private ModifierAccess permissionAccess = ModifierAccess.HIDE;
@@ -22,8 +22,10 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     private final List<Component> components = new ArrayList<>();
     private final List<Resource> resources = new ArrayList<>();
     private String identify = "";
+    private Logic logic;
 
-    public BottomTabs(String identify) {
+    public BottomTabs(Logic logic, String identify) {
+        this.logic = logic;
         setIdentify(identify);
         captions.removeAll(captions);
         components.removeAll(components);
@@ -34,7 +36,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     }
 
     private void init() {
-        initTabs();
+        initTabs(logic);
         for (int i = 0; i < this.components.size(); i++) {
             if (i < resources.size() && i < captions.size()) {
                 this.addTab(this.components.get(i)
@@ -77,7 +79,7 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     public void addResource(Resource resource){
         resources.add(resource);
     }
-    public abstract void initTabs();
+    public abstract void initTabs(Logic logic);
 
     public int getSelecteTabIndex() {
         return this.getTabPosition(this.getTab(this.getSelectedTab()));
