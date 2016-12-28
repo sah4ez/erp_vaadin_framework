@@ -79,23 +79,23 @@ HOW TO
 This framework has next structure:
 ```
   core
-  |__data
-  |  |_DataContainer(A)
-  |  |_TreeBeanContainer(C)
-  |__elements
-  |  |_ButtomTabs(A)
-  |  |_CommonLogic(A)
-  |  |_CommonView(A)
-  |  |_FilterPanel(A)
-  |  |_Logic(I)
-  |  |_Menu(A)
-  |  |_MenuNavigator(A)
-  |  |_Mode(E)
-  |  |_Workspace(A)
-  |__permission
-     |_ModifierAccess(A)
-     |_PermissionAccess(F)
-     |_PermissionAccessUI(I)
+  |--data
+  |  |--DataContainer(A)
+  |  +--TreeBeanContainer(C)
+  |--elements
+  |  |--ButtomTabs(A)
+  |  |--CommonLogic(A)
+  |  |--CommonView(A)
+  |  |--FilterPanel(A)
+  |  |--Logic(I)
+  |  |--Menu(A)
+  |  |--MenuNavigator(A)
+  |  |--Mode(E)
+  |  +--Workspace(A)
+  +--permission
+     |--ModifierAccess(A)
+     |--PermissionAccess(F)
+     +--PermissionAccessUI(I)
 ```
 
 (A) - abstract class, (C) - class, (I) - interface, (E) - enum, (F) - final class. 
