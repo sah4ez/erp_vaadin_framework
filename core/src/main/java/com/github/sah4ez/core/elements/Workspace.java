@@ -40,7 +40,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     private FilterPanel filterPanel = null;
 
-    private ModifierAccess permissionAccess = ModifierAccess.HIDE;
+    private ModifierAccess modifierAccess = ModifierAccess.HIDE;
 
     private VerticalLayout layout;
     private ItemClickEvent.ItemClickListener selectItemClickListener;
@@ -129,10 +129,10 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         return splitPosition;
     }
 
-    private void setSplitPosition(Float splitPosition) {
+    public void setSplitPosition(Float splitPosition) {
         this.splitPosition = splitPosition;
         horizontalSplitPanel.setSplitPosition(this.splitPosition, Unit.PERCENTAGE);
-        if (splitPosition == 100f) {
+        if (this.splitPosition == 100f) {
             horizontalSplitPanel.setLocked(true);
         } else {
             horizontalSplitPanel.setLocked(false);
@@ -298,7 +298,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
             bottomTabs.replacePermissionAccess(permission);
         }
 
-        this.permissionAccess = permission;
+        this.modifierAccess = permission;
 
         switch (permission) {
             case EDIT: {
@@ -324,7 +324,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
     }
 
     public ModifierAccess getModifierAccess() {
-        return permissionAccess;
+        return modifierAccess;
     }
 
     public void hideBottomPanel() {
@@ -334,7 +334,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
 
     public void showBottomPanel() {
         getVerticalSplitPanel().setSplitPosition(50, Unit.PERCENTAGE);
-        getVerticalSplitPanel().setLocked(true);
+        getVerticalSplitPanel().setLocked(false);
     }
 
     public void editOff() {
