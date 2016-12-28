@@ -5,9 +5,9 @@ Framework ERP UI on Vaadin.
 
 
 [![Build Status](https://travis-ci.org/sah4ez/erp_vaadin_framework.svg?branch=master)](https://travis-ci.org/sah4ez/erp_vaadin_framework)
-
-
 [![Coverage Status](https://coveralls.io/repos/github/sah4ez/erp_vaadin_framework/badge.svg?branch=master)](https://coveralls.io/github/sah4ez/erp_vaadin_framework?branch=master)
+[![Code Climate](https://codeclimate.com/github/sah4ez/erp_vaadin_framework/badges/gpa.svg)](https://codeclimate.com/github/sah4ez/erp_vaadin_framework)
+
 
 
 INSTALL
@@ -384,3 +384,6 @@ For binding data to table (or treeTable) you might use this method:
 `java
 CommonLogic.setDataToTalbe(DataContainer container, CustomTable table);
 `
+
+### License ###
+## [**GPL**](http://www.gnu.org/licenses/gpl.txt) ##
