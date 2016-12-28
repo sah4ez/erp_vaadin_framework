@@ -386,7 +386,23 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void testConstructor(){
-        assertNotNull(menu);
+        MenuNavigator test = new MenuNavigator("", null, "") {
+            @Override
+            public void add() {
+
+            }
+
+            @Override
+            public void delete() {
+
+            }
+
+            @Override
+            public void print() {
+
+            }
+        };
+        assertNotNull(test);
     }
 
     private class TestMenuNavigator extends MenuNavigator {

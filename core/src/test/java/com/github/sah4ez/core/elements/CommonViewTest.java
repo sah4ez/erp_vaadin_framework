@@ -19,9 +19,6 @@ public class CommonViewTest extends Assert {
 
     private Logic logic = Mockito.mock(Logic.class);
 
-    private Map<String, ModifierAccess> modifiers = new HashMap<>();
-    private Map<String, PermissionAccessUI> components = new HashMap<>();
-
     private PermissionAccessUI component1 = Mockito.mock(PermissionAccessUI.class);
     private PermissionAccessUI component2 = Mockito.mock(PermissionAccessUI.class);
     private PermissionAccessUI component3 = Mockito.mock(PermissionAccessUI.class);

@@ -63,13 +63,8 @@ public abstract class Menu extends CssLayout {
         }
 
 
-        final Button showMenu = new Button("Меню", event -> {
-            if (menuPart.getStyleName().contains(VALO_MENU_VISIBLE)) {
-                menuPart.removeStyleName(VALO_MENU_VISIBLE);
-            } else {
-                menuPart.addStyleName(VALO_MENU_VISIBLE);
-            }
-        });
+        final Button showMenu = new Button("Меню" );
+        showMenu.addClickListener(this::enterMenu);
 
         showMenu.addStyleName(ValoTheme.BUTTON_PRIMARY);
         showMenu.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -83,6 +78,14 @@ public abstract class Menu extends CssLayout {
         menuPart.addComponent(menuItemsLayout);
 
         addComponent(menuPart);
+    }
+
+    protected void enterMenu(Button.ClickEvent event){
+        if (menuPart.getStyleName().contains(VALO_MENU_VISIBLE)) {
+            menuPart.removeStyleName(VALO_MENU_VISIBLE);
+        } else {
+            menuPart.addStyleName(VALO_MENU_VISIBLE);
+        }
     }
 
     public boolean userIsLoggined() {
@@ -103,12 +106,6 @@ public abstract class Menu extends CssLayout {
     public void addView(View view, final String name, String caption,
                         Resource icon) {
         navigator.addView(name, view);
-        createViewButton(name, caption, icon);
-    }
-
-    public void addView(Class<? extends View> viewClass, final String name,
-                        String caption, Resource icon) {
-        navigator.addView(name, viewClass);
         createViewButton(name, caption, icon);
     }
 
@@ -134,5 +131,17 @@ public abstract class Menu extends CssLayout {
 
     public void setImage(Image image){
         this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    protected Map<String, Button> getViewButtons(){
+        return viewButtons;
+    }
+
+    protected CssLayout getMenuPart(){
+        return menuPart;
     }
 }
