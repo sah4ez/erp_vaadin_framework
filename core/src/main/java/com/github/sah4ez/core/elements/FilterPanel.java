@@ -17,16 +17,12 @@ import java.util.List;
  */
 abstract public class FilterPanel extends VerticalLayout {
     private ComboBox column;
-    private Button up;
-    private Button down;
     private TextField text;
     private Button add;
     private Table table;
     private FilterTable filterTable;
     private FilterTreeTable filterTreeTable;
-    private AbstractSelect select;
     private CssLayout filters;
-    private HorizontalLayout components;
     private List<Object> sortColumn = new ArrayList<>();
     private List<Boolean> sortAscending = new ArrayList<>();
 
@@ -68,7 +64,7 @@ abstract public class FilterPanel extends VerticalLayout {
     }
 
     private HorizontalLayout initComponents() {
-        components = new HorizontalLayout();
+        HorizontalLayout components = new HorizontalLayout();
         components.addComponent(initColumn());
         components.addComponent(initUp());
         components.addComponent(initDown());
@@ -117,7 +113,7 @@ abstract public class FilterPanel extends VerticalLayout {
     }
 
     private Button initDown() {
-        down = new Button("По убыванию");
+        Button down = new Button("По убыванию");
         down.setStyleName(ValoTheme.BUTTON_LINK);
         down.addClickListener(this::descSortListener);
         return down;
@@ -135,7 +131,7 @@ abstract public class FilterPanel extends VerticalLayout {
     }
 
     private Button initUp() {
-        up = new Button("По возрастанию");
+        Button up = new Button("По возрастанию");
         up.setStyleName(ValoTheme.BUTTON_LINK);
         up.addClickListener(this::ascSortListener);
         return up;

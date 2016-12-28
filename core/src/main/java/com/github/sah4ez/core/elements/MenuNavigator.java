@@ -9,7 +9,7 @@ import com.vaadin.ui.MenuBar;
 /**
  * Created by aleksandr on 20.12.16.
  */
-public abstract class MenuNavigator extends MenuBar implements PermissionAccessUI {
+abstract public class MenuNavigator extends MenuBar implements PermissionAccessUI {
 
     private String identify = "";
 
@@ -122,8 +122,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
             menuItem.setEnabled(true);
             menuItem.setVisible(true);
         });
-        this.setEnabled(true);
-        this.setVisible(true);
+        setEditMode();
     }
 
     private void read(){
@@ -131,8 +130,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
             menuItem.setEnabled(false);
             menuItem.setVisible(true);
         });
-        this.setEnabled(false);
-        this.setVisible(true);
+        setReadMode();
     }
 
     private void hide(){
@@ -140,8 +138,7 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
             menuItem.setEnabled(false);
             menuItem.setVisible(false);
         });
-        this.setEnabled(false);
-        this.setVisible(false);
+        setHideMode();
     }
 
     public void replacePermissionAccess(ModifierAccess permissionAccess) {
@@ -149,19 +146,22 @@ public abstract class MenuNavigator extends MenuBar implements PermissionAccessU
     }
 
     public void setReadMode(){
+        this.setVisible(true);
         this.setEnabled(false);
     }
 
     public void setEditMode(){
+        this.setVisible(true);
         this.setEnabled(true);
+    }
+
+    public void setHideMode(){
+        this.setVisible(false);
+        this.setEnabled(false);
     }
 
     public MenuItem getFilter() {
         return filter;
-    }
-
-    public void setFilter(MenuItem filter) {
-        this.filter = filter;
     }
 
     public void hideAdd(){
