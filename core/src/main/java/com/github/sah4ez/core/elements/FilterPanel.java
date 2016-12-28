@@ -97,12 +97,15 @@ abstract public class FilterPanel extends VerticalLayout {
 
         if (column.getValue() == null) return;
 
+        createButton();
+    }
+
+    protected void createButton(){
         Button btn = filterButton(" содержит: " + text.getValue());
 
         Container.Filter filter = addFilter(column.getValue(), text.getValue());
 
         btn.addClickListener(removeFilterListener(btn, filter));
-
     }
 
     private TextField initText() {

@@ -78,7 +78,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void setPermissionAccessHIDE() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.HIDE);
+        menu.setModifierAccess(ModifierAccess.HIDE);
         assertFalse(menu.getItems().get(0).isVisible());
         assertFalse(menu.getItems().get(1).isVisible());
         assertFalse(menu.getItems().get(2).isVisible());
@@ -95,7 +95,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void setPermissionAccessREAD() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.READ);
+        menu.setModifierAccess(ModifierAccess.READ);
         assertTrue(menu.getItems().get(0).isVisible());
         assertTrue(menu.getItems().get(1).isVisible());
         assertTrue(menu.getItems().get(2).isVisible());
@@ -112,7 +112,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void setPermissionAccessEDIT() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.EDIT);
+        menu.setModifierAccess(ModifierAccess.EDIT);
         assertTrue(menu.getItems().get(0).isVisible());
         assertTrue(menu.getItems().get(1).isVisible());
         assertTrue(menu.getItems().get(2).isVisible());
@@ -129,7 +129,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessHideToHide() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.HIDE);
+        menu.setModifierAccess(ModifierAccess.HIDE);
         menu.replacePermissionAccess(ModifierAccess.HIDE);
 
         assertFalse(menu.getItems().get(0).isVisible());
@@ -148,7 +148,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessHideToRead() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.HIDE);
+        menu.setModifierAccess(ModifierAccess.HIDE);
         menu.replacePermissionAccess(ModifierAccess.READ);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -167,7 +167,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessHideToEdit() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.HIDE);
+        menu.setModifierAccess(ModifierAccess.HIDE);
         menu.replacePermissionAccess(ModifierAccess.EDIT);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -186,7 +186,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToHide() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.READ);
+        menu.setModifierAccess(ModifierAccess.READ);
         menu.replacePermissionAccess(ModifierAccess.HIDE);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -205,7 +205,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToRead() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.READ);
+        menu.setModifierAccess(ModifierAccess.READ);
         menu.replacePermissionAccess(ModifierAccess.READ);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -224,7 +224,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToEdit() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.READ);
+        menu.setModifierAccess(ModifierAccess.READ);
         menu.replacePermissionAccess(ModifierAccess.EDIT);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -242,7 +242,7 @@ public class MenuNavigatorTest extends Assert {
     }
     @Test
     public void replacePermissionAccessEditToHide() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.EDIT);
+        menu.setModifierAccess(ModifierAccess.EDIT);
         menu.replacePermissionAccess(ModifierAccess.HIDE);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -261,7 +261,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessEditToRead() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.EDIT);
+        menu.setModifierAccess(ModifierAccess.EDIT);
         menu.replacePermissionAccess(ModifierAccess.READ);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -280,7 +280,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void replacePermissionAccessEditToEdit() throws Exception {
-        menu.setPermissionAccess(ModifierAccess.EDIT);
+        menu.setModifierAccess(ModifierAccess.EDIT);
         menu.replacePermissionAccess(ModifierAccess.EDIT);
 
         assertTrue(menu.getItems().get(0).isVisible());
@@ -386,23 +386,7 @@ public class MenuNavigatorTest extends Assert {
 
     @Test
     public void testConstructor(){
-        MenuNavigator test = new MenuNavigator("", null, "") {
-            @Override
-            public void add() {
-
-            }
-
-            @Override
-            public void delete() {
-
-            }
-
-            @Override
-            public void print() {
-
-            }
-        };
-        assertNotNull(test);
+        assertNotNull(menu);
     }
 
     private class TestMenuNavigator extends MenuNavigator {

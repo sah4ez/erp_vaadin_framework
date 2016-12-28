@@ -99,7 +99,7 @@ abstract public class MenuNavigator extends MenuBar implements PermissionAccessU
         return this.permissionAccess;
     }
 
-    public void setPermissionAccess(ModifierAccess permission) {
+    public void setModifierAccess(ModifierAccess permission) {
         this.permissionAccess = permission;
         switch (permission) {
             case EDIT: {

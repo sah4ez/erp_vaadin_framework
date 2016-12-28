@@ -27,16 +27,16 @@ public final class PermissionAccess {
         switch (component.getModifierAccess()) {
             case EDIT: {
                 if (newValue.equals(ModifierAccess.HIDE) || newValue.equals(ModifierAccess.READ)) break;
-                component.setPermissionAccess(newValue);
+                component.setModifierAccess(newValue);
                 break;
             }
             case READ: {
                 if (newValue.equals(ModifierAccess.HIDE)) break;
-                component.setPermissionAccess(newValue);
+                component.setModifierAccess(newValue);
                 break;
             }
             case HIDE: {
-                component.setPermissionAccess(newValue);
+                component.setModifierAccess(newValue);
                 break;
             }
         }

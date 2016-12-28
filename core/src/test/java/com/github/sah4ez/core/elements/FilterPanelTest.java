@@ -212,6 +212,12 @@ public class FilterPanelTest extends Assert {
         assertEquals(1, testFilterTable.getSortColumn().size());
     }
 
+    @Test
+    public void createButton(){
+        testFilterTable.createButton();
+        verify(container).addContainerFilter(Mockito.any(SimpleStringFilter.class));
+    }
+
     private class TestFilterPanel extends FilterPanel {
 
         public TestFilterPanel(Table table) {

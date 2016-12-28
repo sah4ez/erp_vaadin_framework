@@ -6,7 +6,7 @@ package com.github.sah4ez.core.permission;
  */
 public interface PermissionAccessUI {
 
-    void setPermissionAccess(ModifierAccess access);
+    void setModifierAccess(ModifierAccess access);
 
     void replacePermissionAccess(ModifierAccess access);
 

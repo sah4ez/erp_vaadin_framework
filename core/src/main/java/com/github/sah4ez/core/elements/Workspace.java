@@ -290,7 +290,7 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
                 ", override this method if use FilterTreeTable.");
     }
 
-    public void setPermissionAccess(ModifierAccess permission) {
+    public void setModifierAccess(ModifierAccess permission) {
         if (navigator != null) {
             navigator.replacePermissionAccess(permission);
         }

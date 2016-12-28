@@ -3,7 +3,6 @@ package com.github.sah4ez.core.elements;
 /**
  * Created by aleksandr on 20.12.16.
  */
-import com.github.sah4ez.core.elements.Logic;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.core.permission.PermissionAccess;
 import com.github.sah4ez.core.permission.PermissionAccessUI;
@@ -17,7 +16,7 @@ import java.util.List;
 
 abstract public class BottomTabs extends TabSheet implements PermissionAccessUI {
 
-    private ModifierAccess permissionAccess = ModifierAccess.HIDE;
+    private ModifierAccess modifierAccess = ModifierAccess.HIDE;
     private final List<String> captions = new ArrayList<>();
     private final List<Component> components = new ArrayList<>();
     private final List<Resource> resources = new ArrayList<>();
@@ -81,12 +80,12 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     }
     public abstract void initTabs();
 
-    public int getSelecteTabIndex() {
+    public int getSelectedTabIndex() {
         return this.getTabPosition(this.getTab(this.getSelectedTab()));
     }
 
-    public void setPermissionAccess(ModifierAccess permission) {
-        this.permissionAccess = permission;
+    public void setModifierAccess(ModifierAccess permission) {
+        this.modifierAccess = permission;
         components.forEach(component -> {
             if (component instanceof PermissionAccessUI) {
                 ((PermissionAccessUI) component).replacePermissionAccess(permission);
@@ -99,11 +98,23 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     }
 
     public ModifierAccess getModifierAccess() {
-        return this.permissionAccess;
+        return this.modifierAccess;
     }
 
     public Logic getLogic() {
         return logic;
+    }
+
+    public List<String> getCaptions() {
+        return captions;
+    }
+
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
     }
 }
 

@@ -58,7 +58,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToHide() throws Exception {
-        component.setPermissionAccess(ModifierAccess.READ);
+        component.setModifierAccess(ModifierAccess.READ);
         assertEquals(ModifierAccess.READ, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.HIDE);
         assertEquals(ModifierAccess.READ, component.getModifierAccess());
@@ -66,7 +66,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToRead() throws Exception {
-        component.setPermissionAccess(ModifierAccess.READ);
+        component.setModifierAccess(ModifierAccess.READ);
         assertEquals(ModifierAccess.READ, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.READ);
         assertEquals(ModifierAccess.READ, component.getModifierAccess());
@@ -74,7 +74,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessReadToEdit() throws Exception {
-        component.setPermissionAccess(ModifierAccess.READ);
+        component.setModifierAccess(ModifierAccess.READ);
         assertEquals(ModifierAccess.READ, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.EDIT);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
@@ -82,7 +82,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessEditToHide() throws Exception {
-        component.setPermissionAccess(ModifierAccess.EDIT);
+        component.setModifierAccess(ModifierAccess.EDIT);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.HIDE);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
@@ -90,7 +90,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessEditToRead() throws Exception {
-        component.setPermissionAccess(ModifierAccess.EDIT);
+        component.setModifierAccess(ModifierAccess.EDIT);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.READ);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
@@ -98,7 +98,7 @@ public class PermissionAccessTest extends Assert {
 
     @Test
     public void replacePermissionAccessEditToEdit() throws Exception {
-        component.setPermissionAccess(ModifierAccess.EDIT);
+        component.setModifierAccess(ModifierAccess.EDIT);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
         PermissionAccess.replacePermissionAccess(component, ModifierAccess.EDIT);
         assertEquals(ModifierAccess.EDIT, component.getModifierAccess());
@@ -171,8 +171,7 @@ public class PermissionAccessTest extends Assert {
         private ModifierAccess access = ModifierAccess.HIDE;
         private String identify = "";
 
-        @Override
-        public void setPermissionAccess(ModifierAccess access) {
+        public void setModifierAccess(ModifierAccess access) {
             this.access = access;
         }
 
