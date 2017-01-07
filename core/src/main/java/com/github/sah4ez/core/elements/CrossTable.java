@@ -13,7 +13,7 @@ abstract public class CrossTable extends Workspace{
     private DataContainer<?> secondContainer;
     private String idFirst = "";
     private String idSecond = "";
-    private String stateFirstEntity = "";
+    private String valueProperty = "";
     private String captionSecond = "";
     private String captionFirst = "";
 
@@ -59,12 +59,12 @@ abstract public class CrossTable extends Workspace{
         return secondContainer;
     }
 
-    public void createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String stateFirstEntity) {
+    public void createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String valueProperty) {
         this.idFirst = idFirst;
         this.captionFirst = captionFirst;
         this.idSecond = idSecond;
         this.captionSecond = captionSecond;
-        this.stateFirstEntity = stateFirstEntity;
+        this.valueProperty = valueProperty;
         CustomTable table = getTable();
 
 

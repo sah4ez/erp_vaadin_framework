@@ -56,6 +56,16 @@ And add dependency:
 WHAT NEW
 ==========
 
+*v 1.0.9*
+**BottomTabs**:
+
+- added `public abstract void clear()`, need for cleaning components added to tab in TabSheet.
+
+**CrossTable**:
+
+- create `public abstract class CrossTable`, class with two inner `DataContainer`, where first container used for created rows and second container used for created columns;
+- add method `createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String value)`, `idFirst, idSecond` - id property of entity, which use for generate query. `captionFirst, captionSecodn` - property of entity, which input in first column and headers other columns. And `valueProperty` - property elements from `firstContainer`. This method used data from two containers and create table.
+
 *v 1.0.8*
 
 **FilterPanel**:
@@ -64,13 +74,13 @@ WHAT NEW
 
 **BottomTabs**:
 
-- added `Logic` to constructor `abstract class`, and added *getter* and *setter*;
+- added `Logic` to constructor `abstract class`, and added *getter* and *setter*.
 
 *v 1.0.7*
 
 **PermissionAccessUI**:
 
-- added property `String identity` for insert into instances of `Map` all component `CommonView`;
+- added property `String identity` for insert into instances of `Map` all component `CommonView`.
     
 
 HOW TO
