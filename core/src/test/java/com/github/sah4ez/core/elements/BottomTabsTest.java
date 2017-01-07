@@ -97,6 +97,14 @@ public class BottomTabsTest extends Assert {
         assertNotNull(tabs.getLogic());
     }
 
+    @Test
+    public void clearTest() throws Exception{
+        tabs.clear();
+        assertEquals("", ((Label) tabs.getComponents().get(0)).getValue());
+        assertEquals("", ((Label) tabs.getComponents().get(1)).getValue());
+
+    }
+
     private class TestTabs extends BottomTabs{
 
         public TestTabs(Logic logic, String identify) {
@@ -108,6 +116,11 @@ public class BottomTabsTest extends Assert {
             addCaption("tab1", "tab2");
             addComponent(new Label("1"), new Label("2"));
             addResource(null, null);
+        }
+
+        @Override
+        public void clear() {
+            getComponents().forEach( component -> ((Label) component).setValue(""));
         }
     }
 

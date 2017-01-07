@@ -78,7 +78,10 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     public void addResource(Resource resource){
         resources.add(resource);
     }
+
     public abstract void initTabs();
+
+    public abstract void clear();
 
     public int getSelectedTabIndex() {
         return this.getTabPosition(this.getTab(this.getSelectedTab()));
@@ -116,5 +119,6 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
     public List<Resource> getResources() {
         return resources;
     }
+
 }
 
