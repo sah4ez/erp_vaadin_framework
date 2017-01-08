@@ -127,6 +127,11 @@ public class TreeDataContainerTest extends Assert{
         assertEquals(3,  container.rootItemIds().size());
     }
 
+    @Test
+    public void testRefresh(){
+        container.refresh();
+    }
+
     //region Declaration test class Element
     public class Element implements Serializable {
         private Integer id = 0;

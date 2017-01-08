@@ -1,8 +1,8 @@
 package com.github.sah4ez.example;
 
 import com.github.sah4ez.core.elements.CommonView;
-import com.github.sah4ez.example.layout.MyLayout;
 import com.github.sah4ez.core.permission.ModifierAccess;
+import com.github.sah4ez.example.layout.MyLayout;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.UI;

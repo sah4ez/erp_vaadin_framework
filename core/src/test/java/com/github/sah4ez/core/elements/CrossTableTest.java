@@ -1,6 +1,8 @@
 package com.github.sah4ez.core.elements;
 
+import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
+import com.vaadin.event.ItemClickEvent;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +31,6 @@ public class CrossTableTest extends Assert {
                     this.add(new Element1(1, "name1", 1.0F));
                     this.add(new Element1(2, "name2", 2.0F));
                     this.add(new Element1(3, "name3", 3.0F));
-                    this.add(new Element1(4, "name4", 4.0F));
                     return this;
                 }
             };
@@ -62,20 +63,112 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
-    public void testInnerContainer(){
+    public void testInnerContainer() {
         assertNotNull(crossTable.getFirstContainer());
         assertNotNull(crossTable.getSecondContainer());
     }
 
     @Test
-    public void testCreateDataInCrossTable(){
-        crossTable.createData("id", "name", "id", "name", "state");
+    public void testSetContainer() {
+        crossTable.setFirstContainer(null);
+        crossTable.setSecondContainer(null);
+        assertNull(crossTable.getFirstContainer());
+        assertNull(crossTable.getSecondContainer());
+        crossTable.setFirstContainer(element1DataContainer);
+        crossTable.setSecondContainer(element4DataContainer);
+        assertEquals(element1DataContainer, crossTable.getFirstContainer());
+        assertEquals(element4DataContainer, crossTable.getSecondContainer());
     }
 
-    private class MyCrossTableTest extends CrossTable{
+    @Test
+    public void testCreatePropertyInCrossTable() {
+        crossTable.createData("id", "name", "id", "name", "condition");
+        assertEquals(6, crossTable.getTable().getContainerPropertyIds().size());
+        Object[] property = crossTable.getTable().getContainerPropertyIds().toArray();
+        assertEquals("id", property[0].toString());
+        assertEquals("name", property[1].toString());
+        assertEquals("1", property[2].toString());
+        assertEquals("2", property[3].toString());
+        assertEquals("3", property[4].toString());
+        assertEquals("4", property[5].toString());
+    }
+
+    @Test
+    public void testCreateRowsInCrossTable() throws NoSuchFieldException, IllegalAccessException {
+        crossTable.createData("id", "name", "id", "name", "condition");
+        assertEquals(3, crossTable.getTable().size());
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+
+        assertEquals("1",getValueProperty(items[0], "id"));
+        assertEquals("2", getValueProperty(items[1], "id"));
+        assertEquals("3", getValueProperty(items[2], "id"));
+
+        assertEquals("name1", getValueProperty(items[0], "name"));
+        assertEquals("name2", getValueProperty(items[1], "name"));
+        assertEquals("name3", getValueProperty(items[2], "name"));
+
+        assertEquals(Condition.USE, getValueProperty(items[0], "1"));
+        assertEquals(Condition.USE_EDIT, getValueProperty(items[0], "2"));
+        assertEquals(Condition.USE_NOT_EDIT, getValueProperty(items[0], "3"));
+        assertEquals(Condition.NOT_USE, getValueProperty(items[0], "4"));
+
+        assertEquals(Condition.USE, getValueProperty(items[1], "1"));
+        assertEquals(Condition.USE_EDIT, getValueProperty(items[1], "2"));
+        assertEquals(Condition.USE_NOT_EDIT, getValueProperty(items[1], "3"));
+        assertEquals(Condition.NOT_USE, getValueProperty(items[1], "4"));
+
+        assertEquals(Condition.USE, getValueProperty(items[2], "1"));
+        assertEquals(Condition.USE_EDIT, getValueProperty(items[2], "2"));
+        assertEquals(Condition.USE_NOT_EDIT, getValueProperty(items[2], "3"));
+        assertEquals(Condition.NOT_USE, getValueProperty(items[2], "4"));
+    }
+
+    private Object getValueProperty(Object object, String property) {
+        return crossTable.getTable().getItem(object).getItemProperty(property).getValue();
+    }
+
+    private class MyCrossTableTest extends CrossTable {
 
         public MyCrossTableTest(Logic logic, String identify, DataContainer<?> first, DataContainer<?> second) {
             super(logic, identify, first, second);
+        }
+
+        @Override
+        public <T> T getCell(Object idRow, Object idColumn) {
+            if (idColumn instanceof String){
+                switch ((String) idColumn){
+                    case "1":
+                        return (T) Condition.USE;
+                    case "2":
+                        return (T) Condition.USE_EDIT;
+                    case "3":
+                        return (T) Condition.USE_NOT_EDIT;
+                    case "4":
+                        return (T) Condition.NOT_USE;
+                }
+            }
+            return (T) Condition.USE;
+        }
+
+        @Override
+        protected ItemClickEvent.ItemClickListener editTableItemClick() {
+            return itemClickEvent -> {};
+        }
+
+        @Override
+        protected ItemClickEvent.ItemClickListener selectTableItemClick() {
+            return itemClickEvent -> {};
+        }
+
+        @Override
+        protected ItemClickEvent.ItemClickListener editTableAllItemClick() {
+            return itemClickEvent -> {};
+        }
+
+        @Override
+        protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
+            return itemClickEvent -> {};
         }
     }
 
@@ -84,6 +177,7 @@ public class CrossTableTest extends Assert {
         private Integer id = 0;
         private String name = "";
         private Float price = 0.0F;
+        private Condition condition = Condition.USE;
 
         private DataContainer<Element2> element2DataContainer;
         private DataContainer<Element3> element3DataContainer;

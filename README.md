@@ -63,8 +63,19 @@ WHAT NEW
 
 **CrossTable**:
 
-- create `public abstract class CrossTable`, class with two inner `DataContainer`, where first container used for created rows and second container used for created columns;
+- add class `public abstract class CrossTable`, class with two inner `DataContainer`, where first container used for created rows and second container used for created columns;
 - add method `createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String value)`, `idFirst, idSecond` - id property of entity, which use for generate query. `captionFirst, captionSecodn` - property of entity, which input in first column and headers other columns. And `valueProperty` - property elements from `firstContainer`. This method used data from two containers and create table.
+- add method `public abstract <T> T getCell(Object idRow, Object idColumn)` that `return` data from DB for each cell in cross table;
+
+**Condition**:
+
+- add enum `Condition` with conditions: `EDIT`, `NOT_USE`, `USE`, `USE_EDIT`, `USE_NOT_EDIT`;
+    - `EDIT` - this Object are edited;
+    - `NOT_USE` - this Object not used;
+    - `USE` - this Object are used and wasn't edited; 
+    - `USE_EDIT` - this Object are used and was edited;
+    - `USE_NOT_EDIT` - this Object must be edited and used.
+
 
 *v 1.0.8*
 

@@ -1,5 +1,6 @@
 package com.github.sah4ez.core.data;
 
+import com.vaadin.data.util.filter.SimpleStringFilter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,6 +133,16 @@ public class DataContainerTest extends Assert {
         assertEquals(0, container.getCaptions().length);
         assertEquals(0, container.getHeaders().length);
         assertEquals(0, container.getVisible().length);
+    }
+
+    @Test
+    public void testRefresh(){
+        container.refresh();
+        container.addContainerFilter(new SimpleStringFilter("id",
+                "0",
+                true,
+                false));
+        container.refresh();
     }
 
     //region Declaration test class Element

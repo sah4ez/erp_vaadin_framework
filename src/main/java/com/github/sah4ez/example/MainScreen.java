@@ -24,6 +24,7 @@ public class MainScreen extends HorizontalLayout{
         menu.setMenuCaption("This Example");
 
         menu.addView(new MyView(), "MyView", "MyView", null);
+        menu.addView(new CrossTableView(), "CrossTabel", "CrossTable", null);
 
         navigator.addViewChangeListener(viewChangeListener);
 
