@@ -29,4 +29,9 @@ public class MyTabSheet extends BottomTabs {
                 FontAwesome.AMAZON
         );
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

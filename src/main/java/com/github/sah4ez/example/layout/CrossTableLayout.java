@@ -1,5 +1,6 @@
 package com.github.sah4ez.example.layout;
 
+import com.github.sah4ez.core.data.CellCondition;
 import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.elements.CrossTable;
@@ -53,31 +54,32 @@ public class CrossTableLayout extends CrossTable{
 
     public CrossTableLayout(Logic logic, String identify ) {
         super(logic, identify, CrossTableLayout.element1DataContainer.loadAllData(), element4DataContainer.loadAllData());
+        getTable().setSizeFull();
     }
 
     @Override
-    public <T> T getCell(Object idRow, Object idColumn) {
-        return (T) Condition.NOT_USE;
+    public CellCondition getCell(Object idRow, Object idColumn) {
+        return Condition.NOT_USE;
     }
 
     @Override
     protected ItemClickEvent.ItemClickListener editTableItemClick() {
-        return null;
+        return itemClickEvent -> {};
     }
 
     @Override
     protected ItemClickEvent.ItemClickListener selectTableItemClick() {
-        return null;
+        return itemClickEvent -> {};
     }
 
     @Override
     protected ItemClickEvent.ItemClickListener editTableAllItemClick() {
-        return null;
+        return itemClickEvent -> {};
     }
 
     @Override
     protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
-        return null;
+        return itemClickEvent -> {};
     }
 
     private static class Element1 {

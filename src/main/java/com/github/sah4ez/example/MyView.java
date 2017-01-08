@@ -28,7 +28,6 @@ public class MyView extends CommonView {
     @Override
     public Map<String, ModifierAccess> loadComponents() {
         Map<String, ModifierAccess> map = new HashMap<>();
-        map.put("sss", ModifierAccess.EDIT);
         return map;
     }
 

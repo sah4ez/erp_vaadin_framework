@@ -1,5 +1,6 @@
 package com.github.sah4ez.core.elements;
 
+import com.github.sah4ez.core.data.CellCondition;
 import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.vaadin.event.ItemClickEvent;
@@ -135,25 +136,25 @@ public class CrossTableTest extends Assert {
         }
 
         @Override
-        public <T> T getCell(Object idRow, Object idColumn) {
+        public CellCondition getCell(Object idRow, Object idColumn) {
             if (idColumn instanceof String){
                 switch ((String) idColumn){
                     case "1":
-                        return (T) Condition.USE;
+                        return Condition.USE;
                     case "2":
-                        return (T) Condition.USE_EDIT;
+                        return Condition.USE_EDIT;
                     case "3":
-                        return (T) Condition.USE_NOT_EDIT;
+                        return Condition.USE_NOT_EDIT;
                     case "4":
-                        return (T) Condition.NOT_USE;
+                        return Condition.NOT_USE;
                 }
             }
-            return (T) Condition.USE;
+            return Condition.USE;
         }
 
         @Override
         protected ItemClickEvent.ItemClickListener editTableItemClick() {
-            return itemClickEvent -> {};
+            return itemClickEvent ->{} ;
         }
 
         @Override

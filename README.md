@@ -57,6 +57,7 @@ WHAT NEW
 ==========
 
 *v 1.0.9*
+
 **BottomTabs**:
 
 - added `public abstract void clear()`, need for cleaning components added to tab in TabSheet.

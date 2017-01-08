@@ -18,11 +18,11 @@ public class ConditionTest extends Assert{
 
     @Test
     public void getText() throws Exception {
-        assertEquals("edit", Condition.EDIT.getText());
-        assertEquals("not-use", Condition.NOT_USE.getText());
-        assertEquals("use", Condition.USE.getText());
-        assertEquals("use-edit", Condition.USE_EDIT.getText());
-        assertEquals("use-not-edit", Condition.USE_NOT_EDIT.getText());
+        assertEquals("edit", Condition.EDIT.getCssStyle());
+        assertEquals("not-use", Condition.NOT_USE.getCssStyle());
+        assertEquals("use", Condition.USE.getCssStyle());
+        assertEquals("use-edit", Condition.USE_EDIT.getCssStyle());
+        assertEquals("use-not-edit", Condition.USE_NOT_EDIT.getCssStyle());
     }
 
 }

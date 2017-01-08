@@ -16,13 +16,13 @@ public class CrossTableView extends CommonView{
     public CrossTableView(){
         setLogic(logic);
         CrossTableLayout layout = new CrossTableLayout(logic, "crosstable1");
+        layout.createData("id", "name", "id", "name", "condition");
         addComponent(layout);
         setSizeFull();
     }
     @Override
     public Map<String, ModifierAccess> loadComponents() {
         Map<String, ModifierAccess> map = new HashMap<>();
-        map.put("crosstable1", ModifierAccess.EDIT);
         return map;
     }
 }

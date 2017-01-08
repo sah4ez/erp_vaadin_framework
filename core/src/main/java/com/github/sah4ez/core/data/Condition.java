@@ -3,7 +3,7 @@ package com.github.sah4ez.core.data;
 /**
  * Created by aleksandr on 08.01.17.
  */
-public enum Condition {
+public enum Condition implements CellCondition{
 
     EDIT(1, "edit"),
     NOT_USE(2, "not-use"),
@@ -23,7 +23,8 @@ public enum Condition {
         return id;
     }
 
-    public String getText() {
+    @Override
+    public String getCssStyle() {
         return text;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.sah4ez.core.elements;
 
+import com.github.sah4ez.core.data.CellCondition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.vaadin.data.Item;
 import com.vaadin.ui.CustomTable;
@@ -130,5 +131,5 @@ abstract public class CrossTable extends Workspace {
         return result;
     }
 
-    public abstract <T> T getCell(Object idRow, Object idColumn);
+    public abstract CellCondition getCell(Object idRow, Object idColumn);
 }
