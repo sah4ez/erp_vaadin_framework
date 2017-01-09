@@ -27,6 +27,7 @@ abstract public class TreeDataContainer<T> extends DataContainer<T> implements C
     public Collection<?> getChildren(Object itemId) {
         ArrayList<Object> children = new ArrayList<>();
 
+        //TODO: Find new implementation
         // This implementation has O(n^2) complexity when
         // painting the tree, so it's really inefficient.
         for (Object candidateId : getItemIds()) {

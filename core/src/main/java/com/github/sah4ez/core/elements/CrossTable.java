@@ -76,6 +76,9 @@ abstract public class CrossTable extends Workspace {
 
         initRows();
 
+        if (getTable().getCellStyleGenerator() == null){
+            getTable().setCellStyleGenerator(cellStyleGenerator());
+        }
     }
 
     private void initColumns() {
@@ -129,6 +132,19 @@ abstract public class CrossTable extends Workspace {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private CustomTable.CellStyleGenerator cellStyleGenerator(){
+        return (CustomTable.CellStyleGenerator) (customTable, itemId, property) -> {
+            if (customTable == null || itemId == null || property == null) return null;
+
+            String result = null;
+            Object value = customTable.getItem(itemId).getItemProperty(property).getValue();
+            if (value != null && value instanceof CellCondition){
+                result = ((CellCondition) value).getCssStyle();
+            }
+            return result;
+        };
     }
 
     public abstract CellCondition getCell(Object idRow, Object idColumn);

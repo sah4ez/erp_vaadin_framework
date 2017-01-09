@@ -39,7 +39,6 @@
           <element id="library" level="project" name="Maven: com.googlecode.javaewah:JavaEWAH:0.7.9" />
           <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-utils:2.0.7" />
           <element id="library" level="project" name="Maven: org.apache.maven:maven-plugin-api:3.0" />
-          <element id="library" level="project" name="Maven: org.apache.maven:maven-model:3.0" />
           <element id="library" level="project" name="Maven: org.sonatype.sisu:sisu-inject-plexus:1.4.2" />
           <element id="library" level="project" name="Maven: org.sonatype.sisu:sisu-inject-bean:1.4.2" />
           <element id="library" level="project" name="Maven: org.sonatype.sisu:sisu-guice:noaop:2.1.7" />
@@ -112,6 +111,16 @@
           <element id="library" level="project" name="Maven: org.apache.maven.doxia:doxia-module-xhtml:1.0" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
           <element id="library" level="project" name="Maven: org.apache.maven.shared:maven-invoker:2.0.11" />
+          <element id="library" level="project" name="Maven: org.apache.maven.plugins:maven-source-plugin:3.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.maven:maven-model:3.0" />
+          <element id="library" level="project" name="Maven: org.apache.maven:maven-archiver:3.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.maven.shared:maven-shared-utils:3.0.1" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.5" />
+          <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-archiver:3.4" />
+          <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-io:2.7.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-compress:1.11" />
+          <element id="library" level="project" name="Maven: org.iq80.snappy:snappy:0.4" />
+          <element id="library" level="project" name="Maven: org.tukaani:xz:1.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -56,6 +56,16 @@ And add dependency:
 WHAT NEW
 ==========
 
+*v 1.0.10*
+
+**CrossTable**:
+
+- add `CellStyleGenerator` that used method `getCssStyle()` from `CellCondition`.
+
+**Condition**:
+
+- add `CSS` for condition to jar.
+
 *v 1.0.9*
 
 **BottomTabs**:
@@ -102,12 +112,15 @@ This framework has next structure:
 ```
   core
   |--data
+  |  |--CellCondition(I)
+  |  |--Condition(E)
   |  |--DataContainer(A)
   |  +--TreeBeanContainer(C)
   |--elements
   |  |--ButtomTabs(A)
   |  |--CommonLogic(A)
   |  |--CommonView(A)
+  |  |--CrossTable(A)
   |  |--FilterPanel(A)
   |  |--Logic(I)
   |  |--Menu(A)

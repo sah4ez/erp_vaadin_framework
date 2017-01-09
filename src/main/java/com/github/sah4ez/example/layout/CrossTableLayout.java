@@ -59,7 +59,19 @@ public class CrossTableLayout extends CrossTable{
 
     @Override
     public CellCondition getCell(Object idRow, Object idColumn) {
-        return Condition.NOT_USE;
+        if (idColumn instanceof String){
+            switch ((String) idColumn){
+                case "1":
+                    return Condition.USE;
+                case "2":
+                    return Condition.USE_EDIT;
+                case "3":
+                    return Condition.USE_NOT_EDIT;
+                case "4":
+                    return Condition.NOT_USE;
+            }
+        }
+        return Condition.USE;
     }
 
     @Override

@@ -1,60 +1,43 @@
-@import "mytheme.scss";
-@import "addons.scss";
-
-// This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
-// The actual styles should be defined in mytheme.scss
-
-.mytheme {
-  @include addons;
-  @include mytheme;
-
-  .menu-navigator .v-menubar-menuitem-highlight {
-    background: #B7B9C2;
-  }
-  .v-menubar-menuitem-caption-null-size {
-    font-size: 0%;
-  }
-  .v-table-cell-content-edit {
+.v-table-cell-content-edit {
     text-indent: 100%;
     font-size: 0%;
     -webkit-box-shadow: 0 0 0 2px rgba(59, 89, 152, 0.5);
     box-shadow: 0 0 0 2px rgba(59, 89, 152, 0.5);
     border-color: #3b5998;
     background: #3b5998;
-  }
-  .v-table-cell-content-not-use {
+}
+.v-table-cell-content-not-use {
     text-indent: 100%;
     font-size: 0%;
     -webkit-box-shadow: 0 0 0 2px rgba(174, 170, 179, 0.49);
     box-shadow: 0 0 0 2px rgba(147, 144, 152, 0.5);
     border-color: #c7c3c9;
     background: #c0bec4;
-  }
+}
 
-  .v-table-cell-content-use {
+.v-table-cell-content-use {
     text-indent: 100%;
     font-size: 0%;
     -webkit-box-shadow: 0 0 0 2px rgba(100, 179, 88, 0.49);
     box-shadow: 0 0 0 2px rgba(90, 152, 83, 0.5);
     border-color: #77c963;
     background: #71c45c;
-  }
+}
 
-  .v-table-cell-content-use-edit {
+.v-table-cell-content-use-edit {
     text-indent: 100%;
     font-size: 0%;
     -webkit-box-shadow: 0 0 0 2px rgba(179, 174, 79, 0.49);
     box-shadow: 0 0 0 2px rgba(152, 143, 66, 0.5);
     border-color: #c9c34c;
     background: #c4bb4c;
-  }
+}
 
-  .v-table-cell-content-use-not-edit {
+.v-table-cell-content-use-not-edit {
     text-indent: 100%;
     font-size: 0%;
     -webkit-box-shadow: 0 0 0 2px rgba(179, 59, 60, 0.49);
     box-shadow: 0 0 0 2px rgba(152, 46, 45, 0.5);
     border-color: #c93132;
     background: #c42a2c;
-  }
 }

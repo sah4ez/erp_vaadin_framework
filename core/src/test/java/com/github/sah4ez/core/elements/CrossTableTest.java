@@ -4,6 +4,7 @@ import com.github.sah4ez.core.data.CellCondition;
 import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.vaadin.event.ItemClickEvent;
+import com.vaadin.ui.CustomTable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,7 +101,6 @@ public class CrossTableTest extends Assert {
         assertEquals(3, crossTable.getTable().size());
         Object[] items = crossTable.getTable().getItemIds().toArray();
 
-
         assertEquals("1",getValueProperty(items[0], "id"));
         assertEquals("2", getValueProperty(items[1], "id"));
         assertEquals("3", getValueProperty(items[2], "id"));
@@ -127,6 +127,37 @@ public class CrossTableTest extends Assert {
 
     private Object getValueProperty(Object object, String property) {
         return crossTable.getTable().getItem(object).getItemProperty(property).getValue();
+    }
+
+    private String getStyleCell(Object object, String property){
+        String result;
+
+        CustomTable.CellStyleGenerator generator = crossTable.getTable().getCellStyleGenerator();
+
+        if (generator == null)
+            result = "GENERATOR IS NULL!!";
+        else
+            result = generator.getStyle(crossTable.getTable(), object, property);
+
+        return result;
+    }
+
+    @Test
+    public void testStyleNameForCell(){
+        crossTable.createData("id", "name", "id", "name", "condition");
+
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+        assertEquals("use", getStyleCell(items[0], "1"));
+        assertEquals("use-edit", getStyleCell(items[0], "2"));
+        assertEquals("use-not-edit", getStyleCell(items[0], "3"));
+        assertEquals("not-use", getStyleCell(items[0], "4"));
+        assertNull(getStyleCell(items[0], "id"));
+        assertNull(getStyleCell(items[0], "name"));
+
+        assertNull(getStyleCell(null, null));
+        assertNull(getStyleCell(items[0], null));
+        assertNull(getStyleCell(null, "1"));
     }
 
     private class MyCrossTableTest extends CrossTable {

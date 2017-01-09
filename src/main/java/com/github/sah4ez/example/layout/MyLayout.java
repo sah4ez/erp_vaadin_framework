@@ -20,6 +20,13 @@ public class MyLayout extends Workspace {
         logic.setDataToTable(container.loadAllData(), getTable());
         setBottomTabs(tabSheet);
         setNavigator(menu);
+
+        getTable().addItemClickListener(new ItemClickEvent.ItemClickListener() {
+            @Override
+            public void itemClick(ItemClickEvent event) {
+
+            }
+        });
     }
 
     @Override
