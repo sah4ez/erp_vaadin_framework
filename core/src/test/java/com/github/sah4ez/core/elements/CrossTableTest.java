@@ -101,7 +101,7 @@ public class CrossTableTest extends Assert {
         assertEquals(3, crossTable.getTable().size());
         Object[] items = crossTable.getTable().getItemIds().toArray();
 
-        assertEquals("1",getValueProperty(items[0], "id"));
+        assertEquals("1", getValueProperty(items[0], "id"));
         assertEquals("2", getValueProperty(items[1], "id"));
         assertEquals("3", getValueProperty(items[2], "id"));
 
@@ -129,7 +129,7 @@ public class CrossTableTest extends Assert {
         return crossTable.getTable().getItem(object).getItemProperty(property).getValue();
     }
 
-    private String getStyleCell(Object object, String property){
+    private String getStyleCell(Object object, String property) {
         String result;
 
         CustomTable.CellStyleGenerator generator = crossTable.getTable().getCellStyleGenerator();
@@ -143,7 +143,7 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
-    public void testStyleNameForCell(){
+    public void testStyleNameForCell() {
         crossTable.createData("id", "name", "id", "name");
 
         Object[] items = crossTable.getTable().getItemIds().toArray();
@@ -161,7 +161,7 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
-    public void testSingleSelectModeTheSameCell(){
+    public void testSingleSelectModeTheSameCell() {
         ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
         crossTable.createData("id", "name", "id", "name");
         Object[] items = crossTable.getTable().getItemIds().toArray();
@@ -182,7 +182,7 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
-    public void testSingleSelectModeDifferentCell(){
+    public void testSingleSelectModeDifferentCell() {
         ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
         crossTable.createData("id", "name", "id", "name");
         Object[] items = crossTable.getTable().getItemIds().toArray();
@@ -205,7 +205,7 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
-    public void testMultiRowMode(){
+    public void testMultiCellInRowMode() {
         ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
         crossTable.createData("id", "name", "id", "name");
         Object[] items = crossTable.getTable().getItemIds().toArray();
@@ -281,6 +281,61 @@ public class CrossTableTest extends Assert {
         assertEquals("not-use", getStyleCell(items[0], "4"));
     }
 
+    @Test
+    public void testMultiCellInColumnMode() {
+        ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
+        crossTable.createData("id", "name", "id", "name");
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+        Mockito.when(itemClickEvent.getItem())
+                .thenReturn(crossTable.getTable().getItem(items[0]))
+                .thenReturn(crossTable.getTable().getItem(items[1]))
+                .thenReturn(crossTable.getTable().getItem(items[2]))
+                .thenReturn(crossTable.getTable().getItem(items[1]))
+                .thenReturn(crossTable.getTable().getItem(items[2]))
+                .thenReturn(crossTable.getTable().getItem(items[0]));
+        Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
+        Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
+
+        crossTable.setSelectionMode(SelectionMode.MULTI_CELL_IN_COLUMN);
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+        assertEquals("use", getStyleCell(items[2], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("edit", getStyleCell(items[1], "1"));
+        assertEquals("use", getStyleCell(items[2], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("edit", getStyleCell(items[1], "1"));
+        assertEquals("edit", getStyleCell(items[2], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+        assertEquals("edit", getStyleCell(items[2], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+        assertEquals("use", getStyleCell(items[2], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("use", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+        assertEquals("use", getStyleCell(items[2], "1"));
+    }
+
     private class MyCrossTableTest extends CrossTable {
 
         public MyCrossTableTest(Logic logic, String identify, DataContainer<?> first, DataContainer<?> second) {
@@ -289,8 +344,8 @@ public class CrossTableTest extends Assert {
 
         @Override
         public CellCondition getCell(Object idRow, Object idColumn) {
-            if (idColumn instanceof String){
-                switch ((String) idColumn){
+            if (idColumn instanceof String) {
+                switch ((String) idColumn) {
                     case "1":
                         return Condition.USE;
                     case "2":
@@ -306,22 +361,26 @@ public class CrossTableTest extends Assert {
 
         @Override
         protected ItemClickEvent.ItemClickListener editTableItemClick() {
-            return itemClickEvent ->{} ;
+            return itemClickEvent -> {
+            };
         }
 
         @Override
         protected ItemClickEvent.ItemClickListener selectTableItemClick() {
-            return itemClickEvent -> {};
+            return itemClickEvent -> {
+            };
         }
 
         @Override
         protected ItemClickEvent.ItemClickListener editTableAllItemClick() {
-            return itemClickEvent -> {};
+            return itemClickEvent -> {
+            };
         }
 
         @Override
         protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
-            return itemClickEvent -> {};
+            return itemClickEvent -> {
+            };
         }
     }
 
