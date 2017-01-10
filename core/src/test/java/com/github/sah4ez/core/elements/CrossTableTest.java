@@ -7,6 +7,7 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.CustomTable;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -381,7 +382,7 @@ public class CrossTableTest extends Assert {
         assertEquals("use", getStyleCell(items[2], "1"));
     }
 
-    @Test
+    @Ignore
     public void testMultiCellInColumnModeWithDifferentRow(){
                         ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
         crossTable.createData("id", "name", "id", "name");
