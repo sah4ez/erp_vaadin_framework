@@ -176,15 +176,31 @@ abstract public class CrossTable extends Workspace {
         if (!(item.getItemProperty(property).getValue() instanceof CellCondition)) return;
 
         switch (selectionMode) {
-            case MULTY_CELL_ROW: {
+            case MULTI_CELL_IN_ROW: {
+                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
+                    CellCondition value = selectedCell.get(item).get(property);
+                    item.getItemProperty(property).setValue(value);
 
+                    selectedCell.get(item).remove(property);
+                    if (selectedCell.get(item).isEmpty()) {
+                        selectedCell.remove(item);
+                    }
+                } else if (selectedCell.containsKey(item)) {
+                    selectedCell.get(item).put(property.toString(),
+                            ((CellCondition) item.getItemProperty(property).getValue()));
+                    item.getItemProperty(property).setValue(Condition.EDIT);
+                } else if (selectedCell.isEmpty()) {
+                    selectedCell.put(item, new HashMap<>());
+                    selectedCell.get(item).put(property.toString(),
+                            ((CellCondition) item.getItemProperty(property).getValue()));
+                    item.getItemProperty(property).setValue(Condition.EDIT);
+                }
                 break;
             }
-            case MULTY_CELL_COLUMN: {
+            case MULTI_CELL_IN_COLUMN: {
                 break;
             }
-            case MULTY_CELL: {
-//                if
+            case MULTI_CELL: {
                 break;
             }
             default: {
