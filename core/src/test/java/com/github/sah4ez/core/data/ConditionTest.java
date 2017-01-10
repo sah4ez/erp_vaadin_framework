@@ -24,5 +24,14 @@ public class ConditionTest extends Assert{
         assertEquals("use-edit", Condition.USE_EDIT.getCssStyle());
         assertEquals("use-not-edit", Condition.USE_NOT_EDIT.getCssStyle());
     }
+    
+    @Test
+    public void getCondition(){
+        assertEquals(Condition.EDIT, Condition.valueOf("EDIT"));
+        assertEquals(Condition.NOT_USE, Condition.valueOf("NOT_USE"));
+        assertEquals(Condition.USE, Condition.valueOf("USE"));
+        assertEquals(Condition.USE_EDIT, Condition.valueOf("USE_EDIT"));
+        assertEquals(Condition.USE_NOT_EDIT, Condition.valueOf("USE_NOT_EDIT"));
+    }
 
 }

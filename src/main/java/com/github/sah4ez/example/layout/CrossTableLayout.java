@@ -5,6 +5,7 @@ import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.elements.CrossTable;
 import com.github.sah4ez.core.elements.Logic;
+import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 
 /**
@@ -13,6 +14,8 @@ import com.vaadin.event.ItemClickEvent;
 public class CrossTableLayout extends CrossTable{
     private static DataContainer<Element1> element1DataContainer;
     private static DataContainer<Element4> element4DataContainer;
+
+    private Condition lastCondition = null;
 
     static {
         element1DataContainer =
@@ -26,6 +29,7 @@ public class CrossTableLayout extends CrossTable{
 
                     @Override
                     public DataContainer loadAllData() {
+                        clear();
                         this.add(new Element1(1, "name1", 1.0F));
                         this.add(new Element1(2, "name2", 2.0F));
                         this.add(new Element1(3, "name3", 3.0F));
@@ -43,6 +47,7 @@ public class CrossTableLayout extends CrossTable{
 
                     @Override
                     public DataContainer loadAllData() {
+                        clear();
                         this.add(new Element4(1, "name1", 1.0F));
                         this.add(new Element4(2, "name2", 2.0F));
                         this.add(new Element4(3, "name3", 3.0F));
@@ -55,6 +60,7 @@ public class CrossTableLayout extends CrossTable{
     public CrossTableLayout(Logic logic, String identify ) {
         super(logic, identify, CrossTableLayout.element1DataContainer.loadAllData(), element4DataContainer.loadAllData());
         getTable().setSizeFull();
+        editOff();
     }
 
     @Override
@@ -81,7 +87,19 @@ public class CrossTableLayout extends CrossTable{
 
     @Override
     protected ItemClickEvent.ItemClickListener selectTableItemClick() {
-        return itemClickEvent -> {};
+        return itemClickEvent -> {
+            Item item = itemClickEvent.getItem();
+            Object property = itemClickEvent.getPropertyId();
+
+            if (!(item.getItemProperty(property).getValue() instanceof Condition)) return;
+
+            if (item.getItemProperty(property).getValue().equals(Condition.EDIT)){
+                item.getItemProperty(property).setValue(lastCondition);
+            }else {
+                lastCondition = ((Condition) item.getItemProperty(property).getValue());
+                item.getItemProperty(property).setValue(Condition.EDIT);
+            }
+        };
     }
 
     @Override

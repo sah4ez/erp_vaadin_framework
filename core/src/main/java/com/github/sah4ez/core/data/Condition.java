@@ -3,7 +3,7 @@ package com.github.sah4ez.core.data;
 /**
  * Created by aleksandr on 08.01.17.
  */
-public enum Condition implements CellCondition{
+public enum Condition implements CellCondition {
 
     EDIT(1, "edit"),
     NOT_USE(2, "not-use"),
@@ -14,7 +14,7 @@ public enum Condition implements CellCondition{
     private Integer id;
     private String text;
 
-    Condition(Integer id, String text){
+    Condition(Integer id, String text) {
         this.id = id;
         this.text = text;
     }

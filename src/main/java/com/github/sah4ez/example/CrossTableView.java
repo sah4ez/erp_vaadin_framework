@@ -16,7 +16,8 @@ public class CrossTableView extends CommonView{
     public CrossTableView(){
         setLogic(logic);
         CrossTableLayout layout = new CrossTableLayout(logic, "crosstable1");
-        layout.createData("id", "name", "id", "name", "condition");
+        layout.createData("id", "name", "id", "name");
+        layout.getTable().setColumnCollapsed("id", true);
         addComponent(layout);
         setSizeFull();
     }

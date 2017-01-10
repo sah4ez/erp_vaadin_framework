@@ -1,11 +1,14 @@
 package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.data.CellCondition;
+import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.vaadin.data.Item;
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.CustomTable;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 /**
  * Created by aleksandr on 06.01.17.
@@ -16,15 +19,17 @@ abstract public class CrossTable extends Workspace {
     private DataContainer<?> secondContainer;
     private String idFirst = "";
     private String idSecond = "";
-    private String valueProperty = "";
     private String captionSecond = "";
     private String captionFirst = "";
+    private SelectionMode selectionMode = SelectionMode.SINGLE_CELL;
+    private HashMap<Item, HashMap<String, CellCondition>> selectedCell = new HashMap<>();
 
     public CrossTable(Logic logic, String identify, DataContainer<?> firstContainer, DataContainer<?> secondContainer) {
         super(logic, identify);
         this.firstContainer = firstContainer;
         this.secondContainer = secondContainer;
         this.getTable().setFilterBarVisible(false);
+        getTable().setColumnCollapsingAllowed(true);
     }
 
     public DataContainer<?> getFirstContainer() {
@@ -43,12 +48,11 @@ abstract public class CrossTable extends Workspace {
         this.secondContainer = secondContainer;
     }
 
-    public void createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String valueProperty) {
+    public void createData(String idFirst, String captionFirst, String idSecond, String captionSecond) {
         this.idFirst = idFirst;
         this.captionFirst = captionFirst;
         this.idSecond = idSecond;
         this.captionSecond = captionSecond;
-        this.valueProperty = valueProperty;
         CustomTable table = getTable();
 
         table.setSelectable(false);
@@ -76,7 +80,7 @@ abstract public class CrossTable extends Workspace {
 
         initRows();
 
-        if (getTable().getCellStyleGenerator() == null){
+        if (getTable().getCellStyleGenerator() == null) {
             getTable().setCellStyleGenerator(cellStyleGenerator());
         }
     }
@@ -134,13 +138,13 @@ abstract public class CrossTable extends Workspace {
         return result;
     }
 
-    private CustomTable.CellStyleGenerator cellStyleGenerator(){
+    private CustomTable.CellStyleGenerator cellStyleGenerator() {
         return (CustomTable.CellStyleGenerator) (customTable, itemId, property) -> {
             if (customTable == null || itemId == null || property == null) return null;
 
             String result = null;
             Object value = customTable.getItem(itemId).getItemProperty(property).getValue();
-            if (value != null && value instanceof CellCondition){
+            if (value != null && value instanceof CellCondition) {
                 result = ((CellCondition) value).getCssStyle();
             }
             return result;
@@ -148,4 +152,90 @@ abstract public class CrossTable extends Workspace {
     }
 
     public abstract CellCondition getCell(Object idRow, Object idColumn);
+
+    public void setSelectionMode(SelectionMode mode) {
+        selectionMode = mode;
+    }
+
+    public SelectionMode getSelectionMode() {
+        return selectionMode;
+    }
+
+    private ItemClickEvent.ItemClickListener selectionModeListener() {
+        return this::actionSelectionMode;
+    }
+
+    protected void actionSelectionMode(ItemClickEvent itemClickEvent) {
+        CustomTable table = ((CustomTable) itemClickEvent.getSource());
+        Item item = itemClickEvent.getItem();
+        Object property = itemClickEvent.getPropertyId();
+
+
+        if (table == null || item == null || property == null) return;
+
+        if (!(item.getItemProperty(property).getValue() instanceof CellCondition)) return;
+
+        switch (selectionMode) {
+            case MULTY_CELL_ROW: {
+
+                break;
+            }
+            case MULTY_CELL_COLUMN: {
+                break;
+            }
+            case MULTY_CELL: {
+//                if
+                break;
+            }
+            default: {
+                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
+                    clearSelect();
+                } else {
+                    if (selectedCell.size() > 0) {
+                        clearSelect();
+                    }
+                    firstSelectCell(table, item, property);
+                }
+                break;
+            }
+        }
+    }
+
+    private void clearSelect() {
+        selectedCell.forEach((i, p) -> p.forEach((c, v) -> i.getItemProperty(c).setValue(v)));
+        selectedCell.clear();
+    }
+
+    private void firstSelectCell(CustomTable table, Item item, Object property) {
+        if (selectedCell.isEmpty()) {
+            selectedCell.put(item, new HashMap<>(table.getContainerPropertyIds().size()));
+            HashMap<String, CellCondition> selectProperty = selectedCell.get(item);
+            selectProperty.put(property.toString(), (CellCondition) item.getItemProperty(property).getValue());
+            item.getItemProperty(property).setValue(Condition.EDIT);
+        }
+    }
+
+    private void selectCell(CustomTable table, Item item, Object property) {
+
+        if (!selectedCell.containsKey(item)) {
+            selectedCell.put(item, new HashMap<>(table.getContainerPropertyIds().size()));
+        }
+
+        HashMap<String, CellCondition> selectProperty = selectedCell.get(item);
+
+        if (selectProperty.containsKey(property)) {
+        } else {
+            selectProperty.put(property.toString(), (CellCondition) item.getItemProperty(property).getValue());
+            item.getItemProperty(property).setValue(Condition.EDIT);
+        }
+    }
+
+    protected void repaint(CustomTable source, Item item, Object property) {
+        Object value = item.getItemProperty(property);
+        if (value instanceof CellCondition) {
+
+        }
+    }
+
+
 }

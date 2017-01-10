@@ -84,7 +84,7 @@ public class CrossTableTest extends Assert {
 
     @Test
     public void testCreatePropertyInCrossTable() {
-        crossTable.createData("id", "name", "id", "name", "condition");
+        crossTable.createData("id", "name", "id", "name");
         assertEquals(6, crossTable.getTable().getContainerPropertyIds().size());
         Object[] property = crossTable.getTable().getContainerPropertyIds().toArray();
         assertEquals("id", property[0].toString());
@@ -97,7 +97,7 @@ public class CrossTableTest extends Assert {
 
     @Test
     public void testCreateRowsInCrossTable() throws NoSuchFieldException, IllegalAccessException {
-        crossTable.createData("id", "name", "id", "name", "condition");
+        crossTable.createData("id", "name", "id", "name");
         assertEquals(3, crossTable.getTable().size());
         Object[] items = crossTable.getTable().getItemIds().toArray();
 
@@ -144,7 +144,7 @@ public class CrossTableTest extends Assert {
 
     @Test
     public void testStyleNameForCell(){
-        crossTable.createData("id", "name", "id", "name", "condition");
+        crossTable.createData("id", "name", "id", "name");
 
         Object[] items = crossTable.getTable().getItemIds().toArray();
 
@@ -158,6 +158,50 @@ public class CrossTableTest extends Assert {
         assertNull(getStyleCell(null, null));
         assertNull(getStyleCell(items[0], null));
         assertNull(getStyleCell(null, "1"));
+    }
+
+    @Test
+    public void testSingleSelectModeTheSameCell(){
+        ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
+        crossTable.createData("id", "name", "id", "name");
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+        Mockito.when(itemClickEvent.getItem()).thenReturn(crossTable.getTable().getItem(items[0]));
+        Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
+        Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
+
+        crossTable.setSelectionMode(SelectionMode.SINGLE_CELL);
+        crossTable.actionSelectionMode(itemClickEvent);
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("use", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+    }
+
+    @Test
+    public void testSingleSelectModeDifferentCell(){
+        ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
+        crossTable.createData("id", "name", "id", "name");
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+        Mockito.when(itemClickEvent.getItem())
+                .thenReturn(crossTable.getTable().getItem(items[0]))
+                .thenReturn(crossTable.getTable().getItem(items[1]));
+        Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
+        Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
+
+        crossTable.setSelectionMode(SelectionMode.SINGLE_CELL);
+        crossTable.actionSelectionMode(itemClickEvent);
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("use", getStyleCell(items[0], "1"));
+        assertEquals("edit", getStyleCell(items[1], "1"));
     }
 
     private class MyCrossTableTest extends CrossTable {
