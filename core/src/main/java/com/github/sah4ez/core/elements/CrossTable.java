@@ -30,6 +30,7 @@ abstract public class CrossTable extends Workspace {
         this.secondContainer = secondContainer;
         this.getTable().setFilterBarVisible(false);
         getTable().setColumnCollapsingAllowed(true);
+        getTable().addItemClickListener(selectionModeListener());
     }
 
     public DataContainer<?> getFirstContainer() {
@@ -206,7 +207,15 @@ abstract public class CrossTable extends Workspace {
                     if (selectedCell.get(item).isEmpty()) {
                         selectedCell.remove(item);
                     }
-                } else if (!selectedCell.containsKey(item) || selectedCell.isEmpty()) {
+                } else if (!selectedCell.containsKey(item) && !selectedCell.isEmpty()) {
+                    HashMap p = selectedCell.values().stream().findFirst().orElseGet(HashMap::new);
+                    if (p.keySet().contains(property)){
+                        selectedCell.put(item, new HashMap<>());
+                        selectedCell.get(item).put(property.toString(),
+                                ((CellCondition) item.getItemProperty(property).getValue()));
+                        item.getItemProperty(property).setValue(Condition.EDIT);
+                    }
+                } else if (selectedCell.isEmpty()){
                     selectedCell.put(item, new HashMap<>());
                     selectedCell.get(item).put(property.toString(),
                             ((CellCondition) item.getItemProperty(property).getValue()));
@@ -262,28 +271,4 @@ abstract public class CrossTable extends Workspace {
             item.getItemProperty(property).setValue(Condition.EDIT);
         }
     }
-
-    private void selectCell(CustomTable table, Item item, Object property) {
-
-        if (!selectedCell.containsKey(item)) {
-            selectedCell.put(item, new HashMap<>(table.getContainerPropertyIds().size()));
-        }
-
-        HashMap<String, CellCondition> selectProperty = selectedCell.get(item);
-
-        if (selectProperty.containsKey(property)) {
-        } else {
-            selectProperty.put(property.toString(), (CellCondition) item.getItemProperty(property).getValue());
-            item.getItemProperty(property).setValue(Condition.EDIT);
-        }
-    }
-
-    protected void repaint(CustomTable source, Item item, Object property) {
-        Object value = item.getItemProperty(property);
-        if (value instanceof CellCondition) {
-
-        }
-    }
-
-
 }

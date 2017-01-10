@@ -416,9 +416,7 @@ public class ElementContainer extends DataContainer<Element> {
 ```
 
 For binding data to table (or treeTable) you might use this method:
-`java
-CommonLogic.setDataToTalbe(DataContainer container, CustomTable table);
-`
+` CommonLogic.setDataToTalbe(DataContainer container, CustomTable table);`
 
 ### License ###
 ## [**GPL**](http://www.gnu.org/licenses/gpl.txt) ##

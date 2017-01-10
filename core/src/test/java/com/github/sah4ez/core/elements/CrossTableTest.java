@@ -7,7 +7,6 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.CustomTable;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -69,6 +68,7 @@ public class CrossTableTest extends Assert {
     public void testInnerContainer() {
         assertNotNull(crossTable.getFirstContainer());
         assertNotNull(crossTable.getSecondContainer());
+        assertEquals(SelectionMode.SINGLE_CELL, crossTable.getSelectionMode());
     }
 
     @Test
@@ -382,7 +382,7 @@ public class CrossTableTest extends Assert {
         assertEquals("use", getStyleCell(items[2], "1"));
     }
 
-    @Ignore
+    @Test
     public void testMultiCellInColumnModeWithDifferentRow(){
                         ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
         crossTable.createData("id", "name", "id", "name");
@@ -419,11 +419,13 @@ public class CrossTableTest extends Assert {
                 .thenReturn(crossTable.getTable().getItem(items[0]))
                 .thenReturn(crossTable.getTable().getItem(items[1]))
                 .thenReturn(crossTable.getTable().getItem(items[1]))
+                .thenReturn(crossTable.getTable().getItem(items[1]))
                 .thenReturn(crossTable.getTable().getItem(items[0]));
         Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
         Mockito.when(itemClickEvent.getPropertyId())
                 .thenReturn("1")
                 .thenReturn("2")
+                .thenReturn("3")
                 .thenReturn("2")
                 .thenReturn("1");
 
@@ -433,21 +435,31 @@ public class CrossTableTest extends Assert {
 
         assertEquals("edit", getStyleCell(items[0], "1"));
         assertEquals("use-edit", getStyleCell(items[1], "2"));
+        assertEquals("use-not-edit", getStyleCell(items[1], "3"));
 
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("edit", getStyleCell(items[0], "1"));
         assertEquals("edit", getStyleCell(items[1], "2"));
+        assertEquals("use-not-edit", getStyleCell(items[1], "3"));
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("edit", getStyleCell(items[1], "2"));
+        assertEquals("edit", getStyleCell(items[1], "3"));
 
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("edit", getStyleCell(items[0], "1"));
         assertEquals("use-edit", getStyleCell(items[1], "2"));
+        assertEquals("edit", getStyleCell(items[1], "3"));
 
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("use", getStyleCell(items[0], "1"));
         assertEquals("use-edit", getStyleCell(items[1], "2"));
+        assertEquals("edit", getStyleCell(items[1], "3"));
     }
 
     private class MyCrossTableTest extends CrossTable {
