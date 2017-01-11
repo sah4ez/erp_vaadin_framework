@@ -79,6 +79,12 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
         resources.add(resource);
     }
 
+    public void addPage(BottomPage page) {
+        addCaption(page.getCaption());
+        addComponent(page.getComponent());
+        addResource(page.getResource());
+    }
+
     public abstract void initTabs();
 
     public abstract void clear();

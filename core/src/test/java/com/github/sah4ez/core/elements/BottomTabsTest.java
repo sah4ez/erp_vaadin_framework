@@ -55,6 +55,16 @@ public class BottomTabsTest extends Assert {
         assertEquals(4, tabs.getResources().size());
     }
 
+    @Test
+    public void addPage() {
+        BottomPage page = Mockito.mock(BottomPage.class);
+        tabs.addPage(page);
+
+        assertEquals(3, tabs.getCaptions().size());
+        assertEquals(3, tabs.getComponents().size());
+        assertEquals(3, tabs.getResources().size());
+    }
+
 
     @Test
     public void initTabs() throws Exception {
@@ -123,6 +133,4 @@ public class BottomTabsTest extends Assert {
             getComponents().forEach( component -> ((Label) component).setValue(""));
         }
     }
-
-
 }

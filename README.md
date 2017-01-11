@@ -58,6 +58,15 @@ WHAT NEW
 
 *v 1.0.10*
 
+**BottomPage**:
+
+- add class `abstract public class BottomTabs`, need for interaction with components inherited from class Component
+
+
+**BottomTabs**:
+
+- add method `public void addPage(BottomPage page)` for add bottom pages
+
 **CrossTable**:
 
 - add `CellStyleGenerator` that used method `getCssStyle()` from `CellCondition`.
@@ -126,6 +135,7 @@ This framework has next structure:
   |  |--DataContainer(A)
   |  +--TreeBeanContainer(C)
   |--elements
+  |  |--BottomPage(A)
   |  |--ButtomTabs(A)
   |  |--CommonLogic(A)
   |  |--CommonView(A)
