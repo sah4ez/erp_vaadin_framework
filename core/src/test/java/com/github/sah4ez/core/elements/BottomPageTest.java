@@ -2,16 +2,12 @@ package com.github.sah4ez.core.elements;
 
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Component;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.tepi.filtertable.FilterTable;
 
-import java.awt.event.ComponentEvent;
-import java.util.EventObject;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by pc999 on 1/10/17.
@@ -49,27 +45,14 @@ public class BottomPageTest {
 
     @Test
     public void testActionWithExternalTable(){
-//        FilterTable table = mock(FilterTable.class);
-//        Elemenet1 elemenet1 = new Elemenet1(1, "name1");
-//        Component.Event event = mock(Component.Event.class);
-//
-//        when(table.getValue()).thenReturn(elemenet1);
-//
-//        page.setComponent(table);
-//
-//        component.addListener(action());
-//
-//        page.listener(event);
-//
-//        assertEquals("bla-bla-bla", elemenet1.getName());
-
         Elemenet1 elemenet = new Elemenet1(1, "my name");
         Component.Event event = Mockito.mock(Component.Event.class);
 
         Mockito.when(page.getExternalComponet().getValue()).thenReturn(elemenet);
 
-        page.getComponent().addListener(page::listener);
-        page.listener(event);
+        page.getComponent().addListener(page::action);
+
+        page.action(event);
 
         assertEquals(((BottomPageImpl)page).getTargetName(), elemenet.getName());
         assertEquals(((BottomPageImpl)page).getTargetId(), elemenet.getId());
@@ -85,7 +68,7 @@ public class BottomPageTest {
         }
 
         @Override
-        public void listener(EventObject event) {
+        public void action(Component.Event event) {
             Object select = getExternalComponet().getValue();
 
             if (select instanceof Elemenet1) {

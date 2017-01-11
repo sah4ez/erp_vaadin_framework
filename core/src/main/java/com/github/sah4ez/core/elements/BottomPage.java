@@ -3,8 +3,6 @@ package com.github.sah4ez.core.elements;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
-import java.util.EventObject;
-
 /**
  * Created by pc999 on 1/10/17.
  */
@@ -15,6 +13,16 @@ public abstract class BottomPage<T1 extends Component, T2 extends Component> {
     private T2 externalComponent;
 
     public BottomPage() {}
+
+    public BottomPage(T1 component, T2 externalComponent, String caption, Resource resource) {
+        setComponent(component);
+        setCaption(caption);
+        setResource(resource);
+        setExternalComponent(externalComponent);
+        getComponent().addListener(this::action);
+    }
+
+    public abstract void action(Component.Event event);
 
     public void setResource(Resource resource) {
         this.resource = resource;
@@ -43,8 +51,6 @@ public abstract class BottomPage<T1 extends Component, T2 extends Component> {
     public void setExternalComponent(T2 externalComponent) {
         this.externalComponent = externalComponent;
     }
-
-    public abstract void listener(EventObject event);
 
     public T2 getExternalComponet() {
         return externalComponent;

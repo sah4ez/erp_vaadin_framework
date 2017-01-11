@@ -2,6 +2,7 @@ package com.github.sah4ez.core.elements;
 
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.vaadin.server.Resource;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,13 +37,13 @@ public class BottomTabsTest extends Assert {
     @Test
     public void addCaption() throws Exception {
         tabs.addCaption("tab1", "tab2");
-        assertEquals(4, tabs.getCaptions().size());
+        assertEquals(2, tabs.getCaptions().size());
     }
 
     @Test
     public void addComponent() throws Exception {
         tabs.addComponent(new Label("1"), new Label("2"));
-        assertEquals(4, tabs.getComponents().size());
+        assertEquals(2, tabs.getComponents().size());
     }
 
 
@@ -52,7 +53,7 @@ public class BottomTabsTest extends Assert {
         Resource r2 = Mockito.mock(Resource.class);
 
         tabs.addResource(r1, r2);
-        assertEquals(4, tabs.getResources().size());
+        assertEquals(2, tabs.getResources().size());
     }
 
     @Test
@@ -60,23 +61,20 @@ public class BottomTabsTest extends Assert {
         BottomPage page = Mockito.mock(BottomPage.class);
         tabs.addPage(page);
 
-        assertEquals(3, tabs.getCaptions().size());
-        assertEquals(3, tabs.getComponents().size());
-        assertEquals(3, tabs.getResources().size());
-    }
-
-
-    @Test
-    public void initTabs() throws Exception {
-        tabs.initTabs();
-        assertEquals(4, tabs.getCaptions().size());
-        assertEquals(4, tabs.getComponents().size());
-        assertEquals(4, tabs.getResources().size());
-
+        assertEquals(1, tabs.getCaptions().size());
+        assertEquals(1, tabs.getComponents().size());
+        assertEquals(1, tabs.getResources().size());
     }
 
     @Test
     public void getSelectedTabIndex() throws Exception {
+        Component component = Mockito.mock(Component.class);
+        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
+            @Override
+            public void action(Component.Event event) {
+
+            }
+        });
         assertEquals(0, tabs.getSelectedTabIndex());
     }
 
@@ -109,6 +107,19 @@ public class BottomTabsTest extends Assert {
 
     @Test
     public void clearTest() throws Exception{
+        Component component = Mockito.mock(Component.class);
+        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
+            @Override
+            public void action(Component.Event event) {
+
+            }
+        });
+        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
+            @Override
+            public void action(Component.Event event) {
+
+            }
+        });
         tabs.clear();
         assertEquals("", ((Label) tabs.getComponents().get(0)).getValue());
         assertEquals("", ((Label) tabs.getComponents().get(1)).getValue());
@@ -119,13 +130,6 @@ public class BottomTabsTest extends Assert {
 
         public TestTabs(Logic logic, String identify) {
             super(logic, identify);
-        }
-
-        @Override
-        public void initTabs() {
-            addCaption("tab1", "tab2");
-            addComponent(new Label("1"), new Label("2"));
-            addResource(null, null);
         }
 
         @Override

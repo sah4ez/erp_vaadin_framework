@@ -31,11 +31,10 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
         resources.removeAll(resources);
         setSizeFull();
         init();
-
     }
 
     private void init() {
-        initTabs();
+        removeAllComponents();
         for (int i = 0; i < this.components.size(); i++) {
             if (i < resources.size() && i < captions.size()) {
                 this.addTab(this.components.get(i)
@@ -83,9 +82,8 @@ abstract public class BottomTabs extends TabSheet implements PermissionAccessUI 
         addCaption(page.getCaption());
         addComponent(page.getComponent());
         addResource(page.getResource());
+        init();
     }
-
-    public abstract void initTabs();
 
     public abstract void clear();
 

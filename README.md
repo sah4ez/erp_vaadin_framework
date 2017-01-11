@@ -56,12 +56,26 @@ And add dependency:
 WHAT NEW
 ==========
 
+*v 1.0.11*
+
+**BottomPage**:
+
+- added constructor `BottomPage(T1 component, T2 externalComponent, String caption, Resource resource)`;
+- rename method listeners for `T1 component` from `listener()` to `action()`;
+
+**Logic**:
+- add method `CommonView getView()`;
+
+**BottomTabs**:
+- remove abstract method `void initTabs()`;
+
+Fixed example.
+
 *v 1.0.10*
 
 **BottomPage**:
 
 - add class `abstract public class BottomTabs`, need for interaction with components inherited from class Component
-
 
 **BottomTabs**:
 

@@ -11,4 +11,6 @@ public interface Logic {
     void addUi(PermissionAccessUI ui);
 
     void setDataToTable(DataContainer container, CustomTable table);
+
+    CommonView getView();
 }

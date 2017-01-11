@@ -53,6 +53,6 @@ public class Element implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id);
     }
 }
