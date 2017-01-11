@@ -135,6 +135,7 @@ This framework has next structure:
   |  |--Menu(A)
   |  |--MenuNavigator(A)
   |  |--Mode(E)
+  |  |--SelectionModeCrossTable(E)
   |  +--Workspace(A)
   +--permission
      |--ModifierAccess(A)
