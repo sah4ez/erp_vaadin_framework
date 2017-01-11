@@ -251,7 +251,10 @@ abstract public class CrossTable extends Workspace {
                     if (selectedCell.size() > 0) {
                         clearSelect();
                     }
-                    firstSelectCell(table, item, property);
+                    selectedCell.put(item, new HashMap<>());
+                    CellCondition condition = (CellCondition) item.getItemProperty(property).getValue();
+                    selectedCell.get(item).put(property.toString(), condition);
+                    item.getItemProperty(property).setValue(Condition.EDIT);
                 }
                 break;
             }
@@ -261,14 +264,5 @@ abstract public class CrossTable extends Workspace {
     private void clearSelect() {
         selectedCell.forEach((i, p) -> p.forEach((c, v) -> i.getItemProperty(c).setValue(v)));
         selectedCell.clear();
-    }
-
-    private void firstSelectCell(CustomTable table, Item item, Object property) {
-        if (selectedCell.isEmpty()) {
-            selectedCell.put(item, new HashMap<>(table.getContainerPropertyIds().size()));
-            HashMap<String, CellCondition> selectProperty = selectedCell.get(item);
-            selectProperty.put(property.toString(), (CellCondition) item.getItemProperty(property).getValue());
-            item.getItemProperty(property).setValue(Condition.EDIT);
-        }
     }
 }

@@ -5,7 +5,6 @@ import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.elements.CrossTable;
 import com.github.sah4ez.core.elements.Logic;
-import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 
 /**
@@ -88,17 +87,6 @@ public class CrossTableLayout extends CrossTable{
     @Override
     protected ItemClickEvent.ItemClickListener selectTableItemClick() {
         return itemClickEvent -> {
-            Item item = itemClickEvent.getItem();
-            Object property = itemClickEvent.getPropertyId();
-
-            if (!(item.getItemProperty(property).getValue() instanceof Condition)) return;
-
-            if (item.getItemProperty(property).getValue().equals(Condition.EDIT)){
-                item.getItemProperty(property).setValue(lastCondition);
-            }else {
-                lastCondition = ((Condition) item.getItemProperty(property).getValue());
-                item.getItemProperty(property).setValue(Condition.EDIT);
-            }
         };
     }
 

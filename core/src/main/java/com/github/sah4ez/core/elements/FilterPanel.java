@@ -94,16 +94,14 @@ abstract public class FilterPanel extends VerticalLayout {
     protected void addButton(Button.ClickEvent event) {
         if (!filters.isVisible())
             filters.setVisible(true);
-
-        if (column.getValue() == null) return;
-
-        createButton();
+        createButton(column.getValue());
     }
 
-    protected void createButton(){
+    protected void createButton(Object value){
+        if (value == null) return;
         Button btn = filterButton(" содержит: " + text.getValue());
 
-        Container.Filter filter = addFilter(column.getValue(), text.getValue());
+        Container.Filter filter = addFilter(value, text.getValue());
 
         btn.addClickListener(removeFilterListener(btn, filter));
     }
