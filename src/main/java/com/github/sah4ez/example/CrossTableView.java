@@ -1,6 +1,6 @@
 package com.github.sah4ez.example;
 
-import com.github.sah4ez.core.elements.CommonView;
+import com.github.sah4ez.core.elements.*;
 import com.github.sah4ez.core.permission.ModifierAccess;
 import com.github.sah4ez.example.layout.CrossTableLayout;
 
@@ -18,6 +18,7 @@ public class CrossTableView extends CommonView{
         CrossTableLayout layout = new CrossTableLayout(logic, "crosstable1");
         layout.createData("id", "name", "id", "name");
         layout.getTable().setColumnCollapsed("id", true);
+        layout.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL_IN_COLUMN);
         addComponent(layout);
         setSizeFull();
     }

@@ -70,6 +70,15 @@ WHAT NEW
 **CrossTable**:
 
 - add `CellStyleGenerator` that used method `getCssStyle()` from `CellCondition`.
+- add selection mode for cross table: Single selection cell, Multi selection cell in row, Multi selection cell in column and Multi selection cell.
+
+**SelectionModeCrossTable**:
+
+- add enum `SelectionModeCrossTable`:
+    - `SINGLE_CELL`;
+    - `MULTI_CELL_IN_ROW`;
+    - `MULTI_CELL_IN_COLUMNT`;
+    - `MULTI_CELL`.
 
 **Condition**:
 
@@ -136,6 +145,7 @@ This framework has next structure:
   |  |--Menu(A)
   |  |--MenuNavigator(A)
   |  |--Mode(E)
+  |  |--SelectionModeCrossTable(E)
   |  +--Workspace(A)
   +--permission
      |--ModifierAccess(A)
@@ -226,7 +236,7 @@ public class MainScreen extends HorizontalLayout{
 
 ```
 
-Where MyMenu - extend Menu from Framework. MyView extend from CommonView, MyLogic extend from CommonLogic
+Where MyMenu - extend Menu from Framework. MyView extend from CommonView, MyLogic extend from CommonLogic.
 
 For UI create package **layout** where need make: 
 ```java

@@ -214,7 +214,7 @@ public class FilterPanelTest extends Assert {
 
     @Test
     public void createButton(){
-        testFilterTable.createButton();
+        testFilterTable.createButton("Hello");
         verify(container).addContainerFilter(Mockito.any(SimpleStringFilter.class));
     }
 
