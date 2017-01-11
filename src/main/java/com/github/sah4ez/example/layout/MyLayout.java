@@ -16,6 +16,8 @@ public class MyLayout extends Workspace {
     public MyLayout(Logic logic) {
         super(logic,  "MyLayout1");
         tabSheet = new MyTabSheet(logic);
+        tabSheet.getPage().setExternalComponent(this);
+
         menu = new MyMenu("myMenu", this);
         logic.setDataToTable(container.loadAllData(), getTable());
         setBottomTabs(tabSheet);
@@ -24,7 +26,7 @@ public class MyLayout extends Workspace {
         getTable().addItemClickListener(new ItemClickEvent.ItemClickListener() {
             @Override
             public void itemClick(ItemClickEvent event) {
-
+                tabSheet.getPage().getComponent().setCaption(event.getItem().toString());
             }
         });
     }
