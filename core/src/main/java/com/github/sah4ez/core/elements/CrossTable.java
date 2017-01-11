@@ -21,7 +21,7 @@ abstract public class CrossTable extends Workspace {
     private String idSecond = "";
     private String captionSecond = "";
     private String captionFirst = "";
-    private SelectionMode selectionMode = SelectionMode.SINGLE_CELL;
+    private SelectionModeCrossTable selectionModeCrossTable = SelectionModeCrossTable.SINGLE_CELL;
     private HashMap<Item, HashMap<String, CellCondition>> selectedCell = new HashMap<>();
 
     public CrossTable(Logic logic, String identify, DataContainer<?> firstContainer, DataContainer<?> secondContainer) {
@@ -154,12 +154,12 @@ abstract public class CrossTable extends Workspace {
 
     public abstract CellCondition getCell(Object idRow, Object idColumn);
 
-    public void setSelectionMode(SelectionMode mode) {
-        selectionMode = mode;
+    public void setSelectionModeCrossTable(SelectionModeCrossTable mode) {
+        selectionModeCrossTable = mode;
     }
 
-    public SelectionMode getSelectionMode() {
-        return selectionMode;
+    public SelectionModeCrossTable getSelectionModeCrossTable() {
+        return selectionModeCrossTable;
     }
 
     private ItemClickEvent.ItemClickListener selectionModeListener() {
@@ -176,89 +176,98 @@ abstract public class CrossTable extends Workspace {
 
         if (!(item.getItemProperty(property).getValue() instanceof CellCondition)) return;
 
-        switch (selectionMode) {
+        switch (selectionModeCrossTable) {
             case MULTI_CELL_IN_ROW: {
-                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
-                    CellCondition value = selectedCell.get(item).get(property);
-                    item.getItemProperty(property).setValue(value);
-
-                    selectedCell.get(item).remove(property);
-                    if (selectedCell.get(item).isEmpty()) {
-                        selectedCell.remove(item);
-                    }
-                } else if (selectedCell.containsKey(item)) {
-                    selectedCell.get(item).put(property.toString(),
-                            ((CellCondition) item.getItemProperty(property).getValue()));
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                } else if (selectedCell.isEmpty()) {
-                    selectedCell.put(item, new HashMap<>());
-                    selectedCell.get(item).put(property.toString(),
-                            ((CellCondition) item.getItemProperty(property).getValue()));
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                }
+                multiCellInRowAction(item, property);
                 break;
             }
             case MULTI_CELL_IN_COLUMN: {
-                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
-                    CellCondition value = selectedCell.get(item).get(property);
-                    item.getItemProperty(property).setValue(value);
-
-                    selectedCell.get(item).remove(property);
-                    if (selectedCell.get(item).isEmpty()) {
-                        selectedCell.remove(item);
-                    }
-                } else if (!selectedCell.containsKey(item) && !selectedCell.isEmpty()) {
-                    HashMap p = selectedCell.values().stream().findFirst().orElseGet(HashMap::new);
-                    if (p.keySet().contains(property)){
-                        selectedCell.put(item, new HashMap<>());
-                        selectedCell.get(item).put(property.toString(),
-                                ((CellCondition) item.getItemProperty(property).getValue()));
-                        item.getItemProperty(property).setValue(Condition.EDIT);
-                    }
-                } else if (selectedCell.isEmpty()){
-                    selectedCell.put(item, new HashMap<>());
-                    selectedCell.get(item).put(property.toString(),
-                            ((CellCondition) item.getItemProperty(property).getValue()));
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                }
+                multiCellInColumnAction(item, property);
                 break;
             }
             case MULTI_CELL: {
-                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
-                    CellCondition value = selectedCell.get(item).get(property);
-                    item.getItemProperty(property).setValue(value);
-
-                    selectedCell.get(item).remove(property);
-                    if (selectedCell.get(item).isEmpty()) {
-                        selectedCell.remove(item);
-                    }
-                }else if (!selectedCell.containsKey(item) || selectedCell.isEmpty()) {
-                    selectedCell.put(item, new HashMap<>());
-                    selectedCell.get(item).put(property.toString(),
-                            ((CellCondition) item.getItemProperty(property).getValue()));
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                } else {
-                    selectedCell.get(item).put(property.toString(),
-                            ((CellCondition) item.getItemProperty(property).getValue()));
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                }
+                multiCellAction(item, property);
                 break;
             }
             default: {
-                if (selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property)) {
-                    clearSelect();
-                } else {
-                    if (selectedCell.size() > 0) {
-                        clearSelect();
-                    }
-                    selectedCell.put(item, new HashMap<>());
-                    CellCondition condition = (CellCondition) item.getItemProperty(property).getValue();
-                    selectedCell.get(item).put(property.toString(), condition);
-                    item.getItemProperty(property).setValue(Condition.EDIT);
-                }
+                singleAction(item, property);
                 break;
             }
         }
+    }
+
+    private void multiCellInRowAction(Item item, Object property){
+        if (contains(item, property)) {
+            setPrevValue(item, property);
+            remove(item, property);
+        } else if (selectedCell.containsKey(item)) {
+            saveCurrentValue(item, property);
+        } else if (selectedCell.isEmpty()) {
+            addItemToSelected(item, property);
+        }
+    }
+
+    private void multiCellInColumnAction(Item item, Object property){
+        if (contains(item, property)) {
+            setPrevValue(item, property);
+            remove(item, property);
+        } else if (!selectedCell.containsKey(item) && !selectedCell.isEmpty()) {
+            HashMap p = selectedCell.values().stream().findFirst().orElseGet(HashMap::new);
+            if (p.keySet().contains(property)){
+                addItemToSelected(item, property);
+            }
+        } else if (selectedCell.isEmpty()){
+            addItemToSelected(item, property);
+        }
+    }
+
+    private void multiCellAction(Item item, Object property){
+        if (contains(item, property)) {
+            setPrevValue(item, property);
+            remove(item, property);
+        }else if (!selectedCell.containsKey(item) || selectedCell.isEmpty()) {
+            addItemToSelected(item, property);
+        } else {
+            saveCurrentValue(item, property);
+        }
+    }
+
+    private void singleAction(Item item, Object property){
+        if (contains(item, property)) {
+            clearSelect();
+        } else {
+            if (selectedCell.size() > 0) {
+                clearSelect();
+            }
+            addItemToSelected(item, property);
+        }
+    }
+
+    private boolean contains(Item item, Object property){
+        return selectedCell.containsKey(item) && selectedCell.get(item).containsKey(property);
+    }
+
+    private void remove(Item item, Object property){
+        selectedCell.get(item).remove(property);
+        if (selectedCell.get(item).isEmpty()) {
+            selectedCell.remove(item);
+        }
+    }
+
+    private void setPrevValue(Item item, Object property){
+        CellCondition value = selectedCell.get(item).get(property);
+        item.getItemProperty(property).setValue(value);
+    }
+
+    private void saveCurrentValue(Item item, Object property){
+        selectedCell.get(item).put(property.toString(),
+                ((CellCondition) item.getItemProperty(property).getValue()));
+        item.getItemProperty(property).setValue(Condition.EDIT);
+    }
+
+    private void addItemToSelected(Item item, Object property){
+        selectedCell.put(item, new HashMap<>());
+        saveCurrentValue(item, property);
     }
 
     private void clearSelect() {

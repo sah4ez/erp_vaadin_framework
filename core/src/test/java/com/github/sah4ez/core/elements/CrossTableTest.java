@@ -68,7 +68,7 @@ public class CrossTableTest extends Assert {
     public void testInnerContainer() {
         assertNotNull(crossTable.getFirstContainer());
         assertNotNull(crossTable.getSecondContainer());
-        assertEquals(SelectionMode.SINGLE_CELL, crossTable.getSelectionMode());
+        assertEquals(SelectionModeCrossTable.SINGLE_CELL, crossTable.getSelectionModeCrossTable());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class CrossTableTest extends Assert {
         Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
         Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
 
-        crossTable.setSelectionMode(SelectionMode.SINGLE_CELL);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.SINGLE_CELL);
         crossTable.actionSelectionMode(itemClickEvent);
         assertEquals("edit", getStyleCell(items[0], "1"));
         assertEquals("use", getStyleCell(items[1], "1"));
@@ -200,7 +200,7 @@ public class CrossTableTest extends Assert {
                 .thenReturn("2")
                 .thenReturn("1");
 
-        crossTable.setSelectionMode(SelectionMode.SINGLE_CELL);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.SINGLE_CELL);
 
         crossTable.actionSelectionMode(itemClickEvent);
 
@@ -242,7 +242,7 @@ public class CrossTableTest extends Assert {
                 .thenReturn("4")
                 .thenReturn("3");
 
-        crossTable.setSelectionMode(SelectionMode.MULTI_CELL_IN_ROW);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL_IN_ROW);
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("edit", getStyleCell(items[0], "1"));
@@ -314,7 +314,7 @@ public class CrossTableTest extends Assert {
                 .thenReturn("1")
                 .thenReturn("2");
 
-        crossTable.setSelectionMode(SelectionMode.MULTI_CELL_IN_ROW);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL_IN_ROW);
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("edit", getStyleCell(items[0], "1"));
@@ -343,7 +343,7 @@ public class CrossTableTest extends Assert {
         Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
         Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
 
-        crossTable.setSelectionMode(SelectionMode.MULTI_CELL_IN_COLUMN);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL_IN_COLUMN);
 
         crossTable.actionSelectionMode(itemClickEvent);
 
@@ -396,7 +396,7 @@ public class CrossTableTest extends Assert {
                 .thenReturn("1")
                 .thenReturn("2");
 
-        crossTable.setSelectionMode(SelectionMode.MULTI_CELL_IN_COLUMN);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL_IN_COLUMN);
         crossTable.actionSelectionMode(itemClickEvent);
 
         assertEquals("edit", getStyleCell(items[0], "1"));
@@ -429,7 +429,7 @@ public class CrossTableTest extends Assert {
                 .thenReturn("2")
                 .thenReturn("1");
 
-        crossTable.setSelectionMode(SelectionMode.MULTI_CELL);
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.MULTI_CELL);
 
         crossTable.actionSelectionMode(itemClickEvent);
 

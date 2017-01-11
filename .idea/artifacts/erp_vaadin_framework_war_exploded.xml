@@ -22,7 +22,7 @@
           <element id="library" level="project" name="Maven: com.vaadin:vaadin-themes:7.7.0" />
           <element id="library" level="project" name="Maven: org.vaadin.addons:filteringtable:0.9.15.v7" />
           <element id="library" level="project" name="Maven: org.vaadin.addons:popupbutton:2.5.0" />
-          <element id="archive" name="core-1.0.9.jar">
+          <element id="archive" name="core-1.0.10.jar">
             <element id="module-output" name="core" />
           </element>
           <element id="library" level="project" name="Maven: org.mockito:mockito-all:1.10.19" />
