@@ -462,6 +462,11 @@ public class CrossTableTest extends Assert {
         assertEquals("edit", getStyleCell(items[1], "3"));
     }
 
+    @Test
+    public void testClearLayout(){
+        crossTable.clearLayout();
+    }
+
     private class MyCrossTableTest extends CrossTable {
 
         public MyCrossTableTest(Logic logic, String identify, DataContainer<?> first, DataContainer<?> second) {
@@ -507,6 +512,11 @@ public class CrossTableTest extends Assert {
         protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
             return itemClickEvent -> {
             };
+        }
+
+        @Override
+        public void clearLayout() {
+
         }
     }
 

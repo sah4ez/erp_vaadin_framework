@@ -71,11 +71,6 @@
 			<artifactId>filteringtable</artifactId>
 			<version>0.9.15.v7</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.sah4ez</groupId>
-			<artifactId>core</artifactId>
-			<version>1.0.10</version>
-		</dependency>
 	</dependencies>
 
 	<build>

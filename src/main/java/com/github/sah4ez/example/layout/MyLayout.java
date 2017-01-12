@@ -81,6 +81,11 @@ public class MyLayout extends Workspace {
         };
     }
 
+    @Override
+    public void clearLayout() {
+
+    }
+
     public void initBottomTabs() {
     }
 

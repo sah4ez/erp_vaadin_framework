@@ -64,10 +64,17 @@ WHAT NEW
 - rename method listeners for `T1 component` from `listener()` to `action()`;
 
 **Logic**:
+
 - add method `CommonView getView()`;
 
 **BottomTabs**:
+
 - remove abstract method `void initTabs()`;
+
+**Workspace**:
+
+- added `public abstract void clearLayout()`;
+
 
 Fixed example.
 

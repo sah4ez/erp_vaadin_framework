@@ -302,6 +302,11 @@ public class WorkspaceTest extends Assert {
         assertEquals(itemClickListener, workspace.getSelectItemClickListenerAll());
     }
 
+    @Test
+    public void testClearLayout(){
+        workspace.clearLayout();
+    }
+
     private class TestWorkspace extends Workspace {
 
         public TestWorkspace(Logic logic, String identify) {
@@ -330,6 +335,11 @@ public class WorkspaceTest extends Assert {
         protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
             return itemClickEvent -> {
             };
+        }
+
+        @Override
+        public void clearLayout() {
+
         }
     }
 

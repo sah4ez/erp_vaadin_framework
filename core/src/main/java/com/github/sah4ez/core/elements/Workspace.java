@@ -395,4 +395,5 @@ abstract public class Workspace extends CssLayout implements PermissionAccessUI 
         this.selectItemClickListenerAll = selectItemClickListenerAll;
     }
 
+    public abstract void clearLayout();
 }

@@ -5,7 +5,6 @@ import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
 import com.github.sah4ez.core.elements.CrossTable;
 import com.github.sah4ez.core.elements.Logic;
-import com.github.sah4ez.core.elements.SelectionModeCrossTable;
 import com.vaadin.event.ItemClickEvent;
 
 /**
@@ -100,6 +99,11 @@ public class CrossTableLayout extends CrossTable{
     @Override
     protected ItemClickEvent.ItemClickListener selectTableAllItemClick() {
         return itemClickEvent -> {};
+    }
+
+    @Override
+    public void clearLayout() {
+
     }
 
     private static class Element1 {
