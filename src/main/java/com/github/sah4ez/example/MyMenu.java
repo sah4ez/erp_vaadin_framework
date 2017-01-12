@@ -1,8 +1,8 @@
 package com.github.sah4ez.example;
 
-import com.github.sah4ez.core.elements.Menu;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.MenuBar;
+import com.github.sah4ez.core.elements.*;
 
 /**
  * Created by aleksandr on 20.12.16.
