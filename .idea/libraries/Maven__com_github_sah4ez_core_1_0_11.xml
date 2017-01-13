@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.sah4ez:core:1.0.11">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/sah4ez/core/1.0.11/core-1.0.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/sah4ez/core/1.0.11/core-1.0.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/sah4ez/core/1.0.11/core-1.0.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

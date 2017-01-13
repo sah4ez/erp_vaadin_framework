@@ -76,8 +76,6 @@
 			<groupId>com.github.sah4ez</groupId>
 			<artifactId>core</artifactId>
 			<version>1.0.11</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/core/target/core-1.0.11.jar</systemPath>
 		</dependency>
 	</dependencies>
 

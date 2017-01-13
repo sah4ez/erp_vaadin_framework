@@ -2,10 +2,13 @@ package com.github.sah4ez.core.elements;
 
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.tepi.filtertable.FilterTable;
+
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,6 +21,10 @@ public class BottomPageTest {
     private Component component = Mockito.mock(Component.class);
     private String caption = "caption";
     private FilterTable filterPanel = Mockito.mock(FilterTable.class);
+
+    FilterTable table1 = Mockito.mock(FilterTable.class);
+    FilterTable table2 = Mockito.mock(FilterTable.class);
+    HorizontalLayout layout = Mockito.mock(HorizontalLayout.class);
 
     @Before
     public void setUp() throws Exception {
@@ -48,7 +55,7 @@ public class BottomPageTest {
         Elemenet1 elemenet = new Elemenet1(1, "my name");
         Component.Event event = Mockito.mock(Component.Event.class);
 
-        Mockito.when(page.getExternalComponet().getValue()).thenReturn(elemenet);
+        Mockito.when(page.getExternalComponent().getValue()).thenReturn(elemenet);
 
         page.getComponent().addListener(page::action);
 
@@ -56,6 +63,17 @@ public class BottomPageTest {
 
         assertEquals(((BottomPageImpl)page).getTargetName(), elemenet.getName());
         assertEquals(((BottomPageImpl)page).getTargetId(), elemenet.getId());
+    }
+
+    @Test
+    public void testSomeComponentAction(){
+        Consumer<Component.Event> action1 = System.out::println;
+        Consumer<Component.Event> action2 = System.out::println;
+        page.addComponent(table1, action1);
+        page.addComponent(table2, action2);
+
+        Mockito.verify(table1).addListener(Mockito.any(Component.Listener.class));
+        Mockito.verify(table2).addListener(Mockito.any(Component.Listener.class));
     }
 
     public class BottomPageImpl extends BottomPage<Component, FilterTable> {
@@ -69,7 +87,7 @@ public class BottomPageTest {
 
         @Override
         public void action(Component.Event event) {
-            Object select = getExternalComponet().getValue();
+            Object select = getExternalComponent().getValue();
 
             if (select instanceof Elemenet1) {
                 ((Elemenet1) select).setName(getTargetName());
@@ -87,6 +105,15 @@ public class BottomPageTest {
         }
     }
 
+    public HorizontalLayout testLayout(){
+        layout.setSizeFull();
+        table1.setSizeFull();
+        table2.setSizeFull();
+        layout.addComponent(table1);
+        layout.addComponent(table2);
+
+        return layout;
+    }
 
     private class Elemenet1{
         private Integer id = 0;

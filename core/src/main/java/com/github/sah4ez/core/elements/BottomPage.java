@@ -3,10 +3,12 @@ package com.github.sah4ez.core.elements;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
+import java.util.function.Consumer;
+
 /**
  * Created by pc999 on 1/10/17.
  */
-public abstract class BottomPage<T1 extends Component, T2 extends Component> {
+public class BottomPage<T1 extends Component, T2 extends Component> {
     private T1 component;
     private Resource resource;
     private String caption;
@@ -22,7 +24,9 @@ public abstract class BottomPage<T1 extends Component, T2 extends Component> {
         getComponent().addListener(this::action);
     }
 
-    public abstract void action(Component.Event event);
+    public void action(Component.Event event){
+
+    }
 
     public void setResource(Resource resource) {
         this.resource = resource;
@@ -52,7 +56,11 @@ public abstract class BottomPage<T1 extends Component, T2 extends Component> {
         this.externalComponent = externalComponent;
     }
 
-    public T2 getExternalComponet() {
+    public T2 getExternalComponent() {
         return externalComponent;
+    }
+
+    public void addComponent(Component component, Consumer<Component.Event> action1) {
+        component.addListener(action1::accept);
     }
 }

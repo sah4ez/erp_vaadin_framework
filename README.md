@@ -56,6 +56,14 @@ And add dependency:
 WHAT NEW
 ==========
 
+*v 1.0.12*
+
+**BottomPage**:
+
+- add method `public void addComponent(Component component, Consumer<Component.Event> action)`;
+- change method to `public void action()`;
+- change class from `pbulic abstract class` to `pbulic class`;
+
 *v 1.0.11*
 
 **BottomPage**:
