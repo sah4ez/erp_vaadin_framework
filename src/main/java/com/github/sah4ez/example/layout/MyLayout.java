@@ -23,8 +23,8 @@ public class MyLayout extends Workspace {
     private ElementContainer container = new ElementContainer();
     private MyTabSheet tabSheet;
     private MyMenu menu;
-    private BottomPage<Layout, FilterTable> page1;
-    private BottomPage<Label, FilterTable> page2;
+    private BottomPage<FilterTable> page1;
+    private BottomPage<FilterTable> page2;
     Button button1 = new Button("hello");
     Button button2 = new Button("hello");
 
@@ -34,12 +34,8 @@ public class MyLayout extends Workspace {
 
         Layout layout = new HorizontalLayout();
         layout.addComponents(button1, button2);
-        page1 = new BottomPage<Layout, FilterTable>(layout, getTable(), "tab", FontAwesome.AMAZON) {
-
-            @Override
-            public void action(Event event) {
-            }
-        };
+        page1 = new BottomPage<>(getTable(), "tab", FontAwesome.AMAZON);
+        page1.setComponent(layout);
 
         Consumer action = event -> {
             Set<Element> set = ((Set<Element>) page1.getExternalComponent().getValue());
@@ -60,12 +56,8 @@ public class MyLayout extends Workspace {
 
         page1.addComponent(button2, action1);
 
-        page2 = new BottomPage<Label, FilterTable>(new Label("lllll"), getTable(), "tab2", FontAwesome.AMAZON) {
-            @Override
-            public void action(Event event) {
-
-            }
-        };
+        page2 = new BottomPage<>(getTable(), "tab2", FontAwesome.AMAZON);
+        page2.setComponent(new Label("lllll"));
 
         tabSheet.addPage(page1);
         tabSheet.addPage(page2);

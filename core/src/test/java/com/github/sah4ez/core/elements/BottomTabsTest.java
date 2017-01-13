@@ -69,12 +69,9 @@ public class BottomTabsTest extends Assert {
     @Test
     public void getSelectedTabIndex() throws Exception {
         Component component = Mockito.mock(Component.class);
-        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
-            @Override
-            public void action(Component.Event event) {
-
-            }
-        });
+        BottomPage bottomPage = new BottomPage<Component>(component, "tab1", null);
+        bottomPage.setComponent(new Label("hhh"));
+        tabs.addPage(bottomPage);
         assertEquals(0, tabs.getSelectedTabIndex());
     }
 
@@ -106,27 +103,22 @@ public class BottomTabsTest extends Assert {
     }
 
     @Test
-    public void clearTest() throws Exception{
+    public void clearTest() throws Exception {
         Component component = Mockito.mock(Component.class);
-        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
-            @Override
-            public void action(Component.Event event) {
+        BottomPage bottomPage1 =new BottomPage<Component>(component, "tab1", null);
+        bottomPage1.setComponent(new Label("llll"));
 
-            }
-        });
-        tabs.addPage(new BottomPage<Label, Component>(new Label("11"), component, "tab1", null) {
-            @Override
-            public void action(Component.Event event) {
-
-            }
-        });
+        BottomPage bottomPage2 =new BottomPage<Component>(component, "tab1", null);
+        bottomPage2.setComponent(new Label("llll"));
+        tabs.addPage(bottomPage1);
+        tabs.addPage(bottomPage2);
         tabs.clear();
         assertEquals("", ((Label) tabs.getComponents().get(0)).getValue());
         assertEquals("", ((Label) tabs.getComponents().get(1)).getValue());
 
     }
 
-    private class TestTabs extends BottomTabs{
+    private class TestTabs extends BottomTabs {
 
         public TestTabs(Logic logic, String identify) {
             super(logic, identify);
@@ -134,7 +126,7 @@ public class BottomTabsTest extends Assert {
 
         @Override
         public void clear() {
-            getComponents().forEach( component -> ((Label) component).setValue(""));
+            getComponents().forEach(component -> ((Label) component).setValue(""));
         }
     }
 }

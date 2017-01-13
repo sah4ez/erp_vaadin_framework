@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  * Created by pc999 on 1/10/17.
  */
 public class BottomPageTest {
-    private BottomPage<Component, FilterTable> page;
+    private BottomPage<FilterTable> page;
     private ThemeResource resource = Mockito.mock(ThemeResource.class);
     private Component component = Mockito.mock(Component.class);
     private String caption = "caption";
@@ -76,7 +76,7 @@ public class BottomPageTest {
         Mockito.verify(table2).addListener(Mockito.any(Component.Listener.class));
     }
 
-    public class BottomPageImpl extends BottomPage<Component, FilterTable> {
+    public class BottomPageImpl extends BottomPage<FilterTable> {
         private String targetName;
         private Integer targetId;
 

@@ -49,7 +49,7 @@ And add dependency:
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.4-SNAPSHOT</version>
+      <version>1.0.12-SNAPSHOT</version>
     </dependency>
 
 ```
@@ -63,6 +63,7 @@ WHAT NEW
 - add method `public void addComponent(Component component, Consumer<Component.Event> action)`;
 - change method to `public void action()`;
 - change class from `pbulic abstract class` to `pbulic class`;
+- change constructor `public BottomPage(Component externalComponent, Cpation caption, Resource resource)`;
 
 *v 1.0.11*
 

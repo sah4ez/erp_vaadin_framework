@@ -8,20 +8,18 @@ import java.util.function.Consumer;
 /**
  * Created by pc999 on 1/10/17.
  */
-public class BottomPage<T1 extends Component, T2 extends Component> {
-    private T1 component;
+public class BottomPage<T2 extends Component> {
+    private Component component;
     private Resource resource;
     private String caption;
     private T2 externalComponent;
 
     public BottomPage() {}
 
-    public BottomPage(T1 component, T2 externalComponent, String caption, Resource resource) {
-        setComponent(component);
+    public BottomPage(T2 externalComponent, String caption, Resource resource) {
         setCaption(caption);
         setResource(resource);
         setExternalComponent(externalComponent);
-        getComponent().addListener(this::action);
     }
 
     public void action(Component.Event event){
@@ -44,11 +42,11 @@ public class BottomPage<T1 extends Component, T2 extends Component> {
         return caption;
     }
 
-    public T1 getComponent() {
+    public Component getComponent() {
         return component;
     }
 
-    public void setComponent(T1 component) {
+    public void setComponent(Component component) {
         this.component = component;
     }
 
