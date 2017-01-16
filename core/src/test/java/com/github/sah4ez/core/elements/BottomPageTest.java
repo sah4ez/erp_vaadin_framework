@@ -28,15 +28,21 @@ public class BottomPageTest {
 
     @Before
     public void setUp() throws Exception {
-        page = new BottomPageImpl();
-        page.setResource(resource);
-        page.setCaption(caption);
-        page.setComponent(component);
+        page = new BottomPage<>();
         page.setExternalComponent(filterPanel);
+        page.setCaption(caption);
+        page.setResource(resource);
+        page.setComponent(component);
+    }
+
+    @Test
+    public void getExternalComponent() {
+        assertEquals(filterPanel, page.getExternalComponent());
     }
 
     @Test
     public void getResource() throws Exception {
+        System.out.println(page);
         assertEquals(resource, page.getResource());
     }
 
@@ -53,16 +59,14 @@ public class BottomPageTest {
     @Test
     public void testActionWithExternalTable(){
         Elemenet1 elemenet = new Elemenet1(1, "my name");
-        Component.Event event = Mockito.mock(Component.Event.class);
+        Consumer consumer = event -> {
+            elemenet.setName("bla-bla-bla");
+        };
 
-        Mockito.when(page.getExternalComponent().getValue()).thenReturn(elemenet);
+        page.addComponent(page.getComponent(), consumer);
+        consumer.accept(null);
 
-        page.getComponent().addListener(page::action);
-
-        page.action(event);
-
-        assertEquals(((BottomPageImpl)page).getTargetName(), elemenet.getName());
-        assertEquals(((BottomPageImpl)page).getTargetId(), elemenet.getId());
+        assertEquals("bla-bla-bla", elemenet.getName());
     }
 
     @Test
@@ -74,35 +78,6 @@ public class BottomPageTest {
 
         Mockito.verify(table1).addListener(Mockito.any(Component.Listener.class));
         Mockito.verify(table2).addListener(Mockito.any(Component.Listener.class));
-    }
-
-    public class BottomPageImpl extends BottomPage<FilterTable> {
-        private String targetName;
-        private Integer targetId;
-
-        public BottomPageImpl() {
-            targetName = "bla-bla-bla";
-            targetId = 21;
-        }
-
-        @Override
-        public void action(Component.Event event) {
-            Object select = getExternalComponent().getValue();
-
-            if (select instanceof Elemenet1) {
-                ((Elemenet1) select).setName(getTargetName());
-                ((Elemenet1) select).setId(getTargetId());
-
-            }
-        }
-
-        public String getTargetName() {
-            return targetName;
-        }
-
-        public Integer getTargetId() {
-            return targetId;
-        }
     }
 
     public HorizontalLayout testLayout(){

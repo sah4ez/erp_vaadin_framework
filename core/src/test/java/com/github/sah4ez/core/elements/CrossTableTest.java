@@ -463,6 +463,35 @@ public class CrossTableTest extends Assert {
     }
 
     @Test
+    public void testChangeConditionSelectedCell(){
+
+        ItemClickEvent itemClickEvent = Mockito.mock(ItemClickEvent.class);
+        crossTable.createData("id", "name", "id", "name");
+        Object[] items = crossTable.getTable().getItemIds().toArray();
+
+        Mockito.when(itemClickEvent.getItem())
+                .thenReturn(crossTable.getTable().getItem(items[0]))
+                .thenReturn(crossTable.getTable().getItem(items[1]));
+        Mockito.when(itemClickEvent.getSource()).thenReturn(crossTable.getTable());
+        Mockito.when(itemClickEvent.getPropertyId()).thenReturn("1");
+
+        crossTable.setSelectionModeCrossTable(SelectionModeCrossTable.SINGLE_CELL);
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("edit", getStyleCell(items[0], "1"));
+        assertEquals("use", getStyleCell(items[1], "1"));
+
+        crossTable.changeSelectedCellCondition(Condition.USE_EDIT);
+
+        crossTable.actionSelectionMode(itemClickEvent);
+
+        assertEquals("use-edit", getStyleCell(items[0], "1"));
+        assertEquals("edit", getStyleCell(items[1], "1"));
+
+    }
+
+    @Test
     public void testClearLayout(){
         crossTable.clearLayout();
     }

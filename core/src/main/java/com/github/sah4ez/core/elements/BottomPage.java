@@ -22,10 +22,6 @@ public class BottomPage<T2 extends Component> {
         setExternalComponent(externalComponent);
     }
 
-    public void action(Component.Event event){
-
-    }
-
     public void setResource(Resource resource) {
         this.resource = resource;
     }

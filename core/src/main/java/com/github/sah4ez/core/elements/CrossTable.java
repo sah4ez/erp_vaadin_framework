@@ -9,6 +9,7 @@ import com.vaadin.ui.CustomTable;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.function.BiFunction;
 
 /**
  * Created by aleksandr on 06.01.17.
@@ -271,7 +272,13 @@ abstract public class CrossTable extends Workspace {
     }
 
     private void clearSelect() {
-        selectedCell.forEach((i, p) -> p.forEach((c, v) -> i.getItemProperty(c).setValue(v)));
+        selectedCell.forEach((item, property) -> property.forEach((cell, value) -> item.getItemProperty(cell).setValue(value)));
         selectedCell.clear();
+    }
+
+    public void changeSelectedCellCondition(CellCondition condition) {
+        BiFunction<String, CellCondition, CellCondition> function = (s, cellCondition) -> condition;
+
+        selectedCell.forEach((item, property) -> property.replaceAll(function));
     }
 }

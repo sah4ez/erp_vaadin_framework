@@ -65,6 +65,10 @@ WHAT NEW
 - change class from `pbulic abstract class` to `pbulic class`;
 - change constructor `public BottomPage(Component externalComponent, Cpation caption, Resource resource)`;
 
+**CrossTable**:
+
+- add method change CellCondition for selected cell;
+
 *v 1.0.11*
 
 **BottomPage**:
