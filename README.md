@@ -17,7 +17,7 @@ INSTALL
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.9</version>
+      <version>1.0.12</version>
     </dependency>
 
 ```
