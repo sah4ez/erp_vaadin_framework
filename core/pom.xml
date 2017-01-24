@@ -4,7 +4,7 @@
 
     <groupId>com.github.sah4ez</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.13-SNAPSHOT</version>
+    <version>1.0.13</version>
     <packaging>jar</packaging>
 
     <name>core</name>
@@ -38,6 +38,27 @@
             <roles>
                 <role>Main Developer</role>
             </roles>
+            <email>sah4ez32@gmail.com</email>
+        </developer>
+        <developer>
+            <id>Djeckson</id>
+            <name>Evgeniy Tkachenko</name>
+            <url>https://github.com/etkach</url>
+            <timezone>gmt+3</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <email>djeckson32@gmail.com</email>
+        </developer>
+        <developer>
+            <id>Winster</id>
+            <name>Stanislav Martynov</name>
+            <url>https://github.com/Winster332</url>
+            <timezone>gmt+3</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <email>stas-martynov-98@mail.ru</email>
         </developer>
     </developers>
 
