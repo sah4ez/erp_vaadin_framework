@@ -31,7 +31,7 @@
 
     <developers>
         <developer>
-            <idEntity>sah4ez</idEntity>
+            <id>sah4ez</id>
             <name>Alexandr Kozlenkov</name>
             <url>https://github.com/sah4ez</url>
             <timezone>gmt+3</timezone>
@@ -41,7 +41,7 @@
             <email>sah4ez32@gmail.com</email>
         </developer>
         <developer>
-            <idEntity>Djeckson</idEntity>
+            <id>Djeckson</id>
             <name>Evgeniy Tkachenko</name>
             <url>https://github.com/etkach</url>
             <timezone>gmt+3</timezone>
@@ -51,7 +51,7 @@
             <email>djeckson32@gmail.com</email>
         </developer>
         <developer>
-            <idEntity>Winster</idEntity>
+            <id>Winster</id>
             <name>Stanislav Martynov</name>
             <url>https://github.com/Winster332</url>
             <timezone>gmt+3</timezone>
@@ -64,22 +64,22 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <idEntity>nexus001</idEntity>
+            <id>nexus001</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <idEntity>nexus001</idEntity>
+            <id>nexus001</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
     <repositories>
         <repository>
-            <idEntity>vaadin-addons</idEntity>
+            <id>vaadin-addons</id>
             <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
         <repository>
-            <idEntity>vaadin-snapshots</idEntity>
+            <id>vaadin-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
@@ -200,7 +200,7 @@
 
     <profiles>
         <profile>
-            <idEntity>travis-ci</idEntity>
+            <id>travis-ci</id>
             <build>
                 <plugins>
                     <plugin>
@@ -226,7 +226,7 @@
         </profile>
 
         <profile>
-            <idEntity>release</idEntity>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -235,7 +235,7 @@
                         <version>2.2.1</version>
                         <executions>
                             <execution>
-                                <idEntity>attach-sources</idEntity>
+                                <id>attach-sources</id>
                                 <goals>
                                     <goal>jar-no-fork</goal>
                                 </goals>
@@ -248,7 +248,7 @@
                         <version>2.9.1</version>
                         <executions>
                             <execution>
-                                <idEntity>attach-javadocs</idEntity>
+                                <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -261,7 +261,7 @@
                         <version>1.5</version>
                         <executions>
                             <execution>
-                                <idEntity>gpg</idEntity>
+                                <id>gpg</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
