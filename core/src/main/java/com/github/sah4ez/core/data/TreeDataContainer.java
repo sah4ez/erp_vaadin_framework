@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by aleksandr on 20.12.16.
  */
-abstract public class TreeDataContainer<T> extends DataContainer<T> implements Container.Hierarchical {
+abstract public class TreeDataContainer<T extends TreeEntity> extends DataContainer<T> implements Container.Hierarchical {
     // The contained bean type uses this property to store
     // the parent relationship.
     Object parentPID;
@@ -55,7 +55,7 @@ abstract public class TreeDataContainer<T> extends DataContainer<T> implements C
         for (Object candidateId : getItemIds()) {
             Object parentRef = null;
             Item item = getItem(candidateId);
-            if (item != null){
+            if (item != null) {
                 Property property = item.getItemProperty(parentPID);
                 parentRef = property.getValue();
                 if (parentRef == null)
@@ -107,14 +107,43 @@ abstract public class TreeDataContainer<T> extends DataContainer<T> implements C
         return false;
     }
 
+    @Override
+    protected boolean isFiltered() {
+        return super.isFiltered();
+    }
+
+    @Override
+    protected void filterAll(){
+        super.filterAll();
+    }
+
+    @Override
+    protected void fireItemSetChange(){
+        super.fireItemSetChange();
+    }
+
     public void refresh() {
-        if (isFiltered())
+        if (isFiltered()) {
             filterAll();
-        else fireItemSetChange();
+        } else {
+            fireItemSetChange();
+        }
     }
 
     public List<T> getFilteredItemIds() {
         return super.getFilteredItemIds();
     }
+
+
+    public void buildRelationship() {
+        getItemIds().forEach(this::setParent);
+    }
+
+    protected void setParent(T t) {
+        if (t.getIdParent() == null || t.getIdParent().equals(TreeEntity.NULL_ID_PARENT)) return;
+
+        t.setParent(getByIdEntity(t.getIdParent()));
+    }
+
 }
 

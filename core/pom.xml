@@ -4,7 +4,7 @@
 
     <groupId>com.github.sah4ez</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.13</version>
+    <version>1.0.14</version>
     <packaging>jar</packaging>
 
     <name>core</name>
@@ -31,7 +31,7 @@
 
     <developers>
         <developer>
-            <id>sah4ez</id>
+            <idEntity>sah4ez</idEntity>
             <name>Alexandr Kozlenkov</name>
             <url>https://github.com/sah4ez</url>
             <timezone>gmt+3</timezone>
@@ -41,7 +41,7 @@
             <email>sah4ez32@gmail.com</email>
         </developer>
         <developer>
-            <id>Djeckson</id>
+            <idEntity>Djeckson</idEntity>
             <name>Evgeniy Tkachenko</name>
             <url>https://github.com/etkach</url>
             <timezone>gmt+3</timezone>
@@ -51,7 +51,7 @@
             <email>djeckson32@gmail.com</email>
         </developer>
         <developer>
-            <id>Winster</id>
+            <idEntity>Winster</idEntity>
             <name>Stanislav Martynov</name>
             <url>https://github.com/Winster332</url>
             <timezone>gmt+3</timezone>
@@ -64,22 +64,22 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>nexus001</id>
+            <idEntity>nexus001</idEntity>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>nexus001</id>
+            <idEntity>nexus001</idEntity>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
     <repositories>
         <repository>
-            <id>vaadin-addons</id>
+            <idEntity>vaadin-addons</idEntity>
             <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
         <repository>
-            <id>vaadin-snapshots</id>
+            <idEntity>vaadin-snapshots</idEntity>
             <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
@@ -200,7 +200,7 @@
 
     <profiles>
         <profile>
-            <id>travis-ci</id>
+            <idEntity>travis-ci</idEntity>
             <build>
                 <plugins>
                     <plugin>
@@ -226,7 +226,7 @@
         </profile>
 
         <profile>
-            <id>release</id>
+            <idEntity>release</idEntity>
             <build>
                 <plugins>
                     <plugin>
@@ -235,7 +235,7 @@
                         <version>2.2.1</version>
                         <executions>
                             <execution>
-                                <id>attach-sources</id>
+                                <idEntity>attach-sources</idEntity>
                                 <goals>
                                     <goal>jar-no-fork</goal>
                                 </goals>
@@ -248,7 +248,7 @@
                         <version>2.9.1</version>
                         <executions>
                             <execution>
-                                <id>attach-javadocs</id>
+                                <idEntity>attach-javadocs</idEntity>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -261,7 +261,7 @@
                         <version>1.5</version>
                         <executions>
                             <execution>
-                                <id>gpg</id>
+                                <idEntity>gpg</idEntity>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>

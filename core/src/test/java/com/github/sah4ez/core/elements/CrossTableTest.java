@@ -1,8 +1,6 @@
 package com.github.sah4ez.core.elements;
 
-import com.github.sah4ez.core.data.CellCondition;
-import com.github.sah4ez.core.data.Condition;
-import com.github.sah4ez.core.data.DataContainer;
+import com.github.sah4ez.core.data.*;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.CustomTable;
 import org.junit.Assert;
@@ -498,7 +496,7 @@ public class CrossTableTest extends Assert {
 
     private class MyCrossTableTest extends CrossTable {
 
-        public MyCrossTableTest(Logic logic, String identify, DataContainer<?> first, DataContainer<?> second) {
+        public MyCrossTableTest(Logic logic, String identify, DataContainer<? extends Entity> first, DataContainer<? extends Entity> second) {
             super(logic, identify, first, second);
         }
 
@@ -550,7 +548,7 @@ public class CrossTableTest extends Assert {
     }
 
     //<editor-fold desc="Description ENTITY CLASS">
-    private class Element1 {
+    private class Element1 extends CommonEntity {
         private Integer id = 0;
         private String name = "";
         private Float price = 0.0F;
@@ -602,7 +600,7 @@ public class CrossTableTest extends Assert {
         }
     }
 
-    private class Element2 {
+    private class Element2 extends CommonEntity {
         private Integer id = 0;
         private String name = "";
         private Float price = 0.0F;
@@ -614,7 +612,7 @@ public class CrossTableTest extends Assert {
         }
     }
 
-    private class Element3 {
+    private class Element3 extends CommonEntity {
         private Integer id = 0;
         private String name = "";
         private Float price = 0.0F;
@@ -626,7 +624,7 @@ public class CrossTableTest extends Assert {
         }
     }
 
-    private class Element4 {
+    private class Element4 extends CommonEntity {
         private Integer id = 0;
         private String name = "";
         private Float price = 0.0F;

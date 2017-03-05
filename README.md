@@ -17,7 +17,7 @@ INSTALL
     <dependency>
       <groupId>com.github.sah4ez</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.13</version>
+      <version>1.0.14</version>
     </dependency>
 
 ```
@@ -31,7 +31,7 @@ You need add repository to your pom.xml:
 
 <repositories>
   <repository>
-    <id>oss-sonatype</id>
+    <idEntity>oss-sonatype</idEntity>
     <name>oss-sonatype</name>
     <url>
       https://oss.sonatype.org/content/repositories/snapshots/
@@ -55,19 +55,28 @@ And add dependency:
 ```
 WHAT NEW
 ==========
+*v 1.0.13*:
+
+- added interface `Entity` and changed signature to `DataContainer<? extends Entity>`;
+- added interface `TreeEntity` and changed signature to `TreeDataContainer<? extends TreeEntity>`;
+- added implementation for `Entity` and `TreeEntity`;
+
+**DataContainer**:
+
+- added method `getByIdEntity(Integer)`, which find all items in container with this id;
 
 *v 1.0.12*
 
 **BottomPage**:
 
-- add method `public void addComponent(Component component, Consumer<Component.Event> action)`;
-- change method to `public void action()`;
-- change class from `pbulic abstract class` to `pbulic class`;
-- change constructor `public BottomPage(Component externalComponent, Cpation caption, Resource resource)`;
+- added method `public void addComponent(Component component, Consumer<Component.Event> action)`;
+- changed method to `public void action()`;
+- changed class from `pbulic abstract class` to `pbulic class`;
+- changed constructor `public BottomPage(Component externalComponent, Cpation caption, Resource resource)`;
 
 **CrossTable**:
 
-- add method change CellCondition for selected cell;
+- added method change CellCondition for selected cell;
 
 *v 1.0.11*
 
@@ -127,7 +136,7 @@ Fixed example.
 **CrossTable**:
 
 - add class `public abstract class CrossTable`, class with two inner `DataContainer`, where first container used for created rows and second container used for created columns;
-- add method `createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String value)`, `idFirst, idSecond` - id property of entity, which use for generate query. `captionFirst, captionSecodn` - property of entity, which input in first column and headers other columns. And `valueProperty` - property elements from `firstContainer`. This method used data from two containers and create table.
+- add method `createData(String idFirst, String captionFirst, String idSecond, String captionSecond, String value)`, `idFirst, idSecond` - idEntity property of entity, which use for generate query. `captionFirst, captionSecodn` - property of entity, which input in first column and headers other columns. And `valueProperty` - property elements from `firstContainer`. This method used data from two containers and create table.
 - add method `public abstract CellCondition getCell(Object idRow, Object idColumn)` that `return` data from DB for each cell in cross table;
 
 **Condition**:
@@ -401,22 +410,22 @@ DATA STRUCTURE
 For structure data use JPA with implement **Serializable** interface:
 ```java
 public class Element implements Serializable {
-    private Integer id = 0;
-    private String name = "element";
+    private Integer idEntity = 0;
+    private String name = "treeElement";
     private Float price = 0.0F;
 
-    public Element(Integer id, String name, Float price) {
-        this.id = id;
+    public Element(Integer idEntity, String name, Float price) {
+        this.idEntity = idEntity;
         this.name = name;
         this.price = price;
     }
 
     public Integer getId() {
-        return id;
+        return idEntity;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idEntity) {
+        this.idEntity = idEntity;
     }
 
     public String getName() {
@@ -445,7 +454,7 @@ public class ElementContainer extends DataContainer<Element> {
 
     @Override
     protected void initHeaders() {
-        addCaptionColumn("id", "name", "price"); //set property from Entity
+        addCaptionColumn("idEntity", "name", "price"); //set property from Entity
         addHeaderColumn("ID", "Название", "Цена"); //set Caption for table
         addCollapsedColumn(true, false, false); //set collapsed column
     }

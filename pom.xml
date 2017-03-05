@@ -26,7 +26,7 @@
 
 	<repositories>
 		<repository>
-			<id>vaadin-addons</id>
+			<idEntity>vaadin-addons</idEntity>
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 	</repositories>
@@ -141,20 +141,20 @@
 	<profiles>
 		<profile>
 			<!-- Vaadin pre-release repositories -->
-			<id>vaadin-prerelease</id>
+			<idEntity>vaadin-prerelease</idEntity>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 
 			<repositories>
 				<repository>
-					<id>vaadin-prereleases</id>
+					<idEntity>vaadin-prereleases</idEntity>
 					<url>http://maven.vaadin.com/vaadin-prereleases</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>vaadin-prereleases</id>
+					<idEntity>vaadin-prereleases</idEntity>
 					<url>http://maven.vaadin.com/vaadin-prereleases</url>
 				</pluginRepository>
 			</pluginRepositories>

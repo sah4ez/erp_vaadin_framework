@@ -5,12 +5,13 @@ import com.vaadin.data.util.BeanItemContainer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
  * Created by aleksandr on 20.12.16.
  */
-abstract public class DataContainer<T> extends BeanItemContainer<T> {
+abstract public class DataContainer<T extends Entity> extends BeanItemContainer<T> {
 
     private final ArrayList<String> headers = new ArrayList<>();
     private ArrayList<String> captions = new ArrayList<>();
@@ -105,6 +106,11 @@ abstract public class DataContainer<T> extends BeanItemContainer<T> {
 
     public boolean isEmpty(){
         return size()<=0;
+    }
+
+    public T getByIdEntity(Integer idEntity){
+        Predicate<Entity> filter = entity -> entity.getIdEntity().equals(idEntity);
+        return stream().filter(filter).findFirst().orElse(null);
     }
 }
 

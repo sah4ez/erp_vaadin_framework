@@ -3,6 +3,7 @@ package com.github.sah4ez.core.elements;
 import com.github.sah4ez.core.data.CellCondition;
 import com.github.sah4ez.core.data.Condition;
 import com.github.sah4ez.core.data.DataContainer;
+import com.github.sah4ez.core.data.Entity;
 import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.CustomTable;
@@ -16,8 +17,8 @@ import java.util.function.BiFunction;
  */
 abstract public class CrossTable extends Workspace {
 
-    private DataContainer<?> firstContainer;
-    private DataContainer<?> secondContainer;
+    private DataContainer<? extends Entity> firstContainer;
+    private DataContainer<? extends Entity> secondContainer;
     private String idFirst = "";
     private String idSecond = "";
     private String captionSecond = "";
@@ -25,7 +26,7 @@ abstract public class CrossTable extends Workspace {
     private SelectionModeCrossTable selectionModeCrossTable = SelectionModeCrossTable.SINGLE_CELL;
     private HashMap<Item, HashMap<String, CellCondition>> selectedCell = new HashMap<>();
 
-    public CrossTable(Logic logic, String identify, DataContainer<?> firstContainer, DataContainer<?> secondContainer) {
+    public CrossTable(Logic logic, String identify, DataContainer<? extends Entity> firstContainer, DataContainer<? extends Entity> secondContainer) {
         super(logic, identify);
         this.firstContainer = firstContainer;
         this.secondContainer = secondContainer;
@@ -34,19 +35,19 @@ abstract public class CrossTable extends Workspace {
         getTable().addItemClickListener(selectionModeListener());
     }
 
-    public DataContainer<?> getFirstContainer() {
+    public DataContainer<? extends Entity> getFirstContainer() {
         return firstContainer;
     }
 
-    public void setFirstContainer(DataContainer<?> firstContainer) {
+    public void setFirstContainer(DataContainer<? extends Entity> firstContainer) {
         this.firstContainer = firstContainer;
     }
 
-    public DataContainer<?> getSecondContainer() {
+    public DataContainer<? extends Entity> getSecondContainer() {
         return secondContainer;
     }
 
-    public void setSecondContainer(DataContainer<?> secondContainer) {
+    public void setSecondContainer(DataContainer<? extends Entity> secondContainer) {
         this.secondContainer = secondContainer;
     }
 

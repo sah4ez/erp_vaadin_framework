@@ -5,9 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
  * Created by aleksandr on 24.12.16.
  */
@@ -20,8 +17,8 @@ public class DataContainerTest extends Assert {
         container = new DataContainer<Element>(Element.class) {
             @Override
             protected void initHeaders() {
-                addCaption("id", "name");
-                addHeader("id", "name");
+                addCaption("idEntity", "name");
+                addHeader("idEntity", "name");
                 addCollapsed(true, true);
             }
 
@@ -138,53 +135,23 @@ public class DataContainerTest extends Assert {
     @Test
     public void testRefresh(){
         container.refresh();
-        container.addContainerFilter(new SimpleStringFilter("id",
+        container.addContainerFilter(new SimpleStringFilter("idEntity",
                 "0",
                 true,
                 false));
         container.refresh();
     }
 
-    //region Declaration test class Element
-    private class Element implements Serializable {
-        private Integer id = 0;
-        private String name = "";
+    @Test
+    public void testGetById() throws Exception {
+        //Assign
+        Element element = new Element(1, "element");
+        container.add(element);
 
-        public Element(Integer id, String name) {
-            this.id = id;
-            this.name = name;
-        }
+        //Act
+        Element gotten = container.getByIdEntity(1);
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Element)) return false;
-            Element element = (Element) o;
-            return Objects.equals(getId(), element.getId()) &&
-                    Objects.equals(getName(), element.getName());
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(getId(), getName());
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+        //Assert
+        assertEquals(element, gotten);
     }
-    //endregion
-
 }
